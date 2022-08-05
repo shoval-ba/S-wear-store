@@ -1,0 +1,31 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "jest --watchAll --coverage --verbose",
+    "lint": "eslint ./src --ext .js,.ts",
+    "lint-fix": "eslint ./src --ext .js,.ts --fix",
+    "start-hero": "node ./server/*.js",
+    "build": "npm run build-server && npm run build-client",
+    "server": "nodemon src/server/server.ts",
+    "start": "webpack serve --config ./src/webpack-front.config.ts",
+    "build-server": "set NODE_ENV=production && webpack --mode production --config ./src/webpack-back.config.ts",
+    "build-client": "set NODE_ENV=production && webpack --mode production --config ./src/webpack-front.config.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.18.2",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-webpack-plugin": "^3.1.1"
+  },
+  "dependencies": {}
+}

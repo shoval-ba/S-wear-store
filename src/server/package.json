@@ -1,0 +1,40 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "jest --watchAll --coverage --verbose",
+    "lint": "eslint ./src --ext .js,.ts",
+    "lint-fix": "eslint ./src --ext .js,.ts --fix",
+    "server": "nodemon ./server.ts",
+    "build-client": "set NODE_ENV=production && webpack --mode production --config ./webpack-front.config.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/jest": "^27.5.2",
+    "@types/jquery": "^3.5.14",
+    "@types/node": "^17.0.36",
+    "@types/webpack": "^5.28.0",
+    "@types/webpack-dev-server": "^4.7.2",
+    "axios": "^0.27.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "eslint-webpack-plugin": "^3.2.0",
+    "express": "^4.18.1",
+    "jest": "^28.1.0",
+    "ts-jest": "^28.0.4",
+    "ts-loader": "^9.3.0",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "mongodb": "^4.7.0",
+    "webpack-dev-server": "^4.9.1"
+  }
+}

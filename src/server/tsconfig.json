@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "sourceMap": true,
+    "downlevelIteration": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["dom", "dom.iterable", "esnext"]
+  },
+  "include": ["./"],
+  "exclude": ["node_modules", "build/**/*", "./tests"]
+}
