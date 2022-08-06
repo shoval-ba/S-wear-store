@@ -10,11 +10,11 @@ const config: webpack.Configuration = {
   devtool: mode === "development" ? "inline-source-map" : false,
   target: "node",
   entry: {
-    server: path.resolve(__dirname, "./server.ts"),
+    server: path.resolve(__dirname, "../server.ts"),
   },
   output: {
     filename: "[name][contenthash].js",
-    path: path.resolve(__dirname, "../", "../", "deploy/server"),
+    path: path.resolve(__dirname, "../", "../", "../deploy/server"),
     clean: true,
   },
   module: {
@@ -23,7 +23,7 @@ const config: webpack.Configuration = {
         test: /\.ts$/,
         exclude: /node_modules/,
         use: ["ts-loader"],
-        include: [path.resolve(__dirname, "server")],
+        include: [path.resolve(__dirname, "../")],
       },
 
       {
@@ -36,7 +36,7 @@ const config: webpack.Configuration = {
   resolve: {
     extensions: [".ts", ".js"],
   },
-
+  externals: ["mongodb-client-encryption", "pg-native"],
   plugins: [new ESLintPlugin()],
 };
 

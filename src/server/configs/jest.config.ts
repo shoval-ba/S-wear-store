@@ -4,6 +4,7 @@ import type { Config } from "@jest/types";
 const config: Config.InitialOptions = {
   testEnvironment: "jest-environment-jsdom",
   verbose: true,
+
   globals: {
     "ts-jest": {
       useESM: true,

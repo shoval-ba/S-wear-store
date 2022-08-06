@@ -6,12 +6,7 @@
     "test-server": " cd ./server && npm run test",
     "test-client": " cd ./client && npm run test",
     "lint": "eslint ./src --ext .js,.ts",
-    "lint-fix": "eslint ./src --ext .js,.ts --fix",
-    "build": "npm run build-server && npm run build-client",
-    "server": "cd ./server && nodemon ./server.ts",
-    "start": "cd ./client && npm run start",
-    "build-server": "set NODE_ENV=production && webpack --mode production --config ./src/webpack-back.config.ts",
-    "build-client": "cd  ./client && npm run build"
+    "lint-fix": "eslint ./src --ext .js,.ts --fix"
   },
   "keywords": [],
   "author": "",

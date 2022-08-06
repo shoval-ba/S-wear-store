@@ -7,12 +7,13 @@
     "lint": "eslint ./src --ext .js,.ts",
     "lint-fix": "eslint ./src --ext .js,.ts --fix",
     "server": "nodemon ./server.ts",
-    "build-client": "set NODE_ENV=production && webpack --mode production --config ./webpack-front.config.ts"
+    "build": "cd ./configs && set NODE_ENV=production && webpack --mode production --config webpack-back.config.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/pg": "^8.6.5",
     "@types/cors": "^2.8.12",
     "@types/jest": "^27.5.2",
     "@types/jquery": "^3.5.14",
@@ -34,7 +35,7 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "mongodb": "^4.7.0",
+    "pg": "^8.7.3",
     "webpack-dev-server": "^4.9.1"
   }
 }
