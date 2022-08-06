@@ -1,17 +1,17 @@
 {
-  "name": "pokedex",
+  "name": "client-server-app",
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "jest --watchAll --coverage --verbose",
+    "test-server": " cd ./server && npm run test",
+    "test-client": " cd ./client && npm run test",
     "lint": "eslint ./src --ext .js,.ts",
     "lint-fix": "eslint ./src --ext .js,.ts --fix",
-    "start-hero": "node ./server/*.js",
     "build": "npm run build-server && npm run build-client",
-    "server": "nodemon src/server/server.ts",
-    "start": "webpack serve --config ./src/webpack-front.config.ts",
+    "server": "cd ./server && nodemon ./server.ts",
+    "start": "cd ./client && npm run start",
     "build-server": "set NODE_ENV=production && webpack --mode production --config ./src/webpack-back.config.ts",
-    "build-client": "set NODE_ENV=production && webpack --mode production --config ./src/webpack-front.config.ts"
+    "build-client": "cd  ./client && npm run build"
   },
   "keywords": [],
   "author": "",
