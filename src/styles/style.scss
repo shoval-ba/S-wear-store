@@ -1,0 +1,323 @@
+
+%button {
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 12px;
+    width: 152px;
+    height: 38px;
+    box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+    box-sizing: border-box;
+    color: #121212;
+    cursor: pointer;
+    display: inline-flex;
+    flex: 1 1 auto;
+    font-family: Inter,sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    justify-content: center;
+    line-height: 1;
+    margin: 0;
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s,-webkit-box-shadow .2s;
+    white-space: nowrap;
+    border: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  %button:hover {
+    box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+  }
+  
+  %content {
+      width: 82%;
+      margin: 0 auto;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    %item {
+      border-radius: 19px;
+      display: grid;
+      height: 589px;
+      width: 100%;
+    }
+  
+    %img {
+      margin: 0 auto;
+      width: 100%;
+      height: 380px;
+    }
+  
+    %signInButtons{
+      text-align: center;
+      width: 190px;
+      height: 48px;
+      cursor: pointer;
+    }
+  
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+  html{
+    width: 100%;
+    height: 100%;
+    body{
+      background-color: ghostwhite;
+      position: relative;
+        .imgHeader{
+          width: 100%;
+          height: fit-content;
+        }
+      .popupContainer {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(51, 51, 51, 0.733);
+        z-index: 2;
+        top: 0;
+        .popup {
+          display: block;
+          width: 570px;
+          background-color: white;
+          border-radius: 5px;
+          position: fixed;
+          top: 30%;
+          left: 0; 
+          right: 0; 
+          margin-left: auto; 
+          margin-right: auto; 
+          display: grid;
+          grid-template-rows: 48px 190px 95px;
+          align-items: center;
+          .headerPopup{
+            background-color: #f5f5f5;
+            border-bottom: 1px solid slategray;
+            box-shadow: 0 1px #e4e4e4;
+            .signInTitle{
+              display: inline;
+            }
+            .close{
+              text-align: right;
+              margin-right: 10px;
+              float: right;
+              width: 38px;
+            }
+          }
+          .inputs{
+            align-self: center;
+            display: grid;
+            gap: 38px;
+            justify-content: center;
+            .inputSignIn{
+              background-color: #f5f5f5;
+              border: 1px solid rgb(41, 41, 41);
+              width: 380px;
+              height: 48px;
+            }
+          }
+          .signInButtons{
+            display: grid;
+            justify-content: center;
+            align-content: center;
+            grid-template-columns: repeat(2 ,1fr);
+            .createAccountButton{
+              @extend %signInButtons;
+              border: 1px solid rgb(41, 41, 41) ;
+              background-color: white;
+            }
+            .sighInButton{
+              @extend %signInButtons;
+              background-color: rgb(41, 41, 41) ;
+              color: #fff;
+            }
+          }
+        }
+
+        .app{
+          position: fixed;
+          top: 10%;
+          left: 0; 
+          right: 0; 
+          margin-left: auto; 
+          margin-right: auto; 
+          width: 500px;
+          height: 800px;
+          border: 1px solid rgb(46, 45, 45);
+          background-color: ghostwhite;
+          label{
+            display: block;
+            margin-bottom: 7px;
+            margin-top: 7px;
+          }
+          input{
+            display: block;
+            height: 30px;
+            width: 100%;
+          }
+          .allInfo{
+              margin: 30px;
+              h2{
+                  padding-bottom: 5px;
+                  border-bottom: 1px solid grey;
+              }
+              .basicInfo{
+                  display: grid;
+                  grid-template-rows: repeat(3,1fr);
+                  gap:10px;
+              }
+              .name{
+                  display: grid;
+                  grid-template-columns: repeat(2, 1fr);
+                  .first{
+                      margin-right: 50px;
+                  }
+                  input{
+                      width:195px;
+                  }
+              }
+              .buttons{
+                  text-align: right;
+                  margin-top: 30px;
+                  .buttonCancel{
+                      width: 80px;
+                      height: 35px;
+                      border: 1px solid rgb(54, 180, 238);
+                      background-color: white;
+                      border-radius: 5px;
+                      color:rgb(46, 45, 45);
+                  }
+                  .buttonSave{
+                      width: 80px;
+                      height: 35px;
+                      color: white;
+                      background-color: rgb(54, 180, 238);
+                      border: 1px solid rgb(54, 180, 238);
+                      border-radius: 5px;
+                      margin-left: 15px;
+                  }
+              }
+          }
+        }
+        .popupCreate {
+          display: block;
+          width: 600px;
+          background-color: white;
+          border-radius: 5px;
+          position: fixed;
+          top: 20%;
+          left: 0; 
+          right: 0; 
+          margin-left: auto; 
+          margin-right: auto; 
+          display: grid;
+          grid-template-rows: 40px 500px 70px;
+          align-items: center;
+          .headerPopup{
+            background-color: #f5f5f5;
+            border-bottom: 1px solid slategray;
+            box-shadow: 0 1px #e4e4e4;
+            .signInTitle{
+              display: inline;
+            }
+            .close{
+              text-align: right;
+              margin-right: 10px;
+              float: right;
+              width: 38px;
+            }
+          }
+          .allInputs{
+            align-self: center;
+            display: grid;
+            gap: 15px;
+            justify-content: center;
+            grid-template-columns: repeat(2,1fr);
+            .ulKeys{
+              margin-left: 40px;
+              margin-top: 40px;
+              li{
+                font-size: 25px;
+                margin: 0;
+                margin-bottom: 25px;
+                text-align: left;
+              }
+            }
+            .ulInputs{
+              margin-right: 65px;
+              margin-top: 40px;
+              input{
+                display: block;
+                width: 300px;
+                font-size: 20px;
+                margin-bottom: 25.3px;
+              }
+            }
+          }
+          .createButton{
+            display: grid;
+            justify-content: center;
+            align-content: center;
+            grid-template-columns: repeat(2 ,1fr);
+            .createAccountButton{
+              @extend %signInButtons;
+              background-color: rgb(41, 41, 41) ;          
+              color: #fff;
+              width: 250px;
+            }
+          }
+        }
+      }
+      #container {
+          @extend %content;
+          margin-top: 30px;
+          .item {
+            @extend %item;
+            grid-template-rows: 1fr 1fr;
+            .backgroundImg{
+              position: relative;
+              .img {
+                @extend %img;
+              }
+              #favorite{
+                position: absolute;
+                right: 5%;
+                top:5%;
+              }
+              .price{
+                color:rgb(238, 85, 85);
+                font-size: 19px;
+            }
+            }
+            .bottom{
+              margin-top: 10px;
+              .info {
+                display: grid;
+                grid-template-rows: repeat(3, 1fr);
+                .title{
+                  font-size: 17.5px;
+                  color:rgb(46, 46, 46);
+                  padding:5px 0px 5px 0px;
+                }
+                .model{
+                  font-size:17px;
+                  color:slategray;
+                }
+                .buttonAdd{
+                  @extend %button
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
