@@ -1,6 +1,7 @@
 import {React , useState , useEffect } from 'react';
 import SighIn from './SighIn';
 import CreateAccount from './createAccount';
+import "../styles/Popup.scss"
 
 export default function Popup(props)  { 
 

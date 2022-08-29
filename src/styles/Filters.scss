@@ -1,0 +1,20 @@
+.container{
+    position: sticky;
+    top:30px;
+    width:250px;
+    height: 400px;
+    background-color: white;
+    margin-top: 30px;
+    display: grid;
+    grid-template-rows: repeat(6 , 1fr);
+    border:1px solid slategray;
+    padding: 0;
+    .filter{
+        padding: 20px;
+        height: 60px;
+        width: 100%;
+        &:hover{
+            background-color: #f5f5f5;
+        }
+    }
+}

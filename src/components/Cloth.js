@@ -1,6 +1,9 @@
-import {React , useState , useEffect } from 'react';
+import {React , useState , useEffect , useOutletContext} from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import OneCloth from './OneCloth';
+import Filters from './Filters';
+import '../styles/Clothes.scss';
+import Navbar from './Navbar';
 
 export default function Cloth()  { 
 
@@ -43,9 +46,15 @@ export default function Cloth()  {
       })
 
     return (
-        <div id='container'>
-          {clothesUi}
-          {openOneCloth ? <OneCloth cloth={oneCloth} close={setOpenOneCloth}/> : <></>}
+      <div>
+       
+      <div className='filterAnd'>
+            <Filters/>
+          <div id='container'>
+            {clothesUi}
+            {openOneCloth ? <OneCloth cloth={oneCloth} close={setOpenOneCloth}/> : <></>}
+          </div>
+        </div>
         </div>
     )
 }

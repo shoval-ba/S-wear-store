@@ -14,6 +14,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SighIn from './SighIn';
 import Popup from './Popup';
+import { Link , Outlet} from 'react-router-dom';
+import { myBag } from '../App';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,16 +56,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Navbar() {
 
   const [favorites , setFavorites] = useState();
-  const [myBag , setMyBag] = useState();
+  let [myBag , setMyBag] = useState([])
 
   const [sighIn , setSighIn]= useState(false)
+  const [showCart , setShowCart] = useState(false)
 
   const handleUserClick = () => {
     setSighIn(true)
   }
 
+  const handleCartClick = () => {
+    setShowCart(true)
+  }
+
   return (
-    <Box sx={{ flexGrow: 1}}>
+    <div>
+    <Box sx={{ flexGrow: 1}} style={{margin:"10px"}}>
       <AppBar position="static" sx={{ backgroundColor:"rgb(102, 175, 235)"}}>
         <Toolbar>
           <IconButton
@@ -95,7 +103,7 @@ export default function Navbar() {
                 variant="h6"
                 noWrap
                 sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
-                women
+                <Link to="women" style={{color:"white"}}>women</Link>
                 </Typography>
                 <Typography
                 variant="h6"
@@ -126,11 +134,13 @@ export default function Navbar() {
             />
           </Search>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Link to="cart" style={{color:"white"}}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={myBag} color="error">
-                <ShoppingCartIcon />
+              <Badge badgeContent={myBag.length} color="error">
+                <ShoppingCartIcon/>
               </Badge>
             </IconButton>
+            </Link>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -155,5 +165,7 @@ export default function Navbar() {
       </AppBar>
       {sighIn ? <Popup sighIn={setSighIn}/> : <></>}
     </Box>
+      <Outlet context={[setMyBag , myBag]}></Outlet>
+    </div>
   );
 }

@@ -1,0 +1,137 @@
+%signInButtons{
+    text-align: center;
+    width: 190px;
+    height: 48px;
+    cursor: pointer;
+  }
+
+.popupContainer {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(51, 51, 51, 0.733);
+    z-index: 2;
+    top: 0;
+    .popup {
+      display: block;
+      width: 570px;
+      background-color: white;
+      border-radius: 5px;
+      position: fixed;
+      top: 30%;
+      left: 0; 
+      right: 0; 
+      margin-left: auto; 
+      margin-right: auto; 
+      display: grid;
+      grid-template-rows: 48px 190px 95px;
+      align-items: center;
+      .headerPopup{
+        background-color: #f5f5f5;
+        border-bottom: 1px solid slategray;
+        box-shadow: 0 1px #e4e4e4;
+        .signInTitle{
+          display: inline;
+        }
+        .close{
+          text-align: right;
+          margin-right: 10px;
+          float: right;
+          width: 38px;
+        }
+      }
+      .inputs{
+        align-self: center;
+        display: grid;
+        gap: 38px;
+        justify-content: center;
+        .inputSignIn{
+          background-color: #f5f5f5;
+          border: 1px solid rgb(41, 41, 41);
+          width: 380px;
+          height: 48px;
+        }
+      }
+      .signInButtons{
+        display: flex;
+        justify-content: space-around;
+        .createAccountButton{
+          @extend %signInButtons;
+          border: 1px solid rgb(41, 41, 41) ;
+          background-color: white;
+        }
+        .sighInButton{
+          @extend %signInButtons;
+          background-color: rgb(41, 41, 41) ;
+          color: #fff;
+        }
+      }
+    }
+
+    .app{
+      position: fixed;
+      top: 10%;
+      left: 0; 
+      right: 0; 
+      margin-left: auto; 
+      margin-right: auto; 
+      width: 500px;
+      height: 800px;
+      border: 1px solid rgb(46, 45, 45);
+      background-color: ghostwhite;
+      label{
+        display: block;
+        margin-bottom: 7px;
+        margin-top: 7px;
+      }
+      input{
+        display: block;
+        height: 30px;
+        width: 100%;
+      }
+      .allInfo{
+          margin: 30px;
+          h2{
+              padding-bottom: 5px;
+              border-bottom: 1px solid grey;
+          }
+          .basicInfo{
+              display: grid;
+              grid-template-rows: repeat(3,1fr);
+              gap:10px;
+          }
+          .name{
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              .first{
+                  margin-right: 50px;
+              }
+              input{
+                  width:195px;
+              }
+          }
+          .buttons{
+              text-align: right;
+              margin-top: 30px;
+              .buttonCancel{
+                  width: 80px;
+                  height: 35px;
+                  border: 1px solid rgb(54, 180, 238);
+                  background-color: white;
+                  border-radius: 5px;
+                  color:rgb(46, 45, 45);
+              }
+              .buttonSave{
+                  width: 80px;
+                  height: 35px;
+                  color: white;
+                  background-color: rgb(54, 180, 238);
+                  border: 1px solid rgb(54, 180, 238);
+                  border-radius: 5px;
+                  margin-left: 15px;
+              }
+          }
+      }
+    }        
+  }

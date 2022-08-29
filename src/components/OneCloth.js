@@ -1,30 +1,65 @@
-import {React , useState , useEffect } from 'react';
+import {React , useState , useEffect , createRef} from 'react';
+import {  useOutletContext} from 'react-router-dom';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ClearIcon from '@mui/icons-material/Clear';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import '../styles/OneCloth.scss';
+import { myBag } from '../App';
 
 export default function OneCloth(props)  { 
     const cloth = props.cloth;
-    const [chosenSize , setChosenSize] = useState()
+    const [chosenSize , setChosenSize] = useState();
+    const [quantity , setQuantity] = useState(0)
+    const select = createRef();
+    const setMyBag = useOutletContext()[0];
     let sizes = [];
 
     for(let key in cloth.sizes){
-        if(cloth.sizes[key] === 0) continue;
-        else {
-            sizes.push(key)
-        }
+        sizes.push(key);
     }
 
       const sizesUI = sizes.map(size=>{
-        // if(cloth.sizes[size]==0) console.log(size)
-        return(
-            <div>
-                <button className='button-17'>{size}</button>
-            </div>
-        )
+        if(cloth.sizes[size] == 0) {
+            return (
+                <div>
+                    <button className='button-17' style={{color:"DarkGrey"}}>{size}</button>
+                </div>
+            )
+        }
+        else if(size === chosenSize){
+            return(
+                <div>
+                    <button className='button-17' style={ {outline: "none" , border: "2px solid #4285f4"}} onClick={() => setChosenSize(size)}>{size}</button>
+                </div>
+            )
+        }
+        else{
+            return(
+                <div>
+                    <button className='button-17' onClick={() => setChosenSize(size)}>{size}</button>
+                </div>
+            )
+        }
       })
 
     const close = () => {
         props.close(false)
+    }
+
+    const addToBag = () =>{
+        if(chosenSize === undefined){
+            select.current.style.display = "block";
+        } else {
+            select.current.style.display = "none";
+            if(quantity <= 0 ) setQuantity(1)
+            let newCloth = {
+                cloth:cloth.cloth_id,
+                size:chosenSize, 
+                quantity:quantity
+            }
+            setMyBag(previousState =>{ return [...previousState , newCloth]}); 
+        }
     }
 
     return (
@@ -45,9 +80,15 @@ export default function OneCloth(props)  {
                         <div className='sizes'>
                             {sizesUI}
                         </div>
+                        <p ref={select} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please select your size</p>
+                        <div>
+                            <AddIcon onClick={()=>setQuantity(quantity+1)}></AddIcon>
+                            <input typy="number" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>
+                            <RemoveIcon onClick={()=>setQuantity(quantity-1)}></RemoveIcon>
+                        </div>
                     </div> 
                     <div className='add'>
-                        <button className="button-31">Add to bag </button>
+                        <button className="button-31" onClick={()=>addToBag()}>Add to bag </button>
                         <div className='circle'>
                             <FavoriteBorderIcon id="favoriteIcon"/>
                         </div>
