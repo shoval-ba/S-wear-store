@@ -66,6 +66,111 @@
       margin: 0;
       padding: 0;
     }
+
+.button-17 {
+  align-items: center;
+  appearance: none;
+  background-color: #fff;
+  border-radius: 24px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #3c4043;
+  cursor: pointer;
+  display: inline-flex;
+  fill: currentcolor;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  justify-content: center;
+  letter-spacing: .25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  padding: 2px 24px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 60px;
+  will-change: transform,opacity;
+  z-index: 0;
+}
+
+.button-17:hover {
+  background: #F6F9FE;
+  color: #174ea6;
+}
+
+.button-17:active {
+  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+  outline: none;
+}
+
+.button-17:focus {
+  outline: none;
+  border: 2px solid #4285f4;
+}
+
+.button-17:not(:disabled) {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+.button-17:not(:disabled):hover {
+  box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+}
+
+.button-17:not(:disabled):focus {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+.button-17:not(:disabled):active {
+  box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+}
+
+.button-17:disabled {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+.button-31 {
+  background-color: #222;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 70%;
+  height: 55px;
+  margin-right: 30px;
+}
+
+.button-31:hover,
+.button-31:focus {
+  opacity: .75;
+}
+
   html{
     width: 100%;
     height: 100%;
@@ -125,10 +230,8 @@
             }
           }
           .signInButtons{
-            display: grid;
-            justify-content: center;
-            align-content: center;
-            grid-template-columns: repeat(2 ,1fr);
+            display: flex;
+            justify-content: space-around;
             .createAccountButton{
               @extend %signInButtons;
               border: 1px solid rgb(41, 41, 41) ;
@@ -206,75 +309,7 @@
                   }
               }
           }
-        }
-        .popupCreate {
-          display: block;
-          width: 600px;
-          background-color: white;
-          border-radius: 5px;
-          position: fixed;
-          top: 20%;
-          left: 0; 
-          right: 0; 
-          margin-left: auto; 
-          margin-right: auto; 
-          display: grid;
-          grid-template-rows: 40px 500px 70px;
-          align-items: center;
-          .headerPopup{
-            background-color: #f5f5f5;
-            border-bottom: 1px solid slategray;
-            box-shadow: 0 1px #e4e4e4;
-            .signInTitle{
-              display: inline;
-            }
-            .close{
-              text-align: right;
-              margin-right: 10px;
-              float: right;
-              width: 38px;
-            }
-          }
-          .allInputs{
-            align-self: center;
-            display: grid;
-            gap: 15px;
-            justify-content: center;
-            grid-template-columns: repeat(2,1fr);
-            .ulKeys{
-              margin-left: 40px;
-              margin-top: 40px;
-              li{
-                font-size: 25px;
-                margin: 0;
-                margin-bottom: 25px;
-                text-align: left;
-              }
-            }
-            .ulInputs{
-              margin-right: 65px;
-              margin-top: 40px;
-              input{
-                display: block;
-                width: 300px;
-                font-size: 20px;
-                margin-bottom: 25.3px;
-              }
-            }
-          }
-          .createButton{
-            display: grid;
-            justify-content: center;
-            align-content: center;
-            grid-template-columns: repeat(2 ,1fr);
-            .createAccountButton{
-              @extend %signInButtons;
-              background-color: rgb(41, 41, 41) ;          
-              color: #fff;
-              width: 250px;
-            }
-          }
-        }
+        }        
       }
       #container {
           @extend %content;
@@ -318,6 +353,106 @@
             }
           }
         }
+        .background{
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          background: rgba(182, 179, 179, 0.281);
+          z-index: 2;
+          top: 0;
+          left: 0;
+          .oneCloth{
+            width: 900px;
+            height: 450px;
+            background-color: white;
+            border-radius: 5px;
+            position: fixed;
+            top: 20%;
+            left: 0; 
+            right: 0; 
+            margin-left: auto; 
+            margin-right: auto; 
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            align-items: center;
+            #close{
+              cursor: pointer;
+              position: absolute;
+              top:1%;
+              right: 0.5%;
+            }
+            .imageSide{
+              width: 100%;
+              text-align: center;
+              .OneImage{
+                width: 90%;
+                height: inherit;
+              }
+            }
+            .infoSide{
+              width: 100%;
+              display: grid;
+              height: 90%;
+              .firstDiv{
+                border-bottom:1px solid #7a7f83;
+                height: 80%;
+                .clothTitle{
+                  font-size: 17.5px;
+                  color:rgb(46, 46, 46);
+                  padding:5px 0px 5px 0px;
+                }
+                .model{
+                  font-size:17px;
+                  color:slategray;
+                }
+                .price{
+                  font-size:35px;
+                  font-weight: 700;
+                }
+              }
+              .sizes{
+                display: grid;
+                grid-template-columns: repeat(5 , 1fr);
+                gap:10px;
+              }
+              .add{
+                display: flex;
+                .circle{
+                  border: 1px solid #e5e5e5;
+                  border-radius: 50%;
+                  width:55px;
+                  height: 55px;
+                  position: relative;
+                  #favoriteIcon{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    margin: auto;
+                    font-size: 25px;
+                    &:hover{
+                      font-size: 35px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
 
+    // .createButton{
+    //   display: grid;
+    //   justify-content: center;
+    //   align-content: center;
+    //   grid-template-columns: repeat(2 ,1fr);
+    //   .createAccountButton{
+    //     @extend %signInButtons;
+    //     background-color: rgb(41, 41, 41) ;          
+    //     color: #fff;
+    //     width: 250px;
+    //   }
+    // }

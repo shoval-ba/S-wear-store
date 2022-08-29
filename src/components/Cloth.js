@@ -1,9 +1,12 @@
 import {React , useState , useEffect } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import OneCloth from './OneCloth';
 
 export default function Cloth()  { 
 
     const [clothes , setClothes] = useState([]);
+    const [openOneCloth , setOpenOneCloth] = useState(false);
+    const [oneCloth , setOneCloth] = useState({})
 
     const getClothes = () => {
         fetch("https://clothes-app-shoval.herokuapp.com/allClothes")
@@ -14,6 +17,11 @@ export default function Cloth()  {
       useEffect(() => {
         getClothes();
       }, [] );
+
+      const handleClick = (cloth) => {
+        setOneCloth(cloth)
+        setOpenOneCloth(true)
+      }
 
       const clothesUi = clothes.map(cloth => {
         return (
@@ -27,7 +35,7 @@ export default function Cloth()  {
                     <div className='info'>
                         <h1 className="title"> {cloth.title}</h1>
                         <h1 className="model"> {cloth.model}</h1> 
-                        <button className="buttonAdd">Add to bag </button>
+                        <button className="buttonAdd" onClick={()=>handleClick(cloth)}>Add to bag </button>
                     </div>
                 </div>
             </div>
@@ -37,6 +45,7 @@ export default function Cloth()  {
     return (
         <div id='container'>
           {clothesUi}
+          {openOneCloth ? <OneCloth cloth={oneCloth} close={setOpenOneCloth}/> : <></>}
         </div>
     )
 }
