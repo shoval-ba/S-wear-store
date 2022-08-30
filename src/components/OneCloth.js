@@ -5,14 +5,13 @@ import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import '../styles/OneCloth.scss';
-import { myBag } from '../App';
 
 export default function OneCloth(props)  { 
     const cloth = props.cloth;
     const [chosenSize , setChosenSize] = useState();
     const [quantity , setQuantity] = useState(0)
     const select = createRef();
-    const setMyBag = useOutletContext()[0];
+    const setMyBag = useOutletContext().setMyBag;
     let sizes = [];
 
     for(let key in cloth.sizes){
@@ -51,13 +50,22 @@ export default function OneCloth(props)  {
         if(chosenSize === undefined){
             select.current.style.display = "block";
         } else {
-            select.current.style.display = "none";
-            if(quantity <= 0 ) setQuantity(1)
-            let newCloth = {
-                cloth:cloth.cloth_id,
-                size:chosenSize, 
-                quantity:quantity
+            let newCloth
+            if(quantity <= 0 ) {
+                setQuantity(1)
+                newCloth = {
+                    cloth:cloth,
+                    size:chosenSize, 
+                    quantity:1
+                }
+            } else{
+                newCloth = {
+                    cloth:cloth,
+                    size:chosenSize, 
+                    quantity:quantity
+                }
             }
+            select.current.style.display = "none";
             setMyBag(previousState =>{ return [...previousState , newCloth]}); 
         }
     }
@@ -81,12 +89,12 @@ export default function OneCloth(props)  {
                             {sizesUI}
                         </div>
                         <p ref={select} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please select your size</p>
-                        <div>
-                            <AddIcon onClick={()=>setQuantity(quantity+1)}></AddIcon>
-                            <input typy="number" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>
-                            <RemoveIcon onClick={()=>setQuantity(quantity-1)}></RemoveIcon>
-                        </div>
                     </div> 
+                    <div className='quantity'>
+                        <AddIcon onClick={()=>setQuantity(quantity+1)}></AddIcon>
+                        <input typy="number" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>
+                        <RemoveIcon onClick={()=>setQuantity(quantity-1)}></RemoveIcon>
+                    </div>
                     <div className='add'>
                         <button className="button-31" onClick={()=>addToBag()}>Add to bag </button>
                         <div className='circle'>

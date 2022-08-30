@@ -32,15 +32,15 @@ export default function Carousel()  {
                 <h3>Be the first to get your hands on the most wanted sneakers, tracksuits, backpacks, and more.</h3>
             </div>
             <div style={{margin:"30px" , display:"flex"}}>
-                <img style={{marginRight:"30px" , width:"100%"}} src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/fl-campaign/2022/2022_08_13_fl_onl_converse_animalie/05_final_output_files/ecom/2022_08_13_FL_ONL_CONVERSE_ANIMALIER_HPbanner_800x300.jpg" alt="image"/>
-                <img src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/fl-campaign/2022/2022_08_27_fl_onl_on_running/05_final_output_files/eCom/2022_08_27_FL_ONL_ON_Running_DESIGN_HPbanner_800x300.jpg" alt="image"/>
+                <img style={{marginRight:"30px" , width:"50%"}} src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/fl-campaign/2022/2022_08_13_fl_onl_converse_animalie/05_final_output_files/ecom/2022_08_13_FL_ONL_CONVERSE_ANIMALIER_HPbanner_800x300.jpg" alt="image"/>
+                <img style={{ width:"50%"}} src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/fl-campaign/2022/2022_08_27_fl_onl_on_running/05_final_output_files/eCom/2022_08_27_FL_ONL_ON_Running_DESIGN_HPbanner_800x300.jpg" alt="image"/>
             </div>
             <div style={{margin:"30px" , display:"flex"}}>
                 <img style={{ width:"100%"}} src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/fl-campaign/2022/2022_03_22_fl_onl_summer/05_final_output_files/clearpay/2022_03_22_FL_ONL_Summer_gender_clearpay_1600x300.jpg" alt="image"/>   
             </div>
             <div style={{margin:"30px" , display:"flex"}}>
-                <img style={{marginRight:"30px" , width:"100%"}} src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/2020_09_017_onl_basketball_hub/bballhub-update21-12/05_final_output_files/fl-hp/2021_09_28_1307_fashion-week_striper-hub_header_800x300.jpg" alt="image"/>
-                <img src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/2020_09_017_onl_basketball_hub/bballhub-update21-12/05_final_output_files/fl-hp/02_RTG_Main_landing_RTG_Header_op3_800x300.jpg" alt="image"/>
+                <img style={{marginRight:"30px" , width:"50%"}} src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/2020_09_017_onl_basketball_hub/bballhub-update21-12/05_final_output_files/fl-hp/2021_09_28_1307_fashion-week_striper-hub_header_800x300.jpg" alt="image"/>
+                <img style={{ width:"50%"}} src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/2020_09_017_onl_basketball_hub/bballhub-update21-12/05_final_output_files/fl-hp/02_RTG_Main_landing_RTG_Header_op3_800x300.jpg" alt="image"/>
             </div>
         </div>
     )

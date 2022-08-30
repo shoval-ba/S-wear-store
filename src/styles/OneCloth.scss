@@ -28,7 +28,8 @@
         right: 0.5%;
       }
       .imageSide{
-        width: 100%;
+        width: 90%;
+        height: 400px;
         text-align: center;
         .OneImage{
           width: 90%;
@@ -38,8 +39,10 @@
       .infoSide{
         width: 100%;
         display: grid;
+        grid-template-rows: 140px , 150px , 80px , 100px;
         height: 90%;
         .firstDiv{
+          padding-bottom: 30px;
           border-bottom:1px solid #7a7f83;
           height: 80%;
           .clothTitle{
@@ -61,6 +64,9 @@
           grid-template-columns: repeat(5 , 1fr);
           gap:10px;
           margin-bottom: 10px;
+        }
+        .quantity{
+          margin-top:20px;
         }
         input{
           width: 30px;

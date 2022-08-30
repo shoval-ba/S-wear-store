@@ -97,7 +97,7 @@ export default function Navbar() {
                 noWrap
                 sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}
                 >
-                men
+                <Link to="men" style={{color:"white"}}>men</Link>
                 </Typography>
                 <Typography
                 variant="h6"
@@ -109,19 +109,7 @@ export default function Navbar() {
                 variant="h6"
                 noWrap
                 sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
-                kids
-                </Typography>
-                <Typography
-                variant="h6"
-                noWrap
-                sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
-                back to school
-                </Typography>
-                <Typography
-                variant="h6"
-                noWrap
-                sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
-                sale
+                <Link to="plus" style={{color:"white"}}>plus size</Link>
                 </Typography>
            </Box>
           <Search>
@@ -165,7 +153,7 @@ export default function Navbar() {
       </AppBar>
       {sighIn ? <Popup sighIn={setSighIn}/> : <></>}
     </Box>
-      <Outlet context={[setMyBag , myBag]}></Outlet>
+      <Outlet context={{setMyBag:setMyBag , myBag:myBag}}></Outlet>
     </div>
   );
 }

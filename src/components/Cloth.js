@@ -3,23 +3,24 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import OneCloth from './OneCloth';
 import Filters from './Filters';
 import '../styles/Clothes.scss';
-import Navbar from './Navbar';
 
-export default function Cloth()  { 
+export default function Cloth(props)  { 
+  const brand = props.brand;
 
     const [clothes , setClothes] = useState([]);
     const [openOneCloth , setOpenOneCloth] = useState(false);
     const [oneCloth , setOneCloth] = useState({})
 
     const getClothes = () => {
-        fetch("https://clothes-app-shoval.herokuapp.com/allClothes")
+        fetch(`https://clothes-app-shoval.herokuapp.com/clothesByBrand${brand}`)
         .then((res) => res.json())
         .then((response) => setClothes(response))
       }
     
       useEffect(() => {
         getClothes();
-      }, [] );
+        console.log(clothes)
+      }, [brand] );
 
       const handleClick = (cloth) => {
         setOneCloth(cloth)
@@ -37,7 +38,7 @@ export default function Cloth()  {
                 <div className="bottom">
                     <div className='info'>
                         <h1 className="title"> {cloth.title}</h1>
-                        <h1 className="model"> {cloth.model}</h1> 
+                        <h1 className="model"> {cloth.sector}</h1> 
                         <button className="buttonAdd" onClick={()=>handleClick(cloth)}>Add to bag </button>
                     </div>
                 </div>
@@ -49,7 +50,7 @@ export default function Cloth()  {
       <div>
        
       <div className='filterAnd'>
-            <Filters/>
+            <Filters brand={brand}/>
           <div id='container'>
             {clothesUi}
             {openOneCloth ? <OneCloth cloth={oneCloth} close={setOpenOneCloth}/> : <></>}
