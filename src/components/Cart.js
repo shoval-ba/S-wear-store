@@ -9,7 +9,7 @@ export default function Cart()  {
     const myBag = useOutletContext().myBag;
 
     const [totalPrice , setTotalPrice]= useState(0);
-    const [items , setItems] = useState(myBag)
+    const [items , setItems] = useState(myBag);
 
     useEffect(() => {
         setTotalPrice(0)
@@ -20,7 +20,6 @@ export default function Cart()  {
         setTotalPrice(Math.floor(total))
     }, [items] );
     
-
     let itemsUi ;
     if(items.length ===0 ){
         itemsUi = (
@@ -42,11 +41,17 @@ export default function Cart()  {
                             <div className="row">{item.cloth.title}</div>
                         </div>
                         <div className="col">
-                        <AddIcon onClick={()=>{}}></AddIcon>
+                        <AddIcon onClick={()=>setItems(previousState =>{ 
+                            const itemsFilter = previousState.filter(currentItem => { return item.cloth.cloth_id !== currentItem.cloth.cloth_id })
+                            return [...itemsFilter , {...item, quantity:item.quantity+1}]
+                            })}></AddIcon>
                         <input typy="number" value={item.quantity} onChange={(e)=>setItems(e.target.value)}/>
-                        <RemoveIcon onClick={()=>setItems(previousState =>{ return [...previousState , item.quantity = item.quantity  - 1 ]})}></RemoveIcon>
+                        <RemoveIcon onClick={()=>setItems(previousState =>{ 
+                            const itemsFilter = previousState.filter(currentItem => { return item.cloth.cloth_id !== currentItem.cloth.cloth_id })
+                            return [...itemsFilter , {...item, quantity:item.quantity-1}]
+                            })}></RemoveIcon>
                         </div>
-                        <div className="col">{item.cloth.price} $<span className="close">&#10005;</span></div>
+                        <div className="col">{item.cloth.price} $<span className="close" onClick={()=>{handleDelete(item)}}>&#10005;</span></div>
                     </div>
                 </div> 
             )
@@ -74,13 +79,13 @@ export default function Cart()  {
                     </div>
                     <form>
                         <p>SHIPPING</p>
-                        <select><option className="text-muted">Standard-Delivery- &euro;5.00</option></select>
+                        <select><option className="text-muted">Standard-Delivery- 5.00$</option></select>
                         <p>GIVE CODE</p>
                         <input id="code" placeholder="Enter your code"/>
                     </form>
                     <div className="row" style={{borderTop: "1px solid rgba(0,0,0,.1)", padding: "2vh 0"}}>
                         <div className="col">TOTAL PRICE</div>
-                        <div className="col text-right">{totalPrice}$</div>
+                        <div className="col text-right">{totalPrice + 5}$</div>
                     </div>
                     <button className="btn">TO PAY</button>
                 </div>

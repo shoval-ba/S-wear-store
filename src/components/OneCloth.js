@@ -18,24 +18,24 @@ export default function OneCloth(props)  {
         sizes.push(key);
     }
 
-      const sizesUI = sizes.map(size=>{
+      const sizesUI = sizes.map((size , index)=>{
         if(cloth.sizes[size] == 0) {
             return (
-                <div>
-                    <button className='button-17' style={{color:"DarkGrey"}}>{size}</button>
+                <div key={cloth.cloth_id+index}>
+                    <button className='button-17'style={{color:"DarkGrey"}}>{size}</button>
                 </div>
             )
         }
         else if(size === chosenSize){
             return(
-                <div>
+                <div key={cloth.cloth_id+index}>
                     <button className='button-17' style={ {outline: "none" , border: "2px solid #4285f4"}} onClick={() => setChosenSize(size)}>{size}</button>
                 </div>
             )
         }
         else{
             return(
-                <div>
+                <div key={cloth.cloth_id+index}>
                     <button className='button-17' onClick={() => setChosenSize(size)}>{size}</button>
                 </div>
             )
@@ -71,8 +71,8 @@ export default function OneCloth(props)  {
     }
 
     return (
-        <div className='background' key={cloth.cloth_id}>
-            <div className="oneCloth" key={cloth.cloth_id}>  
+        <div className='background'>
+            <div className="oneCloth">  
                 <ClearIcon id="close" onClick={()=>close()}/>
                 <div className='imageSide'>
                     <img className ='OneImage' src={cloth.img} alt="clothImg"/> 

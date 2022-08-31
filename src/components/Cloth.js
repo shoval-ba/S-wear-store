@@ -19,7 +19,6 @@ export default function Cloth(props)  {
     
       useEffect(() => {
         getClothes();
-        console.log(clothes)
       }, [brand] );
 
       const handleClick = (cloth) => {
