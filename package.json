@@ -1,0 +1,24 @@
+{
+  "name": "client-server-app",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "init-project": "npm run i-linters && npm run i-server && npm run i-client",
+    "i-server": "cd ./src/server && npm ci",
+    "i-client": "cd ./src/client && npm ci",
+    "i-linters": "cd ./src && npm ci",
+    "test-server": "cd ./src/server && npm run test",
+    "test-client": " cd ./src/client && npm run test",
+    "build": "npm run build-server && npm run build-client",
+    "server": "cd ./src/server && npm run server",
+    "start": "cd ./src/client && npm run start",
+    "build-server": "cd ./src/server && npm run build",
+    "build-client": "cd ./src/client && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^10.1.0"
+  }
+}
