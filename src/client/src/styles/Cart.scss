@@ -53,6 +53,30 @@
 //     }
 // }
 
+
+%quantity-buttons{
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    direction: rtl;
+    font-family: Cairo,Arial,Helvetica,sans-serif!important;
+    color: #222;
+    white-space: nowrap;
+    box-sizing: border-box;
+    letter-spacing: normal!important;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    outline: 0;
+    display: inline-block;
+    font-size: 14px;
+    width: 25px;
+    height: 28px;
+    background: #fff;
+    border: 1px solid #222;
+    text-align: center;
+  }
+  
 body{
     background: #ddd;
     min-height: 100vh;
@@ -161,7 +185,7 @@ select{
     width: 100%;
     background-color: rgb(247, 247, 247);
 }
-input{
+.inputCode{
     border: 1px solid rgba(0, 0, 0, 0.137);
     padding: 1vh;
     margin-bottom: 4vh;
@@ -169,7 +193,7 @@ input{
     width: 100%;
     background-color: rgb(247, 247, 247);
 }
-input:focus::-webkit-input-placeholder
+.inputCode:focus::-webkit-input-placeholder
 {
       color:transparent;
 }
@@ -195,13 +219,66 @@ input:focus::-webkit-input-placeholder
 .btn:hover{
     color: white;
 }
-a{
-    color: black; 
-}
-a:hover{
-    color: black;
-    text-decoration: none;
-}
+
+.quantity{
+    margin-top:20px; 
+    ul{
+        line-height: 1.15;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+        font-family: Cairo,Arial,Helvetica,sans-serif!important;
+        font-size: 12px;
+        color: #222;
+        list-style: none;
+        text-align: right;
+        box-sizing: border-box;
+        letter-spacing: normal!important;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        display: flex;
+        height: 30px;
+        -webkit-box-align: center;
+        align-items: center;
+        overflow: hidden;
+        .right{
+          @extend %quantity-buttons;
+          border-radius: 0 100px 100px 0;
+          .middle{
+            line-height: 1.15;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            direction: rtl;
+            font-family: Cairo,Arial,Helvetica,sans-serif!important;
+            color: #222;
+            white-space: nowrap;
+            box-sizing: border-box;
+            letter-spacing: normal!important;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: inline-block;
+          }
+        }
+        .left{
+          @extend %quantity-buttons;
+          border-radius: 100px 0 0 100px;
+        }
+        .inputQuantity{
+          text-align: center;
+          width:30px;
+           height:28px;
+           -moz-appearance:textfield;
+        }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+        }
+      }
+      
+      
+  }
  #code{
     background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253) , rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
     background-repeat: no-repeat;

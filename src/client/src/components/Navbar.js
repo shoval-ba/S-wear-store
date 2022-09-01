@@ -12,10 +12,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import SighIn from './SighIn';
 import Popup from './Popup';
 import { Link , Outlet} from 'react-router-dom';
-import { myBag } from '../App';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,16 +55,16 @@ export default function Navbar() {
 
   const [favorites , setFavorites] = useState();
   let [myBag , setMyBag] = useState([])
+  let [myFavorite , setMyFavorite] = useState([])
 
   const [sighIn , setSighIn]= useState(false)
-  const [showCart , setShowCart] = useState(false)
 
   const handleUserClick = () => {
     setSighIn(true)
   }
 
-  const handleCartClick = () => {
-    setShowCart(true)
+  const handleFavoriteClick = () => {
+    console.log(myFavorite)
   }
 
   return (
@@ -89,7 +87,7 @@ export default function Navbar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' , flexGrow: 0.4} }}
           >
-            SHOVAL SPORT
+            <Link to="/" style={{color:"white"}}>SHOVAL SPORT</Link>
           </Typography>
             <Box sx={{ flexGrow: 1 , textAlign:"center"}}>
                 <Typography
@@ -133,8 +131,9 @@ export default function Navbar() {
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              onClick={() => handleFavoriteClick()}
             >
-              <Badge badgeContent={favorites} color="error">
+              <Badge badgeContent={myFavorite.length} color="error">
                 <FavoriteIcon />
               </Badge>
             </IconButton>
@@ -153,7 +152,7 @@ export default function Navbar() {
       </AppBar>
       {sighIn ? <Popup sighIn={setSighIn}/> : <></>}
     </Box>
-      <Outlet context={{setMyBag:setMyBag , myBag:myBag}}></Outlet>
+      <Outlet context={{setMyBag:setMyBag , myBag:myBag , setMyFavorite:setMyFavorite , myFavorite:myFavorite}}></Outlet>
     </div>
   );
 }

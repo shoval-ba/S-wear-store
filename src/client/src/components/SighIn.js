@@ -20,7 +20,7 @@ export default function SighIn(props)  {
             body: JSON.stringify({email:email, password:password})
           }
           try{
-            let result = await fetch('https://clothes-app-shoval.herokuapp.com/user', options);
+            let result = await fetch('/user', options);
             await result.json().then((res) => {
                 if(typeof res == "string") alert(res)
                 else if (typeof res == "object"){

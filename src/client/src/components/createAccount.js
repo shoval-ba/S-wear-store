@@ -53,7 +53,7 @@ export default function CreateAccount(props)  {
                 body: JSON.stringify(user)
               }
               try{
-                let result = await fetch('https://clothes-app-shoval.herokuapp.com/addUser', options);
+                let result = await fetch('/addUser', options);
                 await result.json().then((res) => {
                   alert(res)
                 })
@@ -78,56 +78,56 @@ export default function CreateAccount(props)  {
                 <div className='name'>
                     <div className='first'>
                         <label htmlFor='firstName'>FIRST NAME</label>
-                        <input type="text" value={user.first_name} onChange={(e)=>{setUser(previousState => {
+                        <input className="inputCreate" type="text" value={user.first_name} onChange={(e)=>{setUser(previousState => {
                                         return { ...previousState, first_name: e.target.value }
                                     })}}></input>
                     </div>
                     <div className='last'>               
                         <label htmlFor='lastName'>LAST NAME</label>
-                        <input type="text" value={user.last_name} onChange={(e)=>{setUser(previousState => {
+                        <input className="inputCreate"  type="text" value={user.last_name} onChange={(e)=>{setUser(previousState => {
                                         return { ...previousState, last_name: e.target.value }
                                     })}}></input>
                     </div>
                 </div>
                 <div>
                     <label htmlFor='phone_number'>PHONE NUMBER</label>
-                    <input type="phone" value={user.phone_number} placeholder="Enter your phone number" onChange={(e)=>{setUser(previousState => {
+                    <input className="inputCreate" type="phone" value={user.phone_number} placeholder="Enter your phone number" onChange={(e)=>{setUser(previousState => {
                                         return { ...previousState, phone_number: e.target.value }
                                     })}}></input>
                 </div>
                 <div>
                     <label htmlFor='email'>EMAIL</label>
-                    <input type="text" value={user.email} placeholder="Enter your email" onChange={(e)=>{setUser(previousState => {
+                    <input className="inputCreate" type="text" value={user.email} placeholder="Enter your email" onChange={(e)=>{setUser(previousState => {
                                         return { ...previousState, email: e.target.value }
                                     })}}></input>
                 </div>
                 <div>               
                     <label htmlFor='city'>CITY</label>
-                    <input type="text" value={user.city} placeholder="Enter city" onChange={(e)=>{setUser(previousState => {
+                    <input className="inputCreate" type="text" value={user.city} placeholder="Enter city" onChange={(e)=>{setUser(previousState => {
                                         return { ...previousState, city: e.target.value }
                                     })}}></input>
                 </div>
                 <div>
                     <label htmlFor='adress'>ADRESS</label>
-                    <input type="text" value={user.adress} placeholder="Enter adress" onChange={(e)=>{setUser(previousState => {
+                    <input className="inputCreate" type="text" value={user.adress} placeholder="Enter adress" onChange={(e)=>{setUser(previousState => {
                                         return { ...previousState, adress: e.target.value }
                                     })}}></input>
                 </div>
                 <div>
                     <label htmlFor='date_of_birth'>DATE OF BIRTH</label>
-                    <input type="date" value={user.date_of_birth} placeholder="Enter bate of birth" onChange={(e)=>{setUser(previousState => {
+                    <input className="inputCreate" type="date" value={user.date_of_birth} placeholder="Enter bate of birth" onChange={(e)=>{setUser(previousState => {
                                         return { ...previousState, date_of_birth: e.target.value }
                                     })}}></input>
                 </div>
                 <div>
                     <label htmlFor='password'>PASSWORD</label>
-                    <input type="password" value={user.password} placeholder="Enter password" onChange={(e)=>{setUser(previousState => {
+                    <input className="inputCreate" type="password" value={user.password} placeholder="Enter password" onChange={(e)=>{setUser(previousState => {
                                         return { ...previousState, password: e.target.value }
                                     })}}></input>
                 </div>
                 <div>
                     <label htmlFor='password'>PASSWORD AGAIN</label>
-                    <input type="password" value={passwordAgain} placeholder="Enter password again" onChange={(e)=>{setPassword(e.target.value)}}></input>
+                    <input className="inputCreate" type="password" value={passwordAgain} placeholder="Enter password again" onChange={(e)=>{setPassword(e.target.value)}}></input>
                 </div>
             </div>
         </form>

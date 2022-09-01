@@ -1,20 +1,20 @@
 {
-  "name": "heroku-starter-project",
+  "name": "server",
   "scripts": {
-    "start": "cd ./src/client && npm start",
-    "server": "nodemon --watch ./src/server ./src/server/server.ts",
+    "server": "nodemon server ",
+    "start": " node server",
     "deploy": "gulp deploy",
     "lint": "eslint ./src --ext .ts",
     "lint-fix": "eslint ./src --ext .ts --fix",
     "jest": "jest"
   },
   "dependencies": {
+    "@types/pg": "^8.6.5",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.2",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "pg": "^8.8.0",
-    "webpack": "^5.73.0"
+    "pg": "^8.7.3"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
@@ -24,13 +24,19 @@
     "@types/node": "^18.0.3",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
+    "axios": "^0.27.2",
+    "browser-sync": "^2.27.9",
     "eslint": "^8.19.0",
+    "fetch": "^1.1.0",
+    "fs": "^0.0.1-security",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
     "jest": "^28.1.2",
+    "node-fetch": "^3.2.10",
     "nodemon": "^2.0.19",
+    "path": "^0.12.7",
     "sass": "^1.53.0",
     "source-map-loader": "^4.0.0",
     "ts-jest": "^28.0.5",

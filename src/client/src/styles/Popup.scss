@@ -44,7 +44,8 @@
       .inputs{
         align-self: center;
         display: grid;
-        gap: 38px;
+        margin-top: 15px;
+        gap:35px;
         justify-content: center;
         .inputSignIn{
           background-color: #f5f5f5;
@@ -85,10 +86,11 @@
         margin-bottom: 7px;
         margin-top: 7px;
       }
-      input{
+      .inputCreate{
         display: block;
         height: 30px;
         width: 100%;
+        margin-bottom: 0;
       }
       .allInfo{
           margin: 30px;

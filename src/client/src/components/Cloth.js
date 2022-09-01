@@ -12,7 +12,7 @@ export default function Cloth(props)  {
     const [oneCloth , setOneCloth] = useState({})
 
     const getClothes = () => {
-        fetch(`https://clothes-app-shoval.herokuapp.com/clothesByBrand${brand}`)
+        fetch(`/clothesByBrand${brand}`)
         .then((res) => res.json())
         .then((response) => setClothes(response))
       }

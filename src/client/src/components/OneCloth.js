@@ -12,11 +12,27 @@ export default function OneCloth(props)  {
     const [quantity , setQuantity] = useState(0)
     const select = createRef();
     const setMyBag = useOutletContext().setMyBag;
+    const myBag = useOutletContext().myBag;
+    const setMyFavorite = useOutletContext().setMyFavorite;
+    const myFavorite = useOutletContext().myFavorite;
     let sizes = [];
+    const [colorHeart , setColor] = useState("black")
 
     for(let key in cloth.sizes){
         sizes.push(key);
     }
+
+    useEffect(()=>{
+        for(let favorite of myFavorite) {
+            if(cloth.cloth_id == favorite.cloth_id) {
+                setColor("red")
+            }
+        }
+    } , [colorHeart])
+
+    useEffect(()=>{
+        if(quantity <= 0 ) setQuantity(1)
+    } , [quantity])
 
       const sizesUI = sizes.map((size , index)=>{
         if(cloth.sizes[size] == 0) {
@@ -46,7 +62,32 @@ export default function OneCloth(props)  {
         props.close(false)
     }
 
+    const addToFavorite = () => {
+        setColor("red")
+        for(let favorite of myFavorite) {
+            if(cloth.cloth_id == favorite.cloth_id) {
+                setColor("black")
+                setMyFavorite(previousState =>{ 
+                    const itemsFilter = previousState.filter(currentItem => { return favorite.cloth_id !== currentItem.cloth_id })
+                    console.log(itemsFilter)
+                    return [...itemsFilter]
+                })
+                return;
+            }
+        }
+        setMyFavorite(previousState =>{ return [...previousState , cloth]})
+    }
+
     const addToBag = () =>{
+        for(let cloth2 of myBag) {
+            if(cloth == cloth2) {
+                console.log("in")
+                setMyBag(previousState =>{ 
+                    const itemsFilter = previousState.filter(currentItem => { return cloth.cloth_id !== currentItem.cloth_id })
+                    return [...itemsFilter , {...cloth, quantity:cloth2.quantity+1}]
+                    })
+            }
+        }
         if(chosenSize === undefined){
             select.current.style.display = "block";
         } else {
@@ -90,15 +131,24 @@ export default function OneCloth(props)  {
                         </div>
                         <p ref={select} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please select your size</p>
                     </div> 
+                    
                     <div className='quantity'>
-                        <AddIcon onClick={()=>setQuantity(quantity+1)}></AddIcon>
-                        <input typy="number" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>
-                        <RemoveIcon onClick={()=>setQuantity(quantity-1)}></RemoveIcon>
+                        <ul>
+                            <li className="qty-opt left disabled">
+                                <AddIcon onClick={()=>setQuantity(quantity+1)}></AddIcon>
+                            </li> 
+                            <li className="middle">
+                                <input className="inputQuantity"  type="number" value={quantity} onChange={(e)=>setQuantity(e.target.value)}/>
+                            </li> 
+                            <li role="button" className="qty-opt right">
+                                <RemoveIcon onClick={()=>setQuantity(quantity-1)}></RemoveIcon>
+                            </li>
+                        </ul>
                     </div>
                     <div className='add'>
                         <button className="button-31" onClick={()=>addToBag()}>Add to bag </button>
                         <div className='circle'>
-                            <FavoriteBorderIcon id="favoriteIcon"/>
+                            <FavoriteBorderIcon id="favoriteIcon" style={{color:colorHeart}} onClick={()=>addToFavorite()}/>
                         </div>
                     </div>
 
