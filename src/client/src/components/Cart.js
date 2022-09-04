@@ -61,9 +61,9 @@ export default function Cart()  {
 
 
     else {
-        itemsUi = items.map(item => {
+        itemsUi = items.map((item,index) => {
             return (
-                 <div className="row border-top border-bottom" key={item.cloth.cloth_id}>
+                 <div className="row border-top border-bottom" key={item.cloth.cloth_id * index}>
                     <div className="row main align-items-center">
                         <div className="col-2"><img className="img-fluid" src={item.cloth.img}/></div>
                         <div className="col">
@@ -83,8 +83,10 @@ export default function Cart()  {
                             </li>
                         </ul>
                         </div>
-                        <h6>size: {item.size}</h6>
-                        <div className="col">{item.cloth.price} $<span className="close" onClick={()=>handleDelete(item)}>&#10005;</span></div>
+                        <div className="col" style={{marginTop:"10px"}}>{item.cloth.price} $
+                            <h6>size: {item.size}</h6>
+                        </div>
+                            <span className="close" onClick={()=>handleDelete(item)}>&#10005;</span>
                     </div>
                 </div> 
             )

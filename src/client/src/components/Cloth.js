@@ -8,13 +8,17 @@ export default function Cloth(props)  {
   const brand = props.brand;
 
     const [clothes , setClothes] = useState([]);
+    const [clothesAfterFilter , setClothesFilter] = useState([]);
     const [openOneCloth , setOpenOneCloth] = useState(false);
     const [oneCloth , setOneCloth] = useState({})
 
     const getClothes = () => {
         fetch(`/clothesByBrand${brand}`)
         .then((res) => res.json())
-        .then((response) => setClothes(response))
+        .then((response) => {
+          setClothes(response)
+          setClothesFilter(response)
+        })
       }
     
       useEffect(() => {
@@ -26,7 +30,7 @@ export default function Cloth(props)  {
         setOpenOneCloth(true)
       }
 
-      const clothesUi = clothes.map(cloth => {
+      const clothesUi = clothesAfterFilter.map(cloth => {
         return (
             <div className='item' key={cloth.cloth_id}>
             <div className="backgroundImg">
@@ -49,7 +53,7 @@ export default function Cloth(props)  {
       <div>
        
       <div className='filterAnd'>
-            <Filters brand={brand}/>
+            <Filters brand={brand} clothes={clothes} setClothes={setClothesFilter}/>
           <div id='container'>
             {clothesUi}
             {openOneCloth ? <OneCloth cloth={oneCloth} close={setOpenOneCloth}/> : <></>}
