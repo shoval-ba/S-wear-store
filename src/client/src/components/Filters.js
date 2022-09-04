@@ -1,4 +1,4 @@
-import {React , useState , useEffect , createRef} from 'react';
+import {React } from 'react';
 import "../styles/Filters.scss"
 
 export default function Filters(props)  { 
@@ -6,15 +6,10 @@ export default function Filters(props)  {
     const brand = props.brand;
     const clothes = props.clothes;
     let clothesAfterFilter = []
-    const [chosenSector , setSector] = useState();
-    // const [clothesAfterFilter , setClothes] = useState([]);
 
     const filterBySector=(sector)=>{
-        setSector(sector);
-        console.log(sector)
-        console.log(clothes)
         for(let cloth of clothes){
-            if(cloth.sector == sector) {
+            if(cloth.sector === sector) {
                 clothesAfterFilter.push(cloth)
             }
         }
@@ -37,7 +32,7 @@ export default function Filters(props)  {
                     <h6>Jackets</h6>
                 </div>
                 <div className='filter' onClick={()=>filterBySector("dresses")}>
-                    <h6>Dresses</h6>
+                    <h6>Dresses and Suits</h6>
                 </div>
                 <div className='filter' onClick={()=>filterBySector("socks")}>
                     <h6>Socks</h6>
@@ -64,6 +59,25 @@ export default function Filters(props)  {
         )
     }
     else if(brand === "PLUS"){
+        return (
+            <div className='container' style={{height:"250px"}}>
+                <div className='filter' onClick={()=>filterBySector("T-Shirts")}>
+                    <h6>T-shirt</h6>
+                </div>
+                <div className='filter' onClick={()=>filterBySector("pants")}>
+                    <h6>Pants</h6>
+                </div>
+                <div className='filter' onClick={()=>filterBySector("dresses")}>
+                    <h6>Dresses</h6>
+                </div>
+                <div className='filter' onClick={()=>filterBySector("jackets")}>
+                    <h6>Jackets</h6>
+                </div>
+            </div>
+        )
+    }
+
+    else if(brand === "KIDS"){
         return (
             <div className='container' style={{height:"250px"}}>
                 <div className='filter' onClick={()=>filterBySector("T-Shirts")}>

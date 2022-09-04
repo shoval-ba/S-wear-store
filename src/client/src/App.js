@@ -25,6 +25,8 @@ function App() {
         </Route>
         <Route path="plus" element={<Cloth brand={"PLUS"}/>}>       
         </Route>
+        <Route path="kids" element={<Cloth brand={"KIDS"}/>}>       
+        </Route>
       </Route>
   </Routes>
 </BrowserRouter>

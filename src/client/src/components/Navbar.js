@@ -109,6 +109,12 @@ export default function Navbar() {
                 sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
                 <Link to="plus" style={{color:"white"}}>plus size</Link>
                 </Typography>
+                <Typography
+                variant="h6"
+                noWrap
+                sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
+                <Link to="kids" style={{color:"white"}}>kids</Link>
+                </Typography>
            </Box>
           <Search>
             <SearchIconWrapper>
