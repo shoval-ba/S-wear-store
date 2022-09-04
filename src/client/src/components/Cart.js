@@ -14,6 +14,7 @@ export default function Cart()  {
     const [items , setItems] = useState(myBag);
 
     useEffect(() => {
+        console.log(items)
         setTotalPrice(0)
         let total = 0
         for (let item of items){
@@ -25,7 +26,7 @@ export default function Cart()  {
     
     const handleDelete = (item) => {
         setItems(previousState =>{ 
-            const itemsFilter = previousState.filter(currentItem => { return item.cloth.cloth_id !== currentItem.cloth.cloth_id })
+            const itemsFilter = previousState.filter(currentItem => { return item !== currentItem})
             return [...itemsFilter]
             })
     }
@@ -35,14 +36,14 @@ export default function Cart()  {
         }
         else if (number === 1 || number === -1){
             setItems(previousState =>{ 
-                const itemsFilter = previousState.filter(currentItem => { return item.cloth.cloth_id !== currentItem.cloth.cloth_id })
+                const itemsFilter = previousState.filter(currentItem => { return item !== currentItem })
                 return [...itemsFilter , {...item, quantity:item.quantity+number}]
                 })
             
         }
         else {
             setItems(previousState =>{ 
-                const itemsFilter = previousState.filter(currentItem => { return item.cloth.cloth_id !== currentItem.cloth.cloth_id })
+                const itemsFilter = previousState.filter(currentItem => { return item !== currentItem })
                 return [...itemsFilter , {...item, quantity:number}]
                 })
         }
@@ -81,9 +82,6 @@ export default function Cart()  {
                                 <RemoveIcon onClick={()=>changeQuantity(-1 , item)}></RemoveIcon>
                             </li>
                         </ul>
-                        {/* <AddIcon onClick={()=>changeQuantity(1 , item)}></AddIcon>
-                        <input className="inputQuantity" type="number" value={item.quantity} onChange={(e)=>changeQuantity(e.target.value , item)}/>
-                        <RemoveIcon onClick={()=>changeQuantity(-1 , item)}></RemoveIcon> */}
                         </div>
                         <h6>size: {item.size}</h6>
                         <div className="col">{item.cloth.price} $<span className="close" onClick={()=>handleDelete(item)}>&#10005;</span></div>

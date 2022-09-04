@@ -69,7 +69,6 @@ export default function OneCloth(props)  {
                 setColor("black")
                 setMyFavorite(previousState =>{ 
                     const itemsFilter = previousState.filter(currentItem => { return favorite.cloth_id !== currentItem.cloth_id })
-                    console.log(itemsFilter)
                     return [...itemsFilter]
                 })
                 return;
@@ -80,12 +79,17 @@ export default function OneCloth(props)  {
 
     const addToBag = () =>{
         for(let cloth2 of myBag) {
-            if(cloth == cloth2) {
-                console.log("in")
+            if(cloth.cloth_id == cloth2.cloth.cloth_id && cloth2.size == chosenSize) {
+                let newCloth = {
+                    cloth:cloth,
+                    size:chosenSize, 
+                    quantity:cloth2.quantity+quantity
+                }
                 setMyBag(previousState =>{ 
-                    const itemsFilter = previousState.filter(currentItem => { return cloth.cloth_id !== currentItem.cloth_id })
-                    return [...itemsFilter , {...cloth, quantity:cloth2.quantity+1}]
+                    const itemsFilter = previousState.filter((currentItem)=>{return currentItem !== cloth2})
+                    return [...itemsFilter , newCloth]
                     })
+                return;
             }
         }
         if(chosenSize === undefined){
