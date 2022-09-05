@@ -1,4 +1,4 @@
-import {React , useState} from 'react';
+import {React , useEffect, useState} from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,6 +14,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Popup from './Popup';
 import { Link , Outlet} from 'react-router-dom';
+import LittleCart from './LittleCart'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,6 +57,7 @@ export default function Navbar() {
   const [favorites , setFavorites] = useState();
   let [myBag , setMyBag] = useState([])
   let [myFavorite , setMyFavorite] = useState([])
+  const [hoverCart , setHover] = useState(false)
 
   const [sighIn , setSighIn]= useState(false)
 
@@ -127,7 +129,10 @@ export default function Navbar() {
           </Search>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Link to="cart" style={{color:"white"}}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit"
+            onMouseEnter={() => setHover(true)}
+            // onMouseLeave={() => setHover(false)}
+            >
               <Badge badgeContent={myBag.length} color="error">
                 <ShoppingCartIcon/>
               </Badge>
@@ -157,6 +162,7 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
       {sighIn ? <Popup sighIn={setSighIn}/> : <></>}
+      {hoverCart ? <LittleCart myBag={myBag} setHover={setHover}/> : <></>}
     </Box>
       <Outlet context={{setMyBag:setMyBag , myBag:myBag , setMyFavorite:setMyFavorite , myFavorite:myFavorite}}></Outlet>
     </div>

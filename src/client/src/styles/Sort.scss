@@ -1,0 +1,22 @@
+#sort{
+    width:280px;
+    margin-left:300px;
+    margin-top:10px;
+    display: flex;
+    justify-content: space-between;
+    #sortTitle{
+        font-size: 20px;
+    }
+    #options{
+        width:180px;
+        margin-bottom: 5px;
+        .link{
+            height: 100%;
+            font-size: large;
+        }
+        .link:hover{
+            background-color: azure;
+        }
+    }
+}
+

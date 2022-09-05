@@ -35,7 +35,7 @@ export default function Cart()  {
             handleDelete(item)
         }
         else if (number === 1 || number === -1){
-            setItems(previousState =>{ 
+            setItems(previousState =>{
                 const itemsFilter = previousState.filter(currentItem => { return item !== currentItem })
                 return [...itemsFilter , {...item, quantity:item.quantity+number}]
                 })

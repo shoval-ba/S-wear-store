@@ -2,6 +2,7 @@ import {React , useState , useEffect , useOutletContext} from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import OneCloth from './OneCloth';
 import Filters from './Filters';
+import Sort from './Sort';
 import '../styles/Clothes.scss';
 
 export default function Cloth(props)  { 
@@ -19,7 +20,6 @@ export default function Cloth(props)  {
           setClothes(response)
           setClothesFilter(response)
         })
-
       }
     
       useEffect(() => {
@@ -52,7 +52,7 @@ export default function Cloth(props)  {
 
     return (
       <div>
-       
+          <Sort clothes={clothesAfterFilter} setClothes={setClothesFilter}></Sort>
       <div className='filterAnd'>
             <Filters brand={brand} clothes={clothes} setClothes={setClothesFilter}/>
           <div id='container'>

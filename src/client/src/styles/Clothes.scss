@@ -57,13 +57,13 @@
 
   .filterAnd{
     display: flex;
-    // margin:0;
+    position: absolute;
     width: 100%;
+    margin-top: 10px;
   }
 #container {
     @extend %content;
     overflow: auto;
-    margin-top: 30px;
     .item {
       @extend %item;
       grid-template-rows: 1fr 1fr;
