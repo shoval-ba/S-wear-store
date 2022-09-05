@@ -15,6 +15,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Popup from './Popup';
 import { Link , Outlet} from 'react-router-dom';
 import LittleCart from './LittleCart'
+import Favorites from './Favorites';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -58,8 +59,17 @@ export default function Navbar() {
   let [myBag , setMyBag] = useState([])
   let [myFavorite , setMyFavorite] = useState([])
   const [hoverCart , setHover] = useState(false)
+  const [hoverFavorite , setHoverFavorite] = useState(false)
 
   const [sighIn , setSighIn]= useState(false)
+
+  useEffect(()=>{
+    if(hoverCart) setHoverFavorite(false)
+  } , [hoverCart])
+
+  useEffect(()=>{
+    if(hoverFavorite) setHover(false)
+  } , [hoverFavorite])
 
   const handleUserClick = () => {
     setSighIn(true)
@@ -131,7 +141,6 @@ export default function Navbar() {
             <Link to="cart" style={{color:"white"}}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit"
             onMouseEnter={() => setHover(true)}
-            // onMouseLeave={() => setHover(false)}
             >
               <Badge badgeContent={myBag.length} color="error">
                 <ShoppingCartIcon/>
@@ -144,7 +153,8 @@ export default function Navbar() {
               color="inherit"
               onClick={() => handleFavoriteClick()}
             >
-              <Badge badgeContent={myFavorite.length} color="error">
+              <Badge badgeContent={myFavorite.length} color="error"
+              onMouseEnter={() => setHoverFavorite(true)}>
                 <FavoriteIcon />
               </Badge>
             </IconButton>
@@ -163,6 +173,7 @@ export default function Navbar() {
       </AppBar>
       {sighIn ? <Popup sighIn={setSighIn}/> : <></>}
       {hoverCart ? <LittleCart myBag={myBag} setHover={setHover}/> : <></>}
+      {hoverFavorite ? <Favorites myFavorite={myFavorite} setHoverFavorite={setHoverFavorite} setFavorite={setMyFavorite}/> : <></>}
     </Box>
       <Outlet context={{setMyBag:setMyBag , myBag:myBag , setMyFavorite:setMyFavorite , myFavorite:myFavorite}}></Outlet>
     </div>

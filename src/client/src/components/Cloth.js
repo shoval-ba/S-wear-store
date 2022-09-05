@@ -43,7 +43,7 @@ export default function Cloth(props)  {
                     <div className='info'>
                         <h1 className="title"> {cloth.title}</h1>
                         <h1 className="model"> {cloth.sector}</h1> 
-                        <button className="buttonAdd" onClick={()=>handleClick(cloth)}>Add to bag </button>
+                        <button className="buttonAdd" onClick={()=>handleClick(cloth)}>Add to cart</button>
                     </div>
                 </div>
             </div>
