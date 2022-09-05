@@ -1,6 +1,17 @@
 $main-color: #6394F8;
 $light-text: #ABB0BE;
 
+#emptyImgText{
+  display: grid;
+  grid-template-columns: auto;
+  text-align: center;
+  #img-empty{
+    width: 120px;
+    margin: 0 auto;
+  }
+}
+
+
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);

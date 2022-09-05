@@ -1,46 +1,63 @@
 import {React , useEffect, useState} from 'react';
+import { Link } from 'react-router-dom';
 import "../styles/LittleCart.scss"
 
 export default function Sort(props)  { 
 
+        const myBag = props.myBag;
+        const [totalPrice , setTotalPrice]= useState(0);
+
+        useEffect(() => {
+                setTotalPrice(0)
+                let total = 0
+                for (let item of myBag){
+                    total += (item.cloth.price)*(item.quantity)
+                }
+                setTotalPrice(Math.floor(total))
+            }, [myBag] );
+
+        let itemsUi ;
+        if(myBag.length ===0 ){
+            itemsUi = (
+                <div id="emptyImgText">                  
+                    <img id="img-empty" src="https://res.cloudinary.com/sivadass/image/upload/v1495427934/icons/empty-cart.png" alt="empty-cart"/>
+                    <h6>Your cart is empty!</h6>                           
+                </div>   
+            )
+        }
+    
+    
+        else {
+            itemsUi = myBag.map((item,index) => {
+                return (
+                        <li className="clearfix">
+                        <img src={item.cloth.img} alt="item1" />
+                        <span className="item-name">{item.cloth.title}</span>
+                        <span className="item-price">{item.cloth.price}$</span>
+                        <span className="item-quantity">{item.quantity}</span>
+                        </li>
+                )
+            })
+        }
+
     return(
-        
             <div onMouseLeave={() => props.setHover(false)}>
-            <div class="shopping-cart">
-            <div class="shopping-cart-header">
-            <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
-            <div class="shopping-cart-total">
-            <span class="lighter-text">Total:</span>
-            <span class="main-color-text">$2,229.97</span>
+            <div className="shopping-cart">
+            <div className="shopping-cart-header">
+            <i className="fa fa-shopping-cart cart-icon"></i><span className="badge">{myBag.length}</span>
+            <div className="shopping-cart-total">
+            <span className="lighter-text">Total:</span>
+            <span className="main-color-text">{totalPrice}$</span>
             </div>
             </div>
 
-            <ul class="shopping-cart-items">
-            <li class="clearfix">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-            <span class="item-name">Sony DSC-RX100M III</span>
-            <span class="item-price">$849.99</span>
-            <span class="item-quantity">Quantity: 01</span>
-            </li>
-
-            <li class="clearfix">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item2.jpg" alt="item1" />
-            <span class="item-name">KS Automatic Mechanic...</span>
-            <span class="item-price">$1,249.99</span>
-            <span class="item-quantity">Quantity: 01</span>
-            </li>
-
-            <li class="clearfix">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item3.jpg" alt="item1" />
-            <span class="item-name">Kindle, 6" Glare-Free To...</span>
-            <span class="item-price">$129.99</span>
-            <span class="item-quantity">Quantity: 01</span>
-            </li>
+            <ul className="shopping-cart-items">
+            {itemsUi}
             </ul>
 
-            <a href="#" class="button">Checkout</a>
+            <Link to="cart" className="button">Checkout</Link>
             </div> 
-            </div>
+        </div>
         
     )
  }
