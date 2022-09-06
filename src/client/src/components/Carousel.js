@@ -3,7 +3,7 @@ import React from 'react';
 export default function Carousel()  { 
 
     return (
-        <div>
+        <div style={{position:"absolute"}}>
             <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item active">

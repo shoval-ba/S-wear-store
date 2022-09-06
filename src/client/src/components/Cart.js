@@ -9,6 +9,7 @@ export default function Cart()  {
    
     const myBag = useOutletContext().myBag;
     const setMyBag = useOutletContext().setMyBag;
+    const currentUser = useOutletContext().currentUser
 
     const [totalPrice , setTotalPrice]= useState(0);
     const [items , setItems] = useState(myBag);
@@ -30,6 +31,11 @@ export default function Cart()  {
             return [...itemsFilter]
             })
     }
+
+    const handlePay = (item) => {
+        console.log(currentUser)
+    }
+
     const changeQuantity = (number , item ) => {
         if(item.quantity + number <= 0 ){
             handleDelete(item)
@@ -122,7 +128,7 @@ export default function Cart()  {
                         <div className="col">TOTAL PRICE</div>
                         <div className="col text-right">{totalPrice + 5}$</div>
                     </div>
-                    <button className="btn">PAYMENT</button>
+                    <button className="btn" onClick={()=>handlePay()}>PAYMENT</button>
                 </div>
             </div>
             
@@ -130,23 +136,3 @@ export default function Cart()  {
         </div>
     )
 }
-// export default function Cart()  { 
-   
-//    const myBag = useOutletContext().myBag;
-//     {console.log(myBag)}
-//     return (
-//         <div className='cart-preview active'>
-//            <div id='info'>
-//                 <div id='insideInfo'>
-//                     <div className='empty-cart'>
-//                         <img src="https://res.cloudinary.com/sivadass/image/upload/v1495427934/icons/empty-cart.png" alt="empty-cart"/>
-//                         <h2>Your cart is empty!</h2>
-//                     </div>
-//                 </div>
-//                 <div className='action-block'>
-//                     <button type="button" class="disabled">PROCEED TO CHECKOUT</button>
-//                 </div>
-//            </div>
-//         </div>
-//     )
-// }

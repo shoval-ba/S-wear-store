@@ -1,10 +1,11 @@
 import {React , useState , useEffect } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
+import '../styles/SighIn.scss'
 
 export default function SighIn(props)  { 
 
     const [email , setEmail] = useState();
     const [password , setPassword] = useState();
-    const[currentUser , setUser] = useState();
 
     const close = () => {
         const fun = props.sighIn
@@ -24,8 +25,7 @@ export default function SighIn(props)  {
             await result.json().then((res) => {
                 if(typeof res == "string") alert(res)
                 else if (typeof res == "object"){
-                    currentUser = res;
-                    console.log(currentUser)
+                    props.setUser(res);
                 }
             })
           }
@@ -39,20 +39,48 @@ export default function SighIn(props)  {
     }
 
     return (
-        <div className='popup'>
-                <div className="headerPopup">
-                    <h1 className="signInTitle"> Sign In</h1>
-                    <img className="close" onClick={() => close()} src="https://d29fhpw069ctt2.cloudfront.net/icon/image/39219/preview.png" alt="Snow"/>
-                </div>
-                <div className="inputs">
-                    <input className="inputSignIn" type="email" placeholder="Email address" onChange={(e) => setEmail(e.target.value)}/>
-                    <input className="inputSignIn" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
-                </div>
-                <div className="signInButtons">
-                    <button className="createAccountButton" onClick={() => create()}>CREATE AN ACCOUNT</button>
-                    <button className="sighInButton" onClick={() => sighIn()}>SIGN IN</button>
-                </div>
+        <div id="login">
+            <CloseIcon className='closeImg' onClick={()=>close()}/>
+            <div class="login_topimg"></div>
+            <div class="wrap-login100">
+                <form class="login100-form validate-form"> 
+                    <span class="login100-form-title "> Login </span> 
+                    <span class="login100-form-subtitle m-b-16"> to your account </span>
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Valid email is required: ex@abc.xyz"> 
+                        <input class="input100" type="text" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/> 
+                        <span class="focus-input100"></span> 
+                        <span class="symbol-input100">
+                            <span class="glyphicon glyphicon-user"></span> 
+                        </span> 
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required"> 
+                        <input class="input100" type="password" name="pass" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                        <span class="focus-input100"></span> 
+                        <span class="symbol-input100"> 
+                            <span class="glyphicon glyphicon-lock"></span> 
+                        </span> 
+                    </div>
+                    <div class="flex-sb-m w-full p-b-30">
+                        <div class="contact100-form-checkbox">
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me"/>
+                            <label class="label-checkbox100" for="ckb1">
+                                Remember me
+                            </label>
+                        </div>
+                        <div>
+                            <a href="#" class="txt1">
+                                Forgot Password?
+                            </a>
+                        </div>
+                    </div>
+                    <div class="container-login100-form-btn p-t-25"> 
+                        <button class="login100-form-btn" style={{marginBottom:"20px"}} onClick={() => sighIn()}> Login </button> 
+                        <button class="login100-form-btn" onClick={() => create()}> Create account </button> 
+                    </div>
+                </form>
+            </div>
         </div>
+    
     )
 }
  

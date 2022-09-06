@@ -61,7 +61,8 @@ export default function Navbar() {
   const [hoverCart , setHover] = useState(false)
   const [hoverFavorite , setHoverFavorite] = useState(false)
 
-  const [sighIn , setSighIn]= useState(false)
+  const [sighIn , setSighIn]= useState(false);
+  const[currentUser , setUser] = useState();
 
   useEffect(()=>{
     if(hoverCart) setHoverFavorite(false)
@@ -171,11 +172,11 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {sighIn ? <Popup sighIn={setSighIn}/> : <></>}
+      {sighIn ? <Popup sighIn={setSighIn} setUser={setUser}/> : <></>}
       {hoverCart ? <LittleCart myBag={myBag} setHover={setHover}/> : <></>}
       {hoverFavorite ? <Favorites myFavorite={myFavorite} setHoverFavorite={setHoverFavorite} setFavorite={setMyFavorite}/> : <></>}
     </Box>
-      <Outlet context={{setMyBag:setMyBag , myBag:myBag , setMyFavorite:setMyFavorite , myFavorite:myFavorite}}></Outlet>
+      <Outlet context={{setMyBag:setMyBag , myBag:myBag , setMyFavorite:setMyFavorite , myFavorite:myFavorite , currentUser:currentUser}}></Outlet>
     </div>
   );
 }
