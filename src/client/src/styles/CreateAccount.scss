@@ -1,0 +1,57 @@
+
+.container{
+    background-color: rgb(201, 220, 236);
+    height: 540px;
+    width: 850px;
+    position: fixed;
+    top: 30%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    .img-fluid{
+        width: 300px;
+        height: inherit;
+    }
+    .py-5{
+        padding-top: 10px!important;
+        margin-top: 0!important;
+    }
+    .col-lg-6{
+        max-width: none!important;
+        width: 100%;
+    }
+    .inputContainer{
+        height: 50px;
+        .iconCreate{
+            height: 100%;
+        }
+        .inputCreate{
+            height: 100%;
+        }
+    }
+    .btn{
+        margin-top: 0;
+    }
+    .buttonCreate {
+        height: 50px;
+    }
+}
+
+.form-control:not(select) {
+    padding: 1.5rem 0.5rem;
+}
+
+select.form-control {
+    height: 52px;
+    padding-left: 0.5rem;
+}
+
+.form-control::placeholder {
+    color: #ccc;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+.form-control:focus {
+    box-shadow: none;
+}

@@ -19,7 +19,7 @@ function App() {
               element={<Carousel/>}
             />
         <Route path="cart" element={<Cart/>}/>
-        <Route path="women" element={<Cloth brand={"WOMEN"}/>}>       
+        <Route path="women" element={<Cloth brand={"WOMEN"}/>}>    
         </Route>
         <Route path="men" element={<Cloth brand={"MEN"}/>}>       
         </Route>

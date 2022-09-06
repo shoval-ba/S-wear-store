@@ -18,7 +18,7 @@ export default function Filters(props)  {
 
     if(brand === "WOMEN"){
         return (
-            <div className='container'>
+            <div className='containerFilter'>
                 <div className='filter' onClick={()=>filterBySector("T-Shirts")}>
                     <h6>T-shirt</h6>
                 </div>
@@ -42,7 +42,7 @@ export default function Filters(props)  {
     }
     else if(brand === "MEN"){
         return (
-            <div className='container' style={{height:"250px"}}>
+            <div className='containerFilter' style={{height:"250px"}}>
                 <div className='filter' onClick={()=>filterBySector("T-Shirts")}>
                     <h6>T-shirt</h6>
                 </div>
@@ -60,7 +60,7 @@ export default function Filters(props)  {
     }
     else if(brand === "PLUS"){
         return (
-            <div className='container' style={{height:"250px"}}>
+            <div className='containerFilter' style={{height:"250px"}}>
                 <div className='filter' onClick={()=>filterBySector("T-Shirts")}>
                     <h6>T-shirt</h6>
                 </div>
@@ -79,7 +79,7 @@ export default function Filters(props)  {
 
     else if(brand === "KIDS"){
         return (
-            <div className='container' style={{height:"250px"}}>
+            <div className='containerFilter' style={{height:"250px"}}>
                 <div className='filter' onClick={()=>filterBySector("T-Shirts")}>
                     <h6>T-shirt</h6>
                 </div>
