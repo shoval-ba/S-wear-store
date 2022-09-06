@@ -39,7 +39,7 @@ async function initDb() {
           city TEXT NOT NULL,
           adress TEXT NOT NULL,
           email TEXT NOT NULL,
-          password INTEGER NOT NULL
+          password TEXT NOT NULL
       );`
       );
 

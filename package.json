@@ -17,6 +17,7 @@
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "pg": "^8.8.0",
+    "react-validations-components": "^1.0.18",
     "webpack": "^5.73.0"
   },
   "devDependencies": {
