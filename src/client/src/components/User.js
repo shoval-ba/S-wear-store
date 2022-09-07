@@ -10,7 +10,7 @@ export default function User(props)  {
         if(currentUser === null ){
             userUi = (
                 <div>
-                    <h3 onClick={()=>props.sighIn(true)}>SighIn</h3>
+                    <p onClick={()=>props.sighIn(true)}>SighIn</p>
                 </div>
             )
         }
@@ -18,7 +18,7 @@ export default function User(props)  {
         else { 
             userUi = (
                     <div>
-                        <h3>{currentUser.email}</h3>
+                        <p>{currentUser.email}</p>
                     </div>
              )
             
@@ -26,7 +26,7 @@ export default function User(props)  {
 
     return(
             <div onMouseLeave={() => props.setHover(false)} >
-                <div className="shopping-cart" style={{right:"0px"}}>
+                <div className="shopping-cart" style={{right:"0px" , width:"200px"}}>
                     {userUi}
                 </div>
             </div>

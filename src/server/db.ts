@@ -36,10 +36,9 @@ export async function getClothesBySector(sector:string){
 }
 
 // Add officer to users table.
-export async function addToOrders(user:any){
-  const userArray = Object.values(user);
-  const sql = 'INSERT INTO users(first_name ,last_name ,phone_number, city , adress , email, date_of_birth, password) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
-  await client.query(sql, userArray);
+export async function addToOrders(size:any , quantity:any , userId:number ,clothId:number){
+  const sql = 'INSERT INTO orders(size ,quantity ,user_id, cloth_id) VALUES($1, $2, $3, $4)';
+  await client.query(sql, [size , quantity , userId , clothId]);
   return "Success"
 }
 

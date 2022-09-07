@@ -12,7 +12,7 @@ if (process.env.NODE_ENV==='production'){
   })
 }
 
-import { addToUsers , checkIfUserExist , getClothesByBrand , getClothesBySector , getClothes} from './db'
+import { addToUsers , checkIfUserExist , getClothesByBrand , getClothesBySector , getClothes , addToOrders} from './db'
 
 // Gives clothes from the db.
 app.get('/allClothes', (_: any, response: any) => {
@@ -44,6 +44,12 @@ app.post('/addUser', async function (req :any, response:any){
 app.post('/user', (req: any, response: any) => {
   const EmailAndPassword = req.body;
   checkIfUserExist(EmailAndPassword.email , EmailAndPassword.password).then((user: any) => response.json(user));
+});
+
+// Gives user from the db.
+app.post('/addToOrders', (req: any, response: any) => {
+  const body = req.body;
+  addToOrders(body.size , body.quantity , body.userId , body.clothId).then((user: any) => response.json(user));
 });
 
 app.listen(port || 4000, () => {

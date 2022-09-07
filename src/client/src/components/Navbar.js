@@ -57,9 +57,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Navbar() {
 
-  const [favorites , setFavorites] = useState();
-  let [myBag , setMyBag] = useState([])
-  let [myFavorite , setMyFavorite] = useState([])
+  const [myBag , setMyBag] = useState([])
+  const [myFavorite , setMyFavorite] = useState([])
   const [hoverCart , setHoverCart] = useState(false)
   const [hoverFavorite , setHoverFavorite] = useState(false)
   const [hoverUser , setHoverUser] = useState(false)
@@ -200,7 +199,7 @@ export default function Navbar() {
       {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} sighIn={setSighIn}/> : <></>}
       {hoverFavorite ? <Favorites myFavorite={myFavorite} setHoverFavorite={setHoverFavorite} setFavorite={setMyFavorite}/> : <></>}
     </Box>
-      <Outlet context={{setMyBag:setMyBag , myBag:myBag , setMyFavorite:setMyFavorite , myFavorite:myFavorite , currentUser:currentUser}}></Outlet>
+      <Outlet context={{setMyBag:setMyBag , myBag:myBag , setMyFavorite:setMyFavorite , myFavorite:myFavorite , currentUser:currentUser , setSighIn:setSighIn}}></Outlet>
     </div>
   );
 }

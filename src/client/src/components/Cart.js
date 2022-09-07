@@ -3,13 +3,13 @@ import '../styles/Cart.scss'
 import {  useOutletContext} from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { ConstructionOutlined } from '@mui/icons-material';
 
 export default function Cart()  { 
    
     const myBag = useOutletContext().myBag;
     const setMyBag = useOutletContext().setMyBag;
     const currentUser = useOutletContext().currentUser
+    const setSighIn = useOutletContext().setSighIn
 
     const [totalPrice , setTotalPrice]= useState(0);
     const [items , setItems] = useState(myBag);
@@ -32,8 +32,37 @@ export default function Cart()  {
             })
     }
 
-    const handlePay = (item) => {
-        console.log(currentUser)
+    const handlePay = async () => {
+        if(currentUser === null) {
+            setSighIn(true)
+            return;
+        }
+        else if (myBag.length ===0 ) {
+            alert('Your cart is empty')
+            return;
+        }
+        else{
+            console.log(currentUser)
+            console.log(myBag)
+            for(let item of myBag){
+                const options ={
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({size:item.size , quantity:item.quantity ,userId:currentUser.user_id , clothId:item.cloth.cloth_id})
+                  }
+                  try{
+                    let result = await fetch('/addToOrders', options);
+                    await result.json().then((res) => {
+                        console.log(res)
+                    })
+                  }
+                  catch {
+                    alert("no")
+                  }
+            }
+        }
     }
 
     const changeQuantity = (number , item ) => {

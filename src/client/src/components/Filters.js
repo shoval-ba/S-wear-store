@@ -34,9 +34,6 @@ export default function Filters(props)  {
                 <div className='filter' onClick={()=>filterBySector("dresses")}>
                     <h6>Dresses and Suits</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("socks")}>
-                    <h6>Socks</h6>
-                </div>
             </div>
         )
     }
