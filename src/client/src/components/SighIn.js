@@ -48,6 +48,7 @@ export default function SighIn(props)  {
                     if(typeof res == "string") alert(res)
                     else if (typeof res == "object"){
                         props.setUser(res);
+                        console.log(res)
                     }
                 })
               }

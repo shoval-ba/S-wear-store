@@ -1,7 +1,7 @@
 
 .container{
     background-color: rgb(201, 220, 236);
-    height: 540px;
+    height: 560px;
     width: 850px;
     position: fixed;
     top: 30%;
@@ -9,6 +9,12 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
+    .closeImg{
+        position: absolute;   
+        font-size: 40px;
+        cursor: pointer;
+        z-index: 3;
+      }
     .img-fluid{
         width: 300px;
         height: inherit;
@@ -23,6 +29,10 @@
     }
     .inputContainer{
         height: 50px;
+        p{
+            padding: 0;
+            margin: 0;
+        }
         .iconCreate{
             height: 100%;
         }
@@ -35,6 +45,17 @@
     }
     .buttonCreate {
         height: 50px;
+    }
+    #divHaveAcount{
+        display:flex;
+        margin: 0 auto;
+        margin-top:10px;
+        #returnToSignIn{
+            cursor: pointer;
+            &:hover{
+                color:blue;
+            }
+        }
     }
 }
 

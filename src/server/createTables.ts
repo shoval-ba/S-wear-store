@@ -15,7 +15,7 @@ client.connect();
 async function initDb() {
 
   // Drop table
-  let sql = 'DROP TABLE IF EXISTS clothes , users , orders;'
+  let sql = 'DROP TABLE IF EXISTS  users , orders;'
   await client.query(sql)
   await client.query(
       `CREATE TABLE IF NOT EXISTS clothes(
@@ -59,7 +59,7 @@ async function initDb() {
       console.log("create")
 }
 
-// initDb();
+initDb();
 
 interface cloth2{
   brand:string
@@ -418,4 +418,4 @@ async function insertClothes(){
   await getShoes();
 }
 
-insertClothes();
+// insertClothes();

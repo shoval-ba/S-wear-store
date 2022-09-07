@@ -1,6 +1,13 @@
-import {React , useState , useEffect } from 'react';
-import SighIn from './SighIn';
+import {React , useState , createRef } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
+import {
+    textValidate,
+    numValidate,
+    textNumberValidate,
+    emailValidate,
+  } from "react-validations-components";
 import '../styles/CreateAccount.scss'
+import { Divider } from '@mui/material';
 
 export default function CreateAccount(props)  { 
 
@@ -11,41 +18,61 @@ export default function CreateAccount(props)  {
         city:"",
         adress:"",
         email:"",
-        date_of_birth:new Date(),
         password:""
     }
     const [user , setUser] = useState(newUser);
     const [passwordAgain , setPassword] = useState("");
-    const [insert , setInsert] = useState(true)
+    const [insert , setInsert] = useState(true);
+
+    const first_name = createRef();
+    const last_name = createRef();
+    const phone_number = createRef();
+    const city = createRef();
+    const adress = createRef();
+    const email = createRef();
+    const password = createRef();
+    const inputPassword = createRef();
+    const userExist = createRef();
 
     const handleSubmit = async () => {
+        if(!textValidate(user.first_name).status || user.first_name == ""){
+            setInsert(false)
+            first_name.current.style.display = "block"
+        } else first_name.current.style.display = "none"
+        if(!textValidate(user.last_name).status || user.last_name == ""){
+            setInsert(false)
+            last_name.current.style.display = "block"
+        } else last_name.current.style.display = "none"
+        if(!emailValidate(user.email).status || user.email == ""){
+            setInsert(false)
+            email.current.style.display = "block"
+        } else email.current.style.display = "none"
+        if(!numValidate(user.phone_number).status || user.phone_number == 0){
+            setInsert(false)
+            phone_number.current.style.display = "block"
+        } else phone_number.current.style.display = "none"
+        if(!textValidate(user.city).status || user.city == ""){
+            setInsert(false)
+            city.current.style.display = "block"
+        } else city.current.style.display = "none"
+        if(!textNumberValidate(user.adress).status || user.adress == ""){
+            setInsert(false)
+            adress.current.style.display = "block"
+        } else adress.current.style.display = "none"
+        if(!textNumberValidate(user.password).status || user.password == ""){
+            setInsert(false)
+            password.current.style.display = "block"
+        } else password.current.style.display = "none"
+              
         console.log(user)
-        if (passwordAgain !== user.password){
+        if (passwordAgain !== user.password || passwordAgain == ""){
             setInsert(false);
-            alert('the password are not the same');
+            inputPassword.current.style.display = "block"
             return
         } 
-        for(let key in user){
-            if(key == "phone_number" && user[key] == 0){
-                console.log(key)
-                setInsert(false);
-                alert('You need to fill all the values');
-                return
-            } 
-            if(key == "date_of_birth" && user[key] == new Date()){
-                console.log(key)
-                setInsert(false);
-                alert('You need to fill all the values');
-                return
-            } 
-            else if(user[key] == ""){
-                setInsert(false);
-                alert('You need to fill all the values');
-                return
-            }
-        }
 
         if(insert == true){
+            console.log("in")
             const options ={
                 method: 'POST',
                 headers: {
@@ -56,7 +83,8 @@ export default function CreateAccount(props)  {
               try{
                 let result = await fetch('/addUser', options);
                 await result.json().then((res) => {
-                  alert(res)
+                    console.log(res)
+                    props.setUser(res)
                 })
               }
               catch {
@@ -65,168 +93,134 @@ export default function CreateAccount(props)  {
         }
     }
 
-    const handleCancel = () => {
+    const close = () => {
         const fun = props.sighIn
         fun(false)
     }
 
     return (
-    //     <div className='app'>
-    //         <div className='allInfo'>
-    //     <h2>Basic information</h2>
-    //     <form>
-    //         <div className='basicInfo'>
-    //             <div className='name'>
-    //                 <div className='first'>
-    //                     <label htmlFor='firstName'>FIRST NAME</label>
-    //                     <input className="inputCreate" type="text" value={user.first_name} onChange={(e)=>{setUser(previousState => {
-    //                                     return { ...previousState, first_name: e.target.value }
-    //                                 })}}></input>
-    //                 </div>
-    //                 <div className='last'>               
-    //                     <label htmlFor='lastName'>LAST NAME</label>
-    //                     <input className="inputCreate"  type="text" value={user.last_name} onChange={(e)=>{setUser(previousState => {
-    //                                     return { ...previousState, last_name: e.target.value }
-    //                                 })}}></input>
-    //                 </div>
-    //             </div>
-    //             <div>
-    //                 <label htmlFor='phone_number'>PHONE NUMBER</label>
-    //                 <input className="inputCreate" type="phone" value={user.phone_number} placeholder="Enter your phone number" onChange={(e)=>{setUser(previousState => {
-    //                                     return { ...previousState, phone_number: e.target.value }
-    //                                 })}}></input>
-    //             </div>
-    //             <div>
-    //                 <label htmlFor='email'>EMAIL</label>
-    //                 <input className="inputCreate" type="text" value={user.email} placeholder="Enter your email" onChange={(e)=>{setUser(previousState => {
-    //                                     return { ...previousState, email: e.target.value }
-    //                                 })}}></input>
-    //             </div>
-    //             <div>               
-    //                 <label htmlFor='city'>CITY</label>
-    //                 <input className="inputCreate" type="text" value={user.city} placeholder="Enter city" onChange={(e)=>{setUser(previousState => {
-    //                                     return { ...previousState, city: e.target.value }
-    //                                 })}}></input>
-    //             </div>
-    //             <div>
-    //                 <label htmlFor='adress'>ADRESS</label>
-    //                 <input className="inputCreate" type="text" value={user.adress} placeholder="Enter adress" onChange={(e)=>{setUser(previousState => {
-    //                                     return { ...previousState, adress: e.target.value }
-    //                                 })}}></input>
-    //             </div>
-    //             <div>
-    //                 <label htmlFor='date_of_birth'>DATE OF BIRTH</label>
-    //                 <input className="inputCreate" type="date" value={user.date_of_birth} placeholder="Enter bate of birth" onChange={(e)=>{setUser(previousState => {
-    //                                     return { ...previousState, date_of_birth: e.target.value }
-    //                                 })}}></input>
-    //             </div>
-    //             <div>
-    //                 <label htmlFor='password'>PASSWORD</label>
-    //                 <input className="inputCreate" type="password" value={user.password} placeholder="Enter password" onChange={(e)=>{setUser(previousState => {
-    //                                     return { ...previousState, password: e.target.value }
-    //                                 })}}></input>
-    //             </div>
-    //             <div>
-    //                 <label htmlFor='password'>PASSWORD AGAIN</label>
-    //                 <input className="inputCreate" type="password" value={passwordAgain} placeholder="Enter password again" onChange={(e)=>{setPassword(e.target.value)}}></input>
-    //             </div>
-    //         </div>
-    //     </form>
-    //     <div className='buttons'>
-    //         <button className='buttonCancel' onClick={()=>{handleCancel()}}>cancel</button>
-    //         <button className='buttonSave' onClick={()=>{handleSubmit()}}>save</button>
-    //     </div>
-    // </div>
-    // </div>
-
-
-<div className="container">
-    <div className="row py-5 mt-4 align-items-center bigParts">
-        <div className="col-md-5 pr-lg-5 mb-5 mb-md-0" style={{flexGrow:"1"}}>
-            <img src="https://bootstrapious.com/i/snippets/sn-registeration/illustration.svg" alt="" className="img-fluid mb-3 d-none d-md-block"/>
-            <h1 style={{textAlign:"center"}}>Create an Account</h1>
-        </div>
-        <div className="col-md-7 col-lg-6 ml-auto" style={{marginLeft:"0" , flexGrow:"3"}}>
-            <form action="#">
-                <div className="row">
-                    <div className="input-group col-lg-6 mb-4 inputContainer">
-                        <div className="input-group-prepend iconCreate">
-                            <span className="input-group-text bg-white px-4 border-md border-right-0">
-                                <i className="fa fa-user text-muted"></i>
-                            </span>
-                        </div>
-                        <input id="firstName" type="text" name="firstname" placeholder="First Name" className="inputCreate form-control bg-white border-left-0 border-md"/>
-                    </div>
-                    <div className="input-group col-lg-6 mb-4 inputContainer">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text bg-white px-4 border-md border-right-0">
-                                <i className="fa fa-user text-muted"></i>
-                            </span>
-                        </div>
-                        <input id="lastName" type="text" name="lastname" placeholder="Last Name" className="inputCreate form-control bg-white border-left-0 border-md"/>
-                    </div>
-                    <div className="input-group col-lg-12 mb-4 inputContainer">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text bg-white px-4 border-md border-right-0">
-                                <i className="fa fa-envelope text-muted"></i>
-                            </span>
-                        </div>
-                        <input id="email" type="email" name="email" placeholder="Email Address" className="inputCreate form-control bg-white border-left-0 border-md"/>
-                    </div>
-
-                    <div className="input-group col-lg-12 mb-4 inputContainer">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text bg-white px-4 border-md border-right-0">
-                                <i className="fa fa-phone-square text-muted"></i>
-                            </span>
-                        </div>   
-                        <input id="phoneNumber" type="tel" name="phone" placeholder="Phone Number" className="inputCreate form-control bg-white border-md border-left-0 pl-3"/>
-                    </div>
-                    <div className="input-group col-lg-12 mb-4 inputContainer">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text bg-white px-4 border-md border-right-0">
-                                <i className="fa fa-globe fa-lg text-muted" aria-hidden="true"></i>
-                            </span>
-                        </div>   
-                        <input id="city" name="city" placeholder="City" className="inputCreate form-control bg-white border-md border-left-0 pl-3"/>
-                    </div>
-                    <div className="input-group col-lg-12 mb-4 inputContainer">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text bg-white px-4 border-md border-right-0">
-                            <i className="fa fa-map-marker fa-lg text-muted" aria-hidden="true"></i>
-                            </span>
-                        </div>   
-                        <input id="adress" name="adress" placeholder="Adress" className="inputCreate form-control bg-white border-md border-left-0 pl-3"/>
-                    </div>
-
-                    <div className="input-group col-lg-6 mb-4 inputContainer">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text bg-white px-4 border-md border-right-0">
-                                <i className="fa fa-lock text-muted"></i>
-                            </span>
-                        </div>
-                        <input id="password" type="password" name="password" placeholder="Password" className="inputCreate form-control bg-white border-left-0 border-md"/>
-                    </div>
-                    <div className="input-group col-lg-6 mb-4 inputContainer">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text bg-white px-4 border-md border-right-0">
-                                <i className="fa fa-lock text-muted"></i>
-                            </span>
-                        </div>
-                        <input id="passwordConfirmation" type="text" name="passwordConfirmation" placeholder="Confirm Password" className="inputCreate form-control bg-white border-left-0 border-md"/>
-                    </div>
-
-                    <div className="form-group col-lg-12 mx-auto mb-0">
-                        <div className="buttonCreate btn btn-primary btn-block py-2">
-                            <span style={{fontSize:"20px"}} className="font-weight-bold">Create your account</span>
-                        </div>
-                    </div>
+    
+        <div className="container">
+            <CloseIcon className='closeImg' onClick={()=>close()}/>
+            <div className="row py-5 mt-4 align-items-center bigParts">
+                <div className="col-md-5 pr-lg-5 mb-5 mb-md-0" style={{flexGrow:"1"}}>
+                    <img src="https://bootstrapious.com/i/snippets/sn-registeration/illustration.svg" alt="" className="img-fluid mb-3 d-none d-md-block"/>
+                    <h1 style={{textAlign:"center"}}>Create an Account</h1>
                 </div>
-            </form>
-        </div>
-    </div>
-</div>
+                <div className="col-md-7 col-lg-6 ml-auto" style={{marginLeft:"0" , flexGrow:"3"}}>
+                    <form action="#" >
+                        <div className="row">
+                            <div className="input-group col-lg-6 mb-4 inputContainer">
+                                <div className="input-group-prepend iconCreate">
+                                    <span className="input-group-text bg-white px-4 border-md border-right-0">
+                                        <i className="fa fa-user text-muted"></i>
+                                    </span>
+                                </div>
+                                <input id="firstName" type="text" name="firstname" placeholder="First Name" 
+                                className="inputCreate form-control bg-white border-left-0 border-md" onChange={(e)=>{setUser(previousState => {
+                                                return { ...previousState, first_name: e.target.value }
+                                            })}}/>
+                                <p ref={first_name} style={{display:"none" , color:"rgb(238, 85, 85)"}}>First name have to be text</p>
+                            </div>
+                            <div className="input-group col-lg-6 mb-4 inputContainer">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text bg-white px-4 border-md border-right-0">
+                                        <i className="fa fa-user text-muted"></i>
+                                    </span>
+                                </div>
+                                <input id="lastName" type="text" name="lastname" placeholder="Last Name" 
+                                className="inputCreate form-control bg-white border-left-0 border-md" onChange={(e)=>{setUser(previousState => {
+                                                return { ...previousState, last_name: e.target.value }
+                                            })}}/>
+                                <p ref={last_name} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Last name have to be text</p>
+                            </div>
+                            <div className="input-group col-lg-12 mb-4 inputContainer" style={{width:"300px"}}>
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text bg-white px-4 border-md border-right-0">
+                                        <i className="fa fa-envelope text-muted"></i>
+                                    </span>
+                                </div>
+                                <input id="email" type="email" name="email" placeholder="Email Address" 
+                                className="inputCreate form-control bg-white border-left-0 border-md" onChange={(e)=>{setUser(previousState => {
+                                    return { ...previousState, email: e.target.value }
+                                })}}/>
+                                <p ref={email} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect email</p>
+                            </div>
 
+                            <div className="input-group col-lg-12 mb-4 inputContainer">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text bg-white px-4 border-md border-right-0">
+                                        <i className="fa fa-phone-square text-muted"></i>
+                                    </span>
+                                </div>   
+                                <input id="phoneNumber" type="tel" name="phone" placeholder="Phone Number" 
+                                className="inputCreate form-control bg-white border-md border-left-0 pl-3" onChange={(e)=>{setUser(previousState => {
+                                    return { ...previousState, phone_number: e.target.value }
+                                })}}/>
+                                <p ref={phone_number} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect phone number</p>
+                            </div>
+                            <div className="input-group col-lg-12 mb-4 inputContainer">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text bg-white px-4 border-md border-right-0">
+                                        <i className="fa fa-globe fa-lg text-muted" aria-hidden="true"></i>
+                                    </span>
+                                </div>   
+                                <input id="city" name="city" placeholder="City" 
+                                className="inputCreate form-control bg-white border-md border-left-0 pl-3" onChange={(e)=>{setUser(previousState => {
+                                    return { ...previousState, city: e.target.value }
+                                })}}/>
+                                <p ref={city} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect city</p>
+                            </div>
+                            <div className="input-group col-lg-12 mb-4 inputContainer">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text bg-white px-4 border-md border-right-0">
+                                    <i className="fa fa-map-marker fa-lg text-muted" aria-hidden="true"></i>
+                                    </span>
+                                </div>   
+                                <input id="adress" name="adress" placeholder="Adress" 
+                                className="inputCreate form-control bg-white border-md border-left-0 pl-3" onChange={(e)=>{setUser(previousState => {
+                                    return { ...previousState, adress: e.target.value }
+                                })}}/>
+                                <p ref={adress} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect adress</p>
+                            </div>
+
+                            <div className="input-group col-lg-6 mb-4 inputContainer">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text bg-white px-4 border-md border-right-0">
+                                        <i className="fa fa-lock text-muted"></i>
+                                    </span>
+                                </div>
+                                <input id="password" type="password" name="password" placeholder="Password" 
+                                className="inputCreate form-control bg-white border-left-0 border-md" onChange={(e)=>{setUser(previousState => {
+                                                return { ...previousState, password: e.target.value }
+                                            })}}/>
+                                    <p ref={password} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter just number and letters</p>
+                            </div>
+                            <div className="input-group col-lg-6 mb-4 inputContainer">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text bg-white px-4 border-md border-right-0">
+                                        <i className="fa fa-lock text-muted"></i>
+                                    </span>
+                                </div>
+                                <input id="passwordConfirmation" type="password" name="passwordConfirmation" placeholder="Confirm Password" 
+                                className="inputCreate form-control bg-white border-left-0 border-md" onChange={(e)=>{setPassword(e.target.value)}}/>
+                                <p ref={inputPassword} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Passwords are not the same</p>
+                            </div>
+
+                            <div className="form-group col-lg-12 mx-auto mb-0">
+                                <div className="buttonCreate btn btn-primary btn-block py-2" onClick={()=>{handleSubmit()}}>
+                                    <span style={{fontSize:"20px"}} className="font-weight-bold">Create your account</span>
+                                </div>
+                            </div>
+                            <div id="divHaveAcount">
+                                <span style={{paddingRight: "25px"}}>Already have an account? </span> 
+                                <span id="returnToSignIn" onClick={()=>props.setCreate(false)}>Sign Up</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     )
 }
  

@@ -49,9 +49,12 @@ export async function addToUsers(user:any){
   const sql1 = 'SELECT COUNT(email) FROM users WHERE email = $1';
   let result = await client.query(sql1, [user.email]);
   if (result.rows[0].count >= 1) return "user with the same email already exist";
-  const sql = 'INSERT INTO users(first_name ,last_name ,phone_number, city , adress , email, date_of_birth, password) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
+  const sql = 'INSERT INTO users(first_name ,last_name ,phone_number, city , adress , email, password) VALUES($1, $2, $3, $4, $5, $6, $7)';
   await client.query(sql, userArray);
-  return "Success"
+  const sql2 = `SELECT * FROM users WHERE email=$1 AND password=$2`;
+  const result2 = await client.query(sql2 , [user.email , user.password]);
+  const user2 = result2.rows.map((user:any) => Object.assign(user));
+  return user2[0]
 }
 
 //Get all the clothes.
