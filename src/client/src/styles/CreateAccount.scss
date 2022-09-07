@@ -1,7 +1,7 @@
 
 .container{
     background-color: rgb(201, 220, 236);
-    height: 560px;
+    height: 566px;
     width: 850px;
     position: fixed;
     top: 30%;
@@ -29,9 +29,9 @@
     }
     .inputContainer{
         height: 50px;
-        p{
-            padding: 0;
-            margin: 0;
+        .message{
+            position: absolute;
+            bottom: -37px;
         }
         .iconCreate{
             height: 100%;

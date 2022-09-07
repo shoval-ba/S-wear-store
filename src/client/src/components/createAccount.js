@@ -72,7 +72,6 @@ export default function CreateAccount(props)  {
         } 
 
         if(insert == true){
-            console.log("in")
             const options ={
                 method: 'POST',
                 headers: {
@@ -134,7 +133,7 @@ export default function CreateAccount(props)  {
                                             })}}/>
                                 <p ref={last_name} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Last name have to be text</p>
                             </div>
-                            <div className="input-group col-lg-12 mb-4 inputContainer" style={{width:"300px"}}>
+                            <div className="input-group col-lg-12 mb-4 inputContainer">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text bg-white px-4 border-md border-right-0">
                                         <i className="fa fa-envelope text-muted"></i>
@@ -144,7 +143,7 @@ export default function CreateAccount(props)  {
                                 className="inputCreate form-control bg-white border-left-0 border-md" onChange={(e)=>{setUser(previousState => {
                                     return { ...previousState, email: e.target.value }
                                 })}}/>
-                                <p ref={email} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect email</p>
+                                <p className="message" ref={email} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect email</p>
                             </div>
 
                             <div className="input-group col-lg-12 mb-4 inputContainer">
@@ -157,7 +156,7 @@ export default function CreateAccount(props)  {
                                 className="inputCreate form-control bg-white border-md border-left-0 pl-3" onChange={(e)=>{setUser(previousState => {
                                     return { ...previousState, phone_number: e.target.value }
                                 })}}/>
-                                <p ref={phone_number} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect phone number</p>
+                                <p className="message" ref={phone_number} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect phone number</p>
                             </div>
                             <div className="input-group col-lg-12 mb-4 inputContainer">
                                 <div className="input-group-prepend">
@@ -169,7 +168,7 @@ export default function CreateAccount(props)  {
                                 className="inputCreate form-control bg-white border-md border-left-0 pl-3" onChange={(e)=>{setUser(previousState => {
                                     return { ...previousState, city: e.target.value }
                                 })}}/>
-                                <p ref={city} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect city</p>
+                                <p className="message" ref={city} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect city</p>
                             </div>
                             <div className="input-group col-lg-12 mb-4 inputContainer">
                                 <div className="input-group-prepend">
@@ -181,7 +180,7 @@ export default function CreateAccount(props)  {
                                 className="inputCreate form-control bg-white border-md border-left-0 pl-3" onChange={(e)=>{setUser(previousState => {
                                     return { ...previousState, adress: e.target.value }
                                 })}}/>
-                                <p ref={adress} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect adress</p>
+                                <p className="message" ref={adress} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter currect adress</p>
                             </div>
 
                             <div className="input-group col-lg-6 mb-4 inputContainer">
