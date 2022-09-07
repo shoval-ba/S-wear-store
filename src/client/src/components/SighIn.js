@@ -16,6 +16,7 @@ export default function SighIn(props)  {
     const inputEmail = createRef();
     const inputPassword = createRef();
     const userExist = createRef();
+    const checkbox = createRef();
 
     const close = () => {
         const fun = props.sighIn
@@ -24,8 +25,6 @@ export default function SighIn(props)  {
 
     const sighIn =  async () => {
         let insert = true;
-        console.log(password)
-        console.log(textNumberValidate(password).status)
         if(!emailValidate(email).status || email === undefined) {
             inputEmail.current.style.display = "block";
             insert = false;
@@ -49,6 +48,13 @@ export default function SighIn(props)  {
                     else if (typeof res == "object"){
                         props.setUser(res);
                         console.log(res)
+                        let user = JSON.parse(localStorage.getItem('currentUser'));
+                        if(user !== null) {
+                            localStorage.removeItem(user)
+                        }
+                        if(checkbox.current.checked){
+                            localStorage.setItem('currentUser' , JSON.stringify(res))
+                        }
                     }
                 })
               }
@@ -87,7 +93,7 @@ export default function SighIn(props)  {
                     </div>
                     <div className="flex-sb-m w-full p-b-30">
                         <div className="contact100-form-checkbox">
-                            <input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me"/>
+                            <input ref={checkbox} className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me"/>
                             <label className="label-checkbox100" htmlFor="ckb1">
                                 Remember me
                             </label>

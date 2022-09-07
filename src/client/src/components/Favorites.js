@@ -2,7 +2,7 @@ import {React , useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/LittleCart.scss"
 
-export default function Sort(props)  { 
+export default function Favorites(props)  { 
 
         const myFavorites = props.myFavorite;
 

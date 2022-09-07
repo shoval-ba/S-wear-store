@@ -16,6 +16,8 @@ import Popup from './Popup';
 import { Link , Outlet} from 'react-router-dom';
 import LittleCart from './LittleCart'
 import Favorites from './Favorites';
+import User from './User';
+import { Unstable_Grid2 } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -58,19 +60,39 @@ export default function Navbar() {
   const [favorites , setFavorites] = useState();
   let [myBag , setMyBag] = useState([])
   let [myFavorite , setMyFavorite] = useState([])
-  const [hoverCart , setHover] = useState(false)
+  const [hoverCart , setHoverCart] = useState(false)
   const [hoverFavorite , setHoverFavorite] = useState(false)
+  const [hoverUser , setHoverUser] = useState(false)
 
   const [sighIn , setSighIn]= useState(false);
   const[currentUser , setUser] = useState();
 
   useEffect(()=>{
-    if(hoverCart) setHoverFavorite(false)
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    setUser(user)
+  },[])
+
+  useEffect(()=>{
+    if(hoverCart){
+     setHoverFavorite(false)
+     setHoverUser(false)
+    }
+      
   } , [hoverCart])
 
   useEffect(()=>{
-    if(hoverFavorite) setHover(false)
+    if(hoverFavorite) {
+      setHoverCart(false)
+      setHoverUser(false)
+      }
   } , [hoverFavorite])
+
+  useEffect(()=>{
+    if(hoverUser) {
+      setHoverCart(false)
+      setHoverFavorite(false)
+      }
+  } , [hoverUser])
 
   const handleUserClick = () => {
     setSighIn(true)
@@ -141,7 +163,7 @@ export default function Navbar() {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Link to="cart" style={{color:"white"}}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit"
-            onMouseEnter={() => setHover(true)}
+            onMouseEnter={() => setHoverCart(true)}
             >
               <Badge badgeContent={myBag.length} color="error">
                 <ShoppingCartIcon/>
@@ -166,6 +188,7 @@ export default function Navbar() {
               aria-haspopup="true"
               onClick={() => handleUserClick()}
               color="inherit"
+              onMouseEnter={() => setHoverUser(true)}
             >
               <AccountCircle />
             </IconButton>
@@ -173,7 +196,8 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
       {sighIn ? <Popup sighIn={setSighIn} setUser={setUser}/> : <></>}
-      {hoverCart ? <LittleCart myBag={myBag} setHover={setHover}/> : <></>}
+      {hoverCart ? <LittleCart myBag={myBag} setHover={setHoverCart}/> : <></>}
+      {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} sighIn={setSighIn}/> : <></>}
       {hoverFavorite ? <Favorites myFavorite={myFavorite} setHoverFavorite={setHoverFavorite} setFavorite={setMyFavorite}/> : <></>}
     </Box>
       <Outlet context={{setMyBag:setMyBag , myBag:myBag , setMyFavorite:setMyFavorite , myFavorite:myFavorite , currentUser:currentUser}}></Outlet>
