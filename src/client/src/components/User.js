@@ -10,7 +10,7 @@ export default function User(props)  {
         if(currentUser === null ){
             userUi = (
                 <div>
-                    <p onClick={()=>props.sighIn(true)}>SighIn</p>
+                    <p style={{cursor:"pointer"}} onClick={()=>props.sighIn(true)}>SighIn</p>
                 </div>
             )
         }

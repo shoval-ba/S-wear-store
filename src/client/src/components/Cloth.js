@@ -51,7 +51,7 @@ export default function Cloth(props)  {
       })
 
     return (
-      <div>
+      <div style={{margin:"20px"}}>
           <Sort clothes={clothesAfterFilter} setClothes={setClothesFilter}></Sort>
       <div className='filterAnd'>
             <Filters brand={brand} clothes={clothes} setClothes={setClothesFilter}/>
