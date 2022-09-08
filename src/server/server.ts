@@ -44,7 +44,6 @@ app.get('/getMyFavorites:userId', (req: any, response: any) => {
   getMyFavorites(userId).then((cloth: any) => response.json(cloth));
 });
 
-
 app.use(express.json({limit: '1mb'}));
 // Add to users table.
 app.post('/addUser', async function (req :any, response:any){

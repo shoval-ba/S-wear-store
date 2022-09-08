@@ -1,8 +1,6 @@
-import {React , useState , useEffect , createRef  } from 'react';
+import {React , useState , createRef  } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import {
-    textValidate,
-    numValidate,
     textNumberValidate,
     emailValidate,
   } from "react-validations-components";
@@ -47,10 +45,10 @@ export default function SighIn(props)  {
                     if(typeof res == "string") alert(res)
                     else if (typeof res == "object"){
                         props.setUser(res);
-                        console.log(res)
                         let user = JSON.parse(localStorage.getItem('currentUser'));
                         if(user !== null) {
                             localStorage.removeItem(user)
+                            props.setMyBag([]);
                         }
                         if(checkbox.current.checked){
                             localStorage.setItem('currentUser' , JSON.stringify(res))

@@ -46,7 +46,7 @@ async function initDb() {
       await client.query(
         `CREATE TABLE IF NOT EXISTS carts(
             cart_id SERIAL PRIMARY KEY,
-            size INTEGER NOT NULL,
+            size TEXT NOT NULL,
             quantity INTEGER NOT NULL,
             user_id INTEGER,
             cloth_id INTEGER,
@@ -71,7 +71,7 @@ async function initDb() {
   // await client.query(
   //     `CREATE TABLE IF NOT EXISTS orders(
   //         order_id SERIAL PRIMARY KEY,
-  //         size INTEGER NOT NULL,
+  //         size TEXT NOT NULL,
   //         quantity INTEGER NOT NULL,
   //         user_id INTEGER,
   //         cloth_id INTEGER,

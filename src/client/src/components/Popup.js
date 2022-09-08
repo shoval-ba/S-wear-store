@@ -9,7 +9,8 @@ export default function Popup(props)  {
 
     return (
         <div className="popupContainer">       
-                {createAccount ? <CreateAccount sighIn={props.sighIn} setUser={props.setUser} setCreate={setCreate}/> : <SighIn setCreate={setCreate} sighIn={props.sighIn} setUser={props.setUser}/>}
+                {createAccount ? <CreateAccount sighIn={props.sighIn} setUser={props.setUser} setCreate={setCreate}/> : 
+                <SighIn setCreate={setCreate} sighIn={props.sighIn} setUser={props.setUser} setMyBag={props.setMyBag}/>}
         </div>
     )
 }

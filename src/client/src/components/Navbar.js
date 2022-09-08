@@ -17,7 +17,6 @@ import { Link , Outlet} from 'react-router-dom';
 import LittleCart from './LittleCart'
 import Favorites from './Favorites';
 import User from './User';
-import { Unstable_Grid2 } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -69,47 +68,50 @@ export default function Navbar() {
   useEffect(()=>{
     let user = JSON.parse(localStorage.getItem('currentUser'));
     setUser(user);
-    fetch(`getMyBag${user.user_id}`)
-    .then((res) => res.json())
-        .then((response) => {
-         setMyBag(response)
-         console.log(response)
-        })
-
-    fetch(`getMyFavorites${user.user_id}`)
-    .then((res) => res.json())
-        .then((response) => {
-          setMyFavorite(response)
-        })
+    if(user !== null){
+      fetch(`getMyBag${user.user_id}`)
+      .then((res) => res.json())
+          .then((response) => {
+           setMyBag(response)
+          })
+  
+      fetch(`getMyFavorites${user.user_id}`)
+      .then((res) => res.json())
+          .then((response) => {
+            setMyFavorite(response)
+          })
+    }
   },[])
 
-  const addToCart = async ()=>{
-    for(let item of myBag){
-      console.log(item)
-      const options ={
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({size:item.size , quantity:item.quantity , clothId:item.cloth.cloth_id , userId:currentUser.user_id})
-      }
-      try{
-        let result = await fetch('/addToCarts', options);
-        await result.json().then((res) => {
-            console.log(res)
-        })
-      }
-      catch {
-        console.log("no")
-      }
-    }
-  }
   useEffect(()=>{
-    const timeoutId = setTimeout(()=>addToCart(),1200)
-    return () => {
-      clearTimeout(timeoutId)
+    const addToCart = async ()=>{
+      for(let item of myBag){
+        console.log(item)
+        const options ={
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({size:item.size , quantity:item.quantity , clothId:item.cloth.cloth_id , userId:currentUser.user_id})
+        }
+        try{
+          let result = await fetch('/addToCarts', options);
+          await result.json().then((res) => {
+              console.log(res)
+          })
+        }
+        catch {
+          console.log("no")
+        }
+      }
     }
-  },[myBag])
+    if(currentUser !== null){
+      const timeoutId = setTimeout(()=>addToCart(),1000)
+      return () => {
+        clearTimeout(timeoutId)
+      }
+    }
+  },[myBag , currentUser])
 
   useEffect(()=>{
     if(hoverCart){
@@ -163,7 +165,7 @@ export default function Navbar() {
           >
             <Link to="/" style={{color:"white"}}>SHOVAL SPORT</Link>
           </Typography>
-            <Box sx={{ flexGrow: 1 , textAlign:"center"}}>
+            <Box sx={{ flexGrow: 1 , textAlign:"center" , marginTop: "5px"}}>
                 <Typography
                 variant="h6"
                 noWrap
@@ -234,7 +236,7 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {sighIn ? <Popup sighIn={setSighIn} setUser={setUser}/> : <></>}
+      {sighIn ? <Popup sighIn={setSighIn} setUser={setUser} setMyBag={setMyBag}/> : <></>}
       {hoverCart ? <LittleCart myBag={myBag} setHover={setHoverCart}/> : <></>}
       {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} sighIn={setSighIn}/> : <></>}
       {hoverFavorite ? <Favorites myFavorite={myFavorite} setHoverFavorite={setHoverFavorite} setFavorite={setMyFavorite}/> : <></>}

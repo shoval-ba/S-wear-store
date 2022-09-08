@@ -29,19 +29,24 @@ export async function getClothesByBrand(brand:string){
 }
 
 export async function getMyBag(userId:string){
-  const sql = `SELECT * FROM carts LEFT JOIN clothes ON carts.user_id=$1 AND carts.cloth_id = clothes.cloth_id`;
+  const sql = `SELECT * FROM carts INNER JOIN clothes ON carts.user_id=$1 AND carts.cloth_id = clothes.cloth_id`;
   const result = await client.query(sql,[userId]);
-  const array = await Promise.all(result.rows.map(async (cart: any) => {
-    const sql = `SELECT * FROM clothes WHERE cloth_id=$1`;
-    const result = await client.query(sql, [cart.cloth_id]);
-    let newCart = {
-      size: cart.size,
-      quantity: cart.quantity,
-      cloth: Object.assign(result.rows[0])
-    };
-    return newCart
-  }))
-  return array
+  if(result.rows.length > 0){
+    const array = await Promise.all(result.rows.map(async (cart: any) => {
+      const sql = `SELECT * FROM clothes WHERE cloth_id=$1`;
+      const result = await client.query(sql, [cart.cloth_id]);
+      if(result.rows.length > 0){
+        let newCart = {
+          size: cart.size,
+          quantity: cart.quantity,
+          cloth: Object.assign(result.rows[0])
+        };
+        return newCart
+      }
+    }))
+    return array
+  }
+  return []
 }
 
 export async function getMyFavorites(userId:string){
@@ -53,8 +58,8 @@ export async function getMyFavorites(userId:string){
 
 // Add officer to users table.
 export async function addToCarts(size:any , quantity:any , userId:number ,clothId:number){
-  const sql1 =`DELETE FROM carts WHERE cloth_id=$1`
-  await client.query(sql1 , [clothId])
+  const sql1 =`DELETE FROM carts WHERE cloth_id=$1 AND user_id =$2 `
+  await client.query(sql1 , [clothId , userId])
   const sql = 'INSERT INTO carts(size ,quantity ,user_id, cloth_id) VALUES($1, $2, $3, $4)';
   await client.query(sql, [size , quantity , userId , clothId]);
   return "Success"
