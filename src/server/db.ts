@@ -50,10 +50,19 @@ export async function getMyBag(userId:string){
 }
 
 export async function getMyFavorites(userId:string){
-  const sql = `SELECT * FROM favorites WHERE user_id=$1`;
+  const sql = `SELECT * FROM favorites INNER JOIN clothes ON favorites.user_id=$1 AND favorites.cloth_id = clothes.cloth_id`;
   const result = await client.query(sql,[userId]);
-  const clothes = result.rows.map((cloth:any) => Object.assign(cloth));
-  return clothes;
+  if(result.rows.length > 0){
+    const array = await Promise.all(result.rows.map(async (cart: any) => {
+      const sql = `SELECT * FROM clothes WHERE cloth_id=$1`;
+      const result = await client.query(sql, [cart.cloth_id]);
+      if(result.rows.length > 0){
+           return Object.assign(result.rows[0]);
+      }
+    }))
+    return array
+  }
+  return []
 }
 
 // Add officer to users table.
@@ -72,13 +81,12 @@ export async function deleteCart(clothId:number){
   return "Success"
 }
 
-// Update from officer table.
-// export async function updateCart(officer:any , key:string , newValue:any){
-//   let id = officer.officer_id;
-//   const sql = `UPDATE carts SET quantity=$1 WHERE carts.cloth_id = $2`;
-//   await client.query(sql, [newValue , id]);
-//   return "Success"
-// }
+// Add officer to users table.
+export async function deleteFavorite(clothId:number){
+  const sql1 =`DELETE FROM favorites WHERE cloth_id=$1`
+  await client.query(sql1 , [clothId])
+  return "Success"
+}
 
 // Add officer to users table.
 export async function addToFavorites(userId:number ,clothId:number){

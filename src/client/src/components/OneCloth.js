@@ -63,7 +63,7 @@ export default function OneCloth(props)  {
         props.close(false)
     }
 
-    const addToFavorite = () => {
+    const addToFavorite = async () => {
         setColor("red")
         for(let favorite of myFavorite) {
             if(cloth.cloth_id == favorite.cloth_id) {
@@ -72,10 +72,45 @@ export default function OneCloth(props)  {
                     const itemsFilter = previousState.filter(currentItem => { return favorite.cloth_id !== currentItem.cloth_id })
                     return [...itemsFilter]
                 })
+                if(currentUser !== null){
+                    const options ={
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                    try{
+                        let result = await fetch(`/deleteFavorite${favorite.cloth_id}`, options);
+                        await result.json().then((res) => {
+                            console.log(res)
+                        })
+                    }
+                    catch {
+                        alert("no")
+                    }
+                }
                 return;
             }
         }
         setMyFavorite(previousState =>{ return [...previousState , cloth]})
+        if(currentUser !== null){
+            const options ={
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ clothId:cloth.cloth_id , userId:currentUser.user_id})
+              }
+              try{
+                let result = await fetch('/addToFavorites', options);
+                await result.json().then((res) => {
+                    console.log(res)
+                })
+              }
+              catch {
+                console.log("no")
+              }
+        }
     }
 
     const addToBag = async () =>{
@@ -113,24 +148,6 @@ export default function OneCloth(props)  {
             }
             select.current.style.display = "none";
             setMyBag(previousState =>{ return [...previousState , newCloth]}); 
-            if(currentUser !== null){
-                const options ={
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({size:newCloth.size , quantity:newCloth.quantity , clothId:newCloth.cloth.cloth_id , userId:currentUser.user_id})
-                  }
-                  try{
-                    let result = await fetch('/addToCarts', options);
-                    await result.json().then((res) => {
-                        console.log(res)
-                    })
-                  }
-                  catch {
-                    console.log("no")
-                  }
-            }
         }
     }
 

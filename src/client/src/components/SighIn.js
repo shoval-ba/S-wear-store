@@ -17,8 +17,7 @@ export default function SighIn(props)  {
     const checkbox = createRef();
 
     const close = () => {
-        const fun = props.sighIn
-        fun(false)
+        props.sighIn(false)
     }
 
     const sighIn =  async () => {
@@ -53,6 +52,7 @@ export default function SighIn(props)  {
                         if(checkbox.current.checked){
                             localStorage.setItem('currentUser' , JSON.stringify(res))
                         }
+                        close()
                     }
                 })
               }

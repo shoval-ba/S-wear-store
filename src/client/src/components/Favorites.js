@@ -6,11 +6,26 @@ export default function Favorites(props)  {
 
         const myFavorites = props.myFavorite;
 
-        const handleDelete = (item) => {
+        const handleDelete = async (item) => {
             props.setFavorite(previousState =>{ 
                 const itemsFilter = previousState.filter(currentItem => { return item !== currentItem})
                 return [...itemsFilter]
                 })
+            const options ={
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            try{
+                let result = await fetch(`/deleteFavorite${item.cloth_id}`, options);
+                await result.json().then((res) => {
+                    console.log(res)
+                })
+            }
+            catch {
+                alert("no")
+            }
         }
 
         let itemsUi ;
@@ -23,13 +38,13 @@ export default function Favorites(props)  {
         }
     
         else {
-            itemsUi = myFavorites.map((item,index) => {
+            itemsUi = myFavorites.map((item) => {
                 return (
-                        <li className="clearfix">
-                        <img src={item.img} alt="item1" />
-                        <span className="item-name">{item.title}</span>
-                        <span className="item-price">{item.price}$</span>
-                        <span className="close" onClick={()=>handleDelete(item)}>&#10005;</span>
+                        <li className="clearfix" key={item.cloth_id}>
+                            <img src={item.img} alt="item1" />
+                            <span className="item-name">{item.title}</span>
+                            <span className="item-price">{item.price}$</span>
+                            <span className="close" onClick={()=>handleDelete(item)}>&#10005;</span>
                         </li>
                 )
             })

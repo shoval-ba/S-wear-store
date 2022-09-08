@@ -32,16 +32,16 @@ export default function Cart()  {
             headers: {
                 'Content-Type': 'application/json'
             }
-            }
-            try{
+        }
+        try{
             let result = await fetch(`/deleteCart${item.cloth.cloth_id}`, options);
             await result.json().then((res) => {
                 console.log(res)
             })
-            }
-            catch {
+        }
+        catch {
             alert("no")
-            }
+        }
     }
 
     const handlePay = async () => {
