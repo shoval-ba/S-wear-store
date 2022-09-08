@@ -12,7 +12,8 @@ if (process.env.NODE_ENV==='production'){
   })
 }
 
-import { addToUsers , checkIfUserExist , getClothesByBrand , getClothesBySector , getClothes , addToOrders} from './db'
+import { addToUsers , checkIfUserExist , getClothesByBrand , getMyBag , 
+  getMyFavorites , getClothes , addToOrders , addToCarts , deleteCart} from './db'
 
 // Gives clothes from the db.
 app.get('/allClothes', (_: any, response: any) => {
@@ -26,9 +27,21 @@ app.get('/clothesByBrand:brand', (req: any, response: any) => {
 });
 
 // Gives clothes from the db.
-app.get('/clothesBySector:sector', (req: any, response: any) => {
-  let sector = req.params.sector;
-  getClothesBySector(sector).then((cloth: any) => response.json(cloth));
+app.get('/getMyBag:userId', (req: any, response: any) => {
+  let userId = req.params.userId;
+  getMyBag(userId).then((cloth: any) => response.json(cloth));
+});
+
+// Gives clothes from the db.
+app.delete('/deleteCart:clothId', (req: any, response: any) => {
+  let clothId = req.params.clothId;
+  deleteCart(clothId).then((cloth: any) => response.json(cloth));
+});
+
+// Gives clothes from the db.
+app.get('/getMyFavorites:userId', (req: any, response: any) => {
+  let userId = req.params.userId;
+  getMyFavorites(userId).then((cloth: any) => response.json(cloth));
 });
 
 
@@ -38,6 +51,12 @@ app.post('/addUser', async function (req :any, response:any){
   const user = req.body;
   const result = await addToUsers(user);
   response.json(result)
+});
+
+// Add to users table.
+app.post('/addToCarts', async function (req :any, response:any){
+  const body = req.body;
+  addToCarts(body.size , body.quantity , body.userId , body.clothId).then((user: any) => response.json(user));
 });
 
 // Gives user from the db.

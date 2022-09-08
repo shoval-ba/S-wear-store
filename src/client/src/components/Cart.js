@@ -12,24 +12,36 @@ export default function Cart()  {
     const setSighIn = useOutletContext().setSighIn
 
     const [totalPrice , setTotalPrice]= useState(0);
-    const [items , setItems] = useState(myBag);
 
     useEffect(() => {
-        console.log(items)
         setTotalPrice(0)
         let total = 0
-        for (let item of items){
+        for (let item of myBag){
             total += (item.cloth.price)*(item.quantity)
         }
         setTotalPrice(Math.floor(total))
-        setMyBag(items)
-    }, [items] );
+    }, [myBag] );
     
-    const handleDelete = (item) => {
-        setItems(previousState =>{ 
+    const handleDelete = async (item) => {
+        setMyBag(previousState =>{ 
             const itemsFilter = previousState.filter(currentItem => { return item !== currentItem})
             return [...itemsFilter]
             })
+        const options ={
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+            }
+            try{
+            let result = await fetch(`/deleteCart${item.cloth.cloth_id}`, options);
+            await result.json().then((res) => {
+                console.log(res)
+            })
+            }
+            catch {
+            alert("no")
+            }
     }
 
     const handlePay = async () => {
@@ -70,14 +82,14 @@ export default function Cart()  {
             handleDelete(item)
         }
         else if (number === 1 || number === -1){
-            setItems(previousState =>{
+            setMyBag(previousState =>{
                 const itemsFilter = previousState.filter(currentItem => { return item !== currentItem })
                 return [...itemsFilter , {...item, quantity:item.quantity+number}]
                 })
             
         }
         else {
-            setItems(previousState =>{ 
+            setMyBag(previousState =>{ 
                 const itemsFilter = previousState.filter(currentItem => { return item !== currentItem })
                 return [...itemsFilter , {...item, quantity:number}]
                 })
@@ -85,7 +97,7 @@ export default function Cart()  {
     }
 
     let itemsUi ;
-    if(items.length ===0 ){
+    if(myBag.length ===0 ){
         itemsUi = (
             <div style={{textAlign:"center"}}>                  
                 <img id="emptyImg" src="https://res.cloudinary.com/sivadass/image/upload/v1495427934/icons/empty-cart.png" alt="empty-cart"/>
@@ -96,7 +108,7 @@ export default function Cart()  {
 
 
     else {
-        itemsUi = items.map((item,index) => {
+        itemsUi = myBag.map((item,index) => {
             return (
                  <div className="row border-top border-bottom" key={item.cloth.cloth_id * index}>
                     <div className="row main align-items-center">

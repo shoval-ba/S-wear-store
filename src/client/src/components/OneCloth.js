@@ -15,6 +15,7 @@ export default function OneCloth(props)  {
     const myBag = useOutletContext().myBag;
     const setMyFavorite = useOutletContext().setMyFavorite;
     const myFavorite = useOutletContext().myFavorite;
+    const currentUser = useOutletContext().currentUser;
     let sizes = [];
     const [colorHeart , setColor] = useState("black")
 
@@ -77,7 +78,7 @@ export default function OneCloth(props)  {
         setMyFavorite(previousState =>{ return [...previousState , cloth]})
     }
 
-    const addToBag = () =>{
+    const addToBag = async () =>{
         for(let cloth2 of myBag) {
             if(cloth.cloth_id == cloth2.cloth.cloth_id && cloth2.size == chosenSize) {
                 let newCloth = {
@@ -112,6 +113,24 @@ export default function OneCloth(props)  {
             }
             select.current.style.display = "none";
             setMyBag(previousState =>{ return [...previousState , newCloth]}); 
+            if(currentUser !== null){
+                const options ={
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({size:newCloth.size , quantity:newCloth.quantity , clothId:newCloth.cloth.cloth_id , userId:currentUser.user_id})
+                  }
+                  try{
+                    let result = await fetch('/addToCarts', options);
+                    await result.json().then((res) => {
+                        console.log(res)
+                    })
+                  }
+                  catch {
+                    console.log("no")
+                  }
+            }
         }
     }
 

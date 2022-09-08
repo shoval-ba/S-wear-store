@@ -68,8 +68,48 @@ export default function Navbar() {
 
   useEffect(()=>{
     let user = JSON.parse(localStorage.getItem('currentUser'));
-    setUser(user)
+    setUser(user);
+    fetch(`getMyBag${user.user_id}`)
+    .then((res) => res.json())
+        .then((response) => {
+         setMyBag(response)
+         console.log(response)
+        })
+
+    fetch(`getMyFavorites${user.user_id}`)
+    .then((res) => res.json())
+        .then((response) => {
+          setMyFavorite(response)
+        })
   },[])
+
+  const addToCart = async ()=>{
+    for(let item of myBag){
+      console.log(item)
+      const options ={
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({size:item.size , quantity:item.quantity , clothId:item.cloth.cloth_id , userId:currentUser.user_id})
+      }
+      try{
+        let result = await fetch('/addToCarts', options);
+        await result.json().then((res) => {
+            console.log(res)
+        })
+      }
+      catch {
+        console.log("no")
+      }
+    }
+  }
+  useEffect(()=>{
+    const timeoutId = setTimeout(()=>addToCart(),1200)
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  },[myBag])
 
   useEffect(()=>{
     if(hoverCart){

@@ -28,9 +28,9 @@ export default function Sort(props)  {
     
     
         else {
-            itemsUi = myBag.map((item,index) => {
+            itemsUi = myBag.map((item) => {
                 return (
-                        <li className="clearfix">
+                        <li className="clearfix" key={item.cloth_id}>
                         <img src={item.cloth.img} alt="item1" />
                         <span className="item-name">{item.cloth.title}</span>
                         <span className="item-price">{item.cloth.price}$</span>
