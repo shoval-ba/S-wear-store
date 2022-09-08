@@ -84,6 +84,7 @@ export default function CreateAccount(props)  {
                 await result.json().then((res) => {
                     console.log(res)
                     props.setUser(res)
+                    close()
                 })
               }
               catch {
@@ -93,8 +94,7 @@ export default function CreateAccount(props)  {
     }
 
     const close = () => {
-        const fun = props.sighIn
-        fun(false)
+        props.sighIn(false)
     }
 
     return (
