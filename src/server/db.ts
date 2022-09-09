@@ -1,5 +1,6 @@
 import { Client } from 'pg';
 import dotenv from 'dotenv';
+const bcrypt = require('bcryptjs')
 dotenv.config();
 
 const DATABASE_URL = process.env.DATABASE_URL
@@ -118,9 +119,13 @@ export async function addToUsers(user:any){
 
 //Get all the clothes.
 export async function checkIfUserExist(email:string  , password:string){
-  const sql = `SELECT * FROM users WHERE email=$1 AND password=$2`;
-  const result = await client.query(sql , [email , password]);
+  const sql = `SELECT * FROM users WHERE email=$1`;
+  const result = await client.query(sql , [email]);
   const user = result.rows.map((user:any) => Object.assign(user));
-  if(user.length == 1) return user[0]
-  else if(user.length == 0) return "user dosen't exist"
+  if(user.length == 1) {
+    const doesPasswordMatch = bcrypt.compareSync(password, user[0].password);
+    if(doesPasswordMatch) return user[0];
+    else return "Invalid password"
+  }
+  else if(user.length == 0) return "Invalid email"
 }

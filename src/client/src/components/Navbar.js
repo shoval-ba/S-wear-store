@@ -66,22 +66,25 @@ export default function Navbar() {
   const[currentUser , setUser] = useState();
 
   useEffect(()=>{
-    let user = JSON.parse(localStorage.getItem('currentUser'));
-    setUser(user);
-    if(user !== null){
-      fetch(`getMyBag${user.user_id}`)
+  let user = JSON.parse(localStorage.getItem('currentUser'));
+  setUser(user);
+  },[])
+
+  useEffect(()=>{
+    if(currentUser !== undefined){
+      fetch(`getMyBag${currentUser.user_id}`)
       .then((res) => res.json())
           .then((response) => {
            setMyBag(response)
           })
   
-      fetch(`getMyFavorites${user.user_id}`)
+      fetch(`getMyFavorites${currentUser.user_id}`)
       .then((res) => res.json())
           .then((response) => {
             setMyFavorite(response)
           })
     }
-  },[])
+  },[currentUser])
 
   useEffect(()=>{
     const addToCart = async ()=>{
@@ -111,7 +114,7 @@ export default function Navbar() {
         clearTimeout(timeoutId)
       }
     }
-  },[myBag , currentUser])
+  },[myBag])
 
   useEffect(()=>{
     if(hoverCart){

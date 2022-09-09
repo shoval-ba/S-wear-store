@@ -29,7 +29,10 @@ export default function SighIn(props)  {
         if(!textNumberValidate(password).status || password == undefined) {
             inputPassword.current.style.display = "block";
             insert = false;
-        } else inputPassword.current.style.display = "none";
+        } else {
+            inputPassword.current.style.display = "none";
+        }
+
         if(insert){
             const options ={
                 method: 'POST',
@@ -47,7 +50,6 @@ export default function SighIn(props)  {
                         let user = JSON.parse(localStorage.getItem('currentUser'));
                         if(user !== null) {
                             localStorage.removeItem(user)
-                            props.setMyBag([]);
                         }
                         if(checkbox.current.checked){
                             localStorage.setItem('currentUser' , JSON.stringify(res))

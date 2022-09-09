@@ -7,7 +7,7 @@ import {
     emailValidate,
   } from "react-validations-components";
 import '../styles/CreateAccount.scss'
-import { Divider } from '@mui/material';
+import bcrypt from 'bcryptjs'
 
 export default function CreateAccount(props)  { 
 
@@ -32,9 +32,9 @@ export default function CreateAccount(props)  {
     const email = createRef();
     const password = createRef();
     const inputPassword = createRef();
-    const userExist = createRef();
 
     const handleSubmit = async () => {
+        setInsert(true)
         if(!textValidate(user.first_name).status || user.first_name == ""){
             setInsert(false)
             first_name.current.style.display = "block"
@@ -64,14 +64,18 @@ export default function CreateAccount(props)  {
             password.current.style.display = "block"
         } else password.current.style.display = "none"
               
-        console.log(user)
         if (passwordAgain !== user.password || passwordAgain == ""){
             setInsert(false);
             inputPassword.current.style.display = "block"
             return
-        } 
-
+        } else {
+            inputPassword.current.style.display = "none"
+            const hashedPassword = bcrypt.hashSync(user.password, bcrypt.genSaltSync());
+            user.password = hashedPassword
+        }
+        console.log(insert)
         if(insert == true){
+            console.log(user)
             const options ={
                 method: 'POST',
                 headers: {
@@ -82,9 +86,15 @@ export default function CreateAccount(props)  {
               try{
                 let result = await fetch('/addUser', options);
                 await result.json().then((res) => {
-                    console.log(res)
-                    props.setUser(res)
-                    close()
+                    if(typeof res == "string") alert(res)
+                    else if (typeof res == "object"){
+                        props.setUser(res);
+                        let user = JSON.parse(localStorage.getItem('currentUser'));
+                        if(user !== null) {
+                            localStorage.removeItem(user)
+                        }
+                        close()
+                    }
                 })
               }
               catch {
