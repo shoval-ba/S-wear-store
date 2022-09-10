@@ -72,6 +72,7 @@
         position: relative;
         .img {
           @extend %img;
+          cursor: pointer;
         }
         #favorite{
           position: absolute;

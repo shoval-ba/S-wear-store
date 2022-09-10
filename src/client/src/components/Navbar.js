@@ -71,25 +71,29 @@ export default function Navbar() {
   },[])
 
   useEffect(()=>{
-    if(currentUser !== undefined){
-      fetch(`getMyBag${currentUser.user_id}`)
-      .then((res) => res.json())
-          .then((response) => {
-           setMyBag(response)
-          })
-  
-      fetch(`getMyFavorites${currentUser.user_id}`)
-      .then((res) => res.json())
-          .then((response) => {
-            setMyFavorite(response)
-          })
+    const getMyBag = async ()=>{
+      console.log(currentUser)
+      if(currentUser !== undefined){
+        await fetch(`getMyBag${currentUser.user_id}`)
+        .then((res) => res.json())
+            .then((response) => {
+              console.log(response)
+             setMyBag(response)
+            })
+    
+        await fetch(`getMyFavorites${currentUser.user_id}`)
+        .then((res) => res.json())
+            .then((response) => {
+              setMyFavorite(response)
+            })
+      }
     }
+    getMyBag()
   },[currentUser])
 
   useEffect(()=>{
     const addToCart = async ()=>{
       for(let item of myBag){
-        console.log(item)
         const options ={
           method: 'POST',
           headers: {
@@ -99,16 +103,14 @@ export default function Navbar() {
         }
         try{
           let result = await fetch('/addToCarts', options);
-          await result.json().then((res) => {
-              console.log(res)
-          })
+          await result.json()
         }
         catch {
           console.log("no")
         }
       }
     }
-    if(currentUser !== null){
+    if(currentUser !== undefined){
       const timeoutId = setTimeout(()=>addToCart(),1000)
       return () => {
         clearTimeout(timeoutId)

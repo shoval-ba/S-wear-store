@@ -1,4 +1,5 @@
-import {React , useState , useEffect , useOutletContext} from 'react';
+import {React , useState , useEffect} from 'react';
+import {  useOutletContext} from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import OneCloth from './OneCloth';
 import Filters from './Filters';
@@ -13,6 +14,10 @@ export default function Cloth(props)  {
     const [openOneCloth , setOpenOneCloth] = useState(false);
     const [oneCloth , setOneCloth] = useState({})
 
+    const setMyFavorite = useOutletContext().setMyFavorite;
+    const myFavorite = useOutletContext().myFavorite;
+    const currentUser = useOutletContext().currentUser;
+
     const getClothes = () => {
         fetch(`/clothesByBrand${brand}`)
         .then((res) => res.json())
@@ -26,17 +31,73 @@ export default function Cloth(props)  {
         getClothes();
       }, [brand] );
 
+      
       const handleClick = (cloth) => {
         setOneCloth(cloth)
         setOpenOneCloth(true)
       }
 
+      const addToFavorite = async (event , cloth) => {
+        event.target.style.color = "red"
+        for(let favorite of myFavorite) {
+            if(cloth.cloth_id == favorite.cloth_id) {
+              event.target.style.color = "black"
+                setMyFavorite(previousState =>{ 
+                    const itemsFilter = previousState.filter(currentItem => { return favorite.cloth_id !== currentItem.cloth_id })
+                    return [...itemsFilter]
+                })
+                if(currentUser !== null){
+                  const options ={
+                    method: 'DELETE',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                  }
+                    try{
+                        let result = await fetch(`/deleteFavorite${favorite.cloth_id}`, options);
+                        await result.json().then((res) => {
+                            console.log(res)
+                        })
+                    }
+                    catch {
+                        alert("no")
+                    }
+                }
+                return;
+              }
+            }
+            setMyFavorite(previousState =>{ return [...previousState , cloth]})
+            if(currentUser !== null){
+              const options ={
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ clothId:cloth.cloth_id , userId:currentUser.user_id})
+              }
+              try{
+                let result = await fetch('/addToFavorites', options);
+                await result.json().then((res) => {
+                  console.log(res)
+                })
+              }
+              catch {
+                console.log("no")
+              }
+        }
+    }
       const clothesUi = clothesAfterFilter.map(cloth => {
+        let colorHeart
+        for(let favorite of myFavorite) {
+          if(cloth.cloth_id == favorite.cloth_id) {
+            colorHeart = "red"
+          }
+        }
         return (
             <div className='item' key={cloth.cloth_id}>
             <div className="backgroundImg">
-                    <FavoriteIcon id="favorite"/>
-                    <img className ='img' src={cloth.img} alt="clothImg"/> 
+                    <FavoriteIcon id="favorite" style={{color:colorHeart}} onClick={(event)=>addToFavorite(event , cloth)}/>
+                    <img className ='img' src={cloth.img} alt="clothImg" onClick={()=>handleClick(cloth)}/> 
                     <h3 className="price" > {cloth.price} $ </h3>
                 </div>
                 <div className="bottom">
@@ -49,8 +110,8 @@ export default function Cloth(props)  {
             </div>
         )
       })
-
-    return (
+      
+      return (
       <div style={{margin:"20px"}}>
           <Sort clothes={clothesAfterFilter} setClothes={setClothesFilter}></Sort>
       <div className='filterAnd'>

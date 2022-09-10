@@ -30,18 +30,18 @@ async function initDb() {
   //     );`
   //     );
 
-  // await client.query(
-  //     `CREATE TABLE IF NOT EXISTS users(
-  //         user_id SERIAL PRIMARY KEY,
-  //         first_name TEXT NOT NULL,
-  //         last_name TEXT NOT NULL,
-  //         phone_number INTEGER NOT NULL,
-  //         city TEXT NOT NULL,
-  //         adress TEXT NOT NULL,
-  //         email TEXT NOT NULL,
-  //         password TEXT NOT NULL
-  //     );`
-  //     );
+  await client.query(
+      `CREATE TABLE IF NOT EXISTS users(
+          user_id SERIAL PRIMARY KEY,
+          first_name TEXT NOT NULL,
+          last_name TEXT NOT NULL,
+          phone_number INTEGER NOT NULL,
+          city TEXT NOT NULL,
+          adress TEXT NOT NULL,
+          email TEXT NOT NULL,
+          password TEXT NOT NULL
+      );`
+      );
 
       await client.query(
         `CREATE TABLE IF NOT EXISTS carts(
@@ -68,19 +68,19 @@ async function initDb() {
               REFERENCES clothes(cloth_id)
           );`
           );
-  // await client.query(
-  //     `CREATE TABLE IF NOT EXISTS orders(
-  //         order_id SERIAL PRIMARY KEY,
-  //         size TEXT NOT NULL,
-  //         quantity INTEGER NOT NULL,
-  //         user_id INTEGER,
-  //         cloth_id INTEGER,
-  //         CONSTRAINT FK_userID FOREIGN KEY(user_id)
-  //         REFERENCES users(user_id), 
-  //         CONSTRAINT FK_clothId FOREIGN KEY(cloth_id)
-  //         REFERENCES clothes(cloth_id)
-  //     );`
-  //     );
+  await client.query(
+      `CREATE TABLE IF NOT EXISTS orders(
+          order_id SERIAL PRIMARY KEY,
+          size TEXT NOT NULL,
+          quantity INTEGER NOT NULL,
+          user_id INTEGER,
+          cloth_id INTEGER,
+          CONSTRAINT FK_userID FOREIGN KEY(user_id)
+          REFERENCES users(user_id), 
+          CONSTRAINT FK_clothId FOREIGN KEY(cloth_id)
+          REFERENCES clothes(cloth_id)
+      );`
+      );
       console.log("create")
 }
 

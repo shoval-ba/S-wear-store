@@ -93,6 +93,7 @@ export default function CreateAccount(props)  {
                         if(user !== null) {
                             localStorage.removeItem(user)
                         }
+                        localStorage.setItem('currentUser' , JSON.stringify(res))
                         close()
                     }
                 })
