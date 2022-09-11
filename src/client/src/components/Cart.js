@@ -12,6 +12,8 @@ export default function Cart()  {
     const setSighIn = useOutletContext().setSighIn
 
     const [totalPrice , setTotalPrice]= useState(0);
+    const [price , setPrice]= useState(5);
+    const [coupon , setCoupon] = useState()
 
     useEffect(() => {
         setTotalPrice(0)
@@ -42,6 +44,13 @@ export default function Cart()  {
         catch {
             alert("no")
         }
+    }
+
+    const inputCoupon = (value) =>{
+        if(value === "ilovecode" || value === "Swear"){
+            setPrice(0)
+        } else setPrice(5)
+            
     }
 
     const handlePay = async () => {
@@ -163,11 +172,11 @@ export default function Cart()  {
                         <p>SHIPPING</p>
                         <select><option className="text-muted">Standard-Delivery- 5.00$</option></select>
                         <p>GIVE CODE</p>
-                        <input className="inputCode" id="code" placeholder="Enter your code"/>
+                        <input className="inputCode" id="code" placeholder="Enter your code" onChange={(e)=>inputCoupon(e.target.value)}/>
                     </form>
                     <div className="row" style={{borderTop: "1px solid rgba(0,0,0,.1)", padding: "2vh 0"}}>
                         <div className="col">TOTAL PRICE</div>
-                        <div className="col text-right">{totalPrice + 5}$</div>
+                        <div className="col text-right">{totalPrice + price}$</div>
                     </div>
                     <button className="btn" onClick={()=>handlePay()}>PAYMENT</button>
                 </div>
