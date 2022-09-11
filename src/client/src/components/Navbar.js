@@ -67,31 +67,32 @@ export default function Navbar() {
   const [sighIn , setSighIn]= useState(false);
   const[currentUser , setUser] = useState();
   const [search , setSearch] = useState();
-  const [openClothes , setOpenClothes] = useState(false);
 
   useEffect(()=>{
-  let user = JSON.parse(localStorage.getItem('currentUser'));
-  setUser(user);
-  const getAllClothes = async () =>{
-    await fetch(`allClothes`)
-      .then((res) => res.json())
-          .then((response) => {
-            console.log(response)
-            setAllClothes(response)
-          })
-  }
-  getAllClothes();
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    setUser(user);
+    const getAllClothes = async () =>{
+      await fetch(`allClothes`)
+        .then((res) => res.json())
+            .then((response) => {
+              console.log(response)
+              setAllClothes(response)
+            })
+    }
+    getAllClothes();
   },[])
 
   useEffect(()=>{
     const getMyBag = async ()=>{
       console.log(currentUser)
-      if(currentUser !== undefined){
+      setMyBag([])
+      setMyFavorite([])
+      if(currentUser !== undefined || currentUser !== null){
         await fetch(`getMyBag${currentUser.user_id}`)
         .then((res) => res.json())
             .then((response) => {
               console.log(response)
-             setMyBag(response)
+              setMyBag(response)
             })
     
         await fetch(`getMyFavorites${currentUser.user_id}`)
@@ -264,9 +265,8 @@ export default function Navbar() {
       </AppBar>
       {sighIn ? <Popup sighIn={setSighIn} setUser={setUser} setMyBag={setMyBag}/> : <></>}
       {hoverCart ? <LittleCart myBag={myBag} setHover={setHoverCart}/> : <></>}
-      {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} sighIn={setSighIn}/> : <></>}
+      {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} sighIn={setSighIn} setUser={setUser}/> : <></>}
       {hoverFavorite ? <Favorites myFavorite={myFavorite} setHoverFavorite={setHoverFavorite} setFavorite={setMyFavorite}/> : <></>}
-      {/* {openClothes ? <ClothesSearch searchValue={search} allClothes={allClothes} setMyBag={setMyBag} myBag={myBag} setMyFavorite={setMyFavorite} myFavorite={myFavorite} currentUser={currentUser}/>  : <></>} */}
     </Box>
       <Outlet context={{setMyBag:setMyBag, myBag:myBag , setMyFavorite:setMyFavorite , 
         myFavorite:myFavorite , currentUser:currentUser , setSighIn:setSighIn ,

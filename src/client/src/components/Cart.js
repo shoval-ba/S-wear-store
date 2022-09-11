@@ -13,7 +13,6 @@ export default function Cart()  {
 
     const [totalPrice , setTotalPrice]= useState(0);
     const [price , setPrice]= useState(5);
-    const [coupon , setCoupon] = useState()
 
     useEffect(() => {
         setTotalPrice(0)

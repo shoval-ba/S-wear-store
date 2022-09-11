@@ -49,7 +49,7 @@ export default function SighIn(props)  {
                         props.setUser(res);
                         let user = JSON.parse(localStorage.getItem('currentUser'));
                         if(user !== null) {
-                            localStorage.removeItem(user)
+                            localStorage.removeItem('currentUser')
                         }
                         if(checkbox.current.checked){
                             localStorage.setItem('currentUser' , JSON.stringify(res))

@@ -5,12 +5,21 @@ import "../styles/LittleCart.scss"
 export default function User(props)  { 
 
         const currentUser = props.currentUser;
+        
+        const handleSignOut = () => {
+            let user = JSON.parse(localStorage.getItem('currentUser'));
+            console.log(user)
+                if(user !== null) {
+                    localStorage.removeItem('currentUser')
+                }
+            props.setUser(null);
+        }
 
         let userUi ;
         if(currentUser === null ){
             userUi = (
                 <div>
-                    <p style={{cursor:"pointer"}} onClick={()=>props.sighIn(true)}>SighIn</p>
+                    <p style={{cursor:"pointer"}} onClick={()=>props.sighIn(true)}>Sign In</p>
                 </div>
             )
         }
@@ -19,6 +28,7 @@ export default function User(props)  {
             userUi = (
                     <div>
                         <p>{currentUser.email}</p>
+                        <p style={{cursor:"pointer"}} onClick={()=>handleSignOut()}>Sign Out</p>
                     </div>
              )
             
