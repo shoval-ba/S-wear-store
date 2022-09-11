@@ -105,7 +105,7 @@ export default function CreateAccount(props)  {
     }
 
     const close = () => {
-        props.sighIn(false)
+        props.signIn(false)
     }
 
     return (

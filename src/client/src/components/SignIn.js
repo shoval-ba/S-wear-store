@@ -4,9 +4,9 @@ import {
     textNumberValidate,
     emailValidate,
   } from "react-validations-components";
-import '../styles/SighIn.scss'
+import '../styles/SignIn.scss'
 
-export default function SighIn(props)  { 
+export default function SignIn(props)  { 
 
     const [email , setEmail] = useState();
     const [password , setPassword] = useState();
@@ -17,10 +17,10 @@ export default function SighIn(props)  {
     const checkbox = createRef();
 
     const close = () => {
-        props.sighIn(false)
+        props.signIn(false)
     }
 
-    const sighIn =  async () => {
+    const signIn =  async () => {
         let insert = true;
         if(!emailValidate(email).status || email === undefined) {
             inputEmail.current.style.display = "block";
@@ -101,7 +101,7 @@ export default function SighIn(props)  {
                     </div>
                     <div className="container-login100-form-btn p-t-25"> 
                     <p ref={userExist} style={{display:"none" , color:"rgb(238, 85, 85)"}}>User don't exist</p>
-                        <button className="login100-form-btn" style={{marginBottom:"20px"}} onClick={() => sighIn()}> Login </button> 
+                        <button className="login100-form-btn" style={{marginBottom:"20px"}} onClick={() => signIn()}> Login </button> 
                         <button className="login100-form-btn" onClick={() => create()}> Create account </button> 
                     </div>
             </div>

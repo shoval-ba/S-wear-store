@@ -19,7 +19,7 @@ export default function User(props)  {
         if(currentUser === null ){
             userUi = (
                 <div>
-                    <p style={{cursor:"pointer"}} onClick={()=>props.sighIn(true)}>Sign In</p>
+                    <p style={{cursor:"pointer"}} onClick={()=>props.signIn(true)}>Sign In</p>
                 </div>
             )
         }

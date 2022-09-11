@@ -64,7 +64,7 @@ export default function Navbar() {
   const [hoverFavorite , setHoverFavorite] = useState(false)
   const [hoverUser , setHoverUser] = useState(false)
 
-  const [sighIn , setSighIn]= useState(false);
+  const [signIn , setSignIn]= useState(false);
   const[currentUser , setUser] = useState();
   const [search , setSearch] = useState();
 
@@ -155,7 +155,7 @@ export default function Navbar() {
   } , [hoverUser])
 
   const handleUserClick = () => {
-    setSighIn(true)
+    setSignIn(true)
   }
 
   const handleFavoriteClick = () => {
@@ -263,13 +263,13 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {sighIn ? <Popup sighIn={setSighIn} setUser={setUser} setMyBag={setMyBag}/> : <></>}
+      {signIn ? <Popup signIn={setSignIn} setUser={setUser} setMyBag={setMyBag}/> : <></>}
       {hoverCart ? <LittleCart myBag={myBag} setHover={setHoverCart}/> : <></>}
-      {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} sighIn={setSighIn} setUser={setUser}/> : <></>}
+      {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} signIn={setSignIn} setUser={setUser}/> : <></>}
       {hoverFavorite ? <Favorites myFavorite={myFavorite} setHoverFavorite={setHoverFavorite} setFavorite={setMyFavorite}/> : <></>}
     </Box>
       <Outlet context={{setMyBag:setMyBag, myBag:myBag , setMyFavorite:setMyFavorite , 
-        myFavorite:myFavorite , currentUser:currentUser , setSighIn:setSighIn ,
+        myFavorite:myFavorite , currentUser:currentUser , setSignIn:setSignIn ,
         searchValue:search ,  allClothes:allClothes  }}></Outlet>
     </div>
   );

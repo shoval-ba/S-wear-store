@@ -9,7 +9,7 @@ export default function Cart()  {
     const myBag = useOutletContext().myBag;
     const setMyBag = useOutletContext().setMyBag;
     const currentUser = useOutletContext().currentUser
-    const setSighIn = useOutletContext().setSighIn
+    const setSignIn = useOutletContext().setSignIn
 
     const [totalPrice , setTotalPrice]= useState(0);
     const [price , setPrice]= useState(5);
@@ -54,7 +54,7 @@ export default function Cart()  {
 
     const handlePay = async () => {
         if(currentUser === null) {
-            setSighIn(true)
+            setSignIn(true)
             return;
         }
         else if (myBag.length ===0 ) {
