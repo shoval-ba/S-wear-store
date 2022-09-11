@@ -17,6 +17,7 @@ import { Link , Outlet} from 'react-router-dom';
 import LittleCart from './LittleCart'
 import Favorites from './Favorites';
 import User from './User';
+import ClothesSearch from './ClothesSearch';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,6 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Navbar() {
 
   const [myBag , setMyBag] = useState([])
+  const [allClothes , setAllClothes] = useState([])
   const [myFavorite , setMyFavorite] = useState([])
   const [hoverCart , setHoverCart] = useState(false)
   const [hoverFavorite , setHoverFavorite] = useState(false)
@@ -64,10 +66,21 @@ export default function Navbar() {
 
   const [sighIn , setSighIn]= useState(false);
   const[currentUser , setUser] = useState();
+  const [search , setSearch] = useState();
+  const [openClothes , setOpenClothes] = useState(false);
 
   useEffect(()=>{
   let user = JSON.parse(localStorage.getItem('currentUser'));
   setUser(user);
+  const getAllClothes = async () =>{
+    await fetch(`allClothes`)
+      .then((res) => res.json())
+          .then((response) => {
+            console.log(response)
+            setAllClothes(response)
+          })
+  }
+  getAllClothes();
   },[])
 
   useEffect(()=>{
@@ -148,6 +161,11 @@ export default function Navbar() {
     console.log(myFavorite)
   }
 
+  const handleSearch = (value) => {
+    setSearch(value)
+    // setOpenClothes(true)
+  }
+
   return (
     <div>
     <Box sx={{ flexGrow: 1}} style={{margin:"10px"}}>
@@ -198,13 +216,16 @@ export default function Navbar() {
                 </Typography>
            </Box>
           <Search>
+              <Link to="search" style={{color:"white"}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-            />
+              onChange={(e)=>{handleSearch(e.target.value)}}
+              />
+              </Link>
           </Search>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Link to="cart" style={{color:"white"}}>
@@ -245,8 +266,11 @@ export default function Navbar() {
       {hoverCart ? <LittleCart myBag={myBag} setHover={setHoverCart}/> : <></>}
       {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} sighIn={setSighIn}/> : <></>}
       {hoverFavorite ? <Favorites myFavorite={myFavorite} setHoverFavorite={setHoverFavorite} setFavorite={setMyFavorite}/> : <></>}
+      {/* {openClothes ? <ClothesSearch searchValue={search} allClothes={allClothes} setMyBag={setMyBag} myBag={myBag} setMyFavorite={setMyFavorite} myFavorite={myFavorite} currentUser={currentUser}/>  : <></>} */}
     </Box>
-      <Outlet context={{setMyBag:setMyBag , myBag:myBag , setMyFavorite:setMyFavorite , myFavorite:myFavorite , currentUser:currentUser , setSighIn:setSighIn}}></Outlet>
+      <Outlet context={{setMyBag:setMyBag, myBag:myBag , setMyFavorite:setMyFavorite , 
+        myFavorite:myFavorite , currentUser:currentUser , setSighIn:setSighIn ,
+        searchValue:search ,  allClothes:allClothes  }}></Outlet>
     </div>
   );
 }

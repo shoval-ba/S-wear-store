@@ -224,7 +224,7 @@ export default function CreateAccount(props)  {
                             </div>
                             <div id="divHaveAcount">
                                 <span style={{paddingRight: "25px"}}>Already have an account? </span> 
-                                <span id="returnToSignIn" onClick={()=>props.setCreate(false)}>Sign Up</span>
+                                <span id="returnToSignIn" onClick={()=>props.setCreate(false)}>Login</span>
                             </div>
                         </div>
                     </form>

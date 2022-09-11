@@ -92,4 +92,26 @@ export default function Filters(props)  {
             </div>
         )
     }
+
+    else if(brand === "null"){
+        return (
+            <div className='containerFilter'>
+                <div className='filter' onClick={()=>filterBySector("T-Shirts")}>
+                    <h6>T-shirt</h6>
+                </div>
+                <div className='filter' onClick={()=>filterBySector("pants")}>
+                    <h6>Pants</h6>
+                </div>
+                <div className='filter' onClick={()=>filterBySector("jackets")}>
+                    <h6>Jackets</h6>
+                </div>
+                <div className='filter' onClick={()=>filterBySector("dresses")}>
+                    <h6>Dresses and Suits</h6>
+                </div>
+                <div className='filter' onClick={()=>filterBySector("shoes")}>
+                    <h6>Shoes</h6>
+                </div>
+            </div>
+        )
+    }
 }

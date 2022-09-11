@@ -6,47 +6,27 @@ import Filters from './Filters';
 import Sort from './Sort';
 import '../styles/Clothes.scss';
 
-export default function Cloth(props)  { 
-  const brand = props.brand;
-
-    const [clothes , setClothes] = useState([]);
-    const [clothesAfterFilter , setClothesFilter] = useState([]);
+export default function ClothSearch(props)  { 
     const [openOneCloth , setOpenOneCloth] = useState(false);
     const [oneCloth , setOneCloth] = useState({})
-
+    const [clothesAfterSearch , setClothes] = useState([])
     const setMyFavorite = useOutletContext().setMyFavorite;
     const myFavorite = useOutletContext().myFavorite;
     const currentUser = useOutletContext().currentUser;
     const searchValue = useOutletContext().searchValue;
     const allClothes = useOutletContext().allClothes;
 
-    const getClothes = () => {
-        fetch(`/clothesByBrand${brand}`)
-        .then((res) => res.json())
-        .then((response) => {
-          setClothes(response)
-          setClothesFilter(response)
-        })
-      }
-    
-      useEffect(() => {
-        if(brand !== "null") getClothes();
-      }, [brand] );
-
       useEffect(()=>{
-        let clothesAfterSearch = [];
-        if(searchValue == undefined) {
-          setClothesFilter(allClothes)
-          setClothes(allClothes)
-        } else {
-          for (let cloth of allClothes){
-            if(cloth.title.toLowerCase().includes(searchValue)){
-              clothesAfterSearch.push(cloth)
-            }
+        let clothesAfterSearch =[]
+        if(searchValue === "")
+        for (let cloth of allClothes){
+          if(cloth.title.toLowerCase().includes(searchValue)){
+            console.log(cloth.title)
+            clothesAfterSearch.push(cloth)
           }
-          setClothesFilter(clothesAfterSearch)
-          setClothes(clothesAfterSearch)
         }
+        setClothes(clothesAfterSearch)
+        console.log(clothesAfterSearch)
       } , [searchValue])
 
       const handleClick = (cloth) => {
@@ -103,7 +83,7 @@ export default function Cloth(props)  {
               }
         }
     }
-      const clothesUi = clothesAfterFilter.map(cloth => {
+      const clothesUi = clothesAfterSearch.map(cloth => {
         let colorHeart
         for(let favorite of myFavorite) {
           if(cloth.cloth_id == favorite.cloth_id) {
@@ -130,9 +110,7 @@ export default function Cloth(props)  {
       
       return (
       <div style={{margin:"20px"}}>
-          <Sort clothes={clothesAfterFilter} setClothes={setClothesFilter}></Sort>
       <div className='filterAnd'>
-            <Filters brand={brand} clothes={clothes} setClothes={setClothesFilter}/>
           <div id='container'>
             {clothesUi}
             {openOneCloth ? <OneCloth cloth={oneCloth} close={setOpenOneCloth}/> : <></>}

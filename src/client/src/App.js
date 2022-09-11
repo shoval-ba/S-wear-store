@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Carousel from './components/Carousel';
 import Cart from './components/Cart';
+import ClothesSearch from './components/ClothesSearch';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="plus" element={<Cloth brand={"PLUS"}/>}>       
         </Route>
         <Route path="kids" element={<Cloth brand={"KIDS"}/>}>       
+        </Route>
+        <Route path="search" element={<Cloth brand={"null"}/>}>       
         </Route>
       </Route>
   </Routes>
