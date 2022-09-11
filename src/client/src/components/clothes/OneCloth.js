@@ -9,15 +9,15 @@ import '../../styles/OneCloth.scss';
 export default function OneCloth(props)  { 
     const cloth = props.cloth;
     const [chosenSize , setChosenSize] = useState();
-    const [quantity , setQuantity] = useState(0)
+    const [quantity , setQuantity] = useState(0);
     const select = createRef();
     const setMyBag = useOutletContext().setMyBag;
     const myBag = useOutletContext().myBag;
     const setMyFavorite = useOutletContext().setMyFavorite;
     const myFavorite = useOutletContext().myFavorite;
     const currentUser = useOutletContext().currentUser;
+    const [colorHeart , setColor] = useState("black");
     let sizes = [];
-    const [colorHeart , setColor] = useState("black")
 
     for(let key in cloth.sizes){
         sizes.push(key);
@@ -25,7 +25,7 @@ export default function OneCloth(props)  {
 
     useEffect(()=>{
         for(let favorite of myFavorite) {
-            if(cloth.cloth_id == favorite.cloth_id) {
+            if(cloth.cloth_id === favorite.cloth_id) {
                 setColor("red")
             }
         }
@@ -36,7 +36,7 @@ export default function OneCloth(props)  {
     } , [quantity])
 
       const sizesUI = sizes.map((size , index)=>{
-        if(cloth.sizes[size] == 0) {
+        if(cloth.sizes[size] === 0) {
             return (
                 <div key={cloth.cloth_id+index}>
                     <button className='button-17'style={{color:"DarkGrey"}}>{size}</button>
@@ -66,7 +66,7 @@ export default function OneCloth(props)  {
     const addToFavorite = async () => {
         setColor("red")
         for(let favorite of myFavorite) {
-            if(cloth.cloth_id == favorite.cloth_id) {
+            if(cloth.cloth_id === favorite.cloth_id) {
                 setColor("black")
                 setMyFavorite(previousState =>{ 
                     const itemsFilter = previousState.filter(currentItem => { return favorite.cloth_id !== currentItem.cloth_id })
@@ -115,7 +115,7 @@ export default function OneCloth(props)  {
 
     const addToBag = async () =>{
         for(let cloth2 of myBag) {
-            if(cloth.cloth_id == cloth2.cloth.cloth_id && cloth2.size == chosenSize) {
+            if(cloth.cloth_id === cloth2.cloth.cloth_id && cloth2.size === chosenSize) {
                 let newCloth = {
                     cloth:cloth,
                     size:chosenSize, 

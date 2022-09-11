@@ -5,15 +5,15 @@ export default function Filters(props)  {
 
     const brand = props.brand;
     const clothes = props.clothes;
-    let clothesAfterFilter = []
+    let clothesAfterFilter = [];
 
     const filterBySector=(sector)=>{
         for(let cloth of clothes){
             if(cloth.sector === sector) {
-                clothesAfterFilter.push(cloth)
+                clothesAfterFilter.push(cloth);
             }
         }
-        props.setClothes(clothesAfterFilter)
+        props.setClothes(clothesAfterFilter);
     }
 
     if(brand === "WOMEN"){

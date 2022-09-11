@@ -1,4 +1,4 @@
-import {React , useEffect, useState} from 'react';
+import { React } from 'react';
 import "../../styles/Sort.scss"
 
 export default function Sort(props)  { 
@@ -8,20 +8,20 @@ export default function Sort(props)  {
 
     const handleClick = (value) => {
         console.log(value)
-        if (value == "lowToHigh"){      
+        if (value === "lowToHigh"){      
             sorted = clothes.slice().sort((a, b) => {
                 return a.price - b.price;
             });
             props.setClothes(sorted)
         }
-        if (value == "highToLow"){      
+        if (value === "highToLow"){      
             sorted = clothes.slice().sort((a, b) => {
                 return a.price - b.price;
             });
             sorted.reverse()
             props.setClothes(sorted)
         }
-        if(value == "popular"){     
+        if(value === "popular"){     
             sorted = clothes.slice().sort((a, b) => {
                 return 0.5 - Math.random()
             });

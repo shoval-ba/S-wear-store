@@ -1,5 +1,5 @@
-import {React , useState , useEffect} from 'react';
-import {  useOutletContext} from 'react-router-dom';
+import {React , useState , useEffect } from 'react';
+import {  useOutletContext } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import OneCloth from './OneCloth';
 import Filters from './Filters';
@@ -20,22 +20,22 @@ export default function Cloth(props)  {
     const searchValue = useOutletContext().searchValue;
     const allClothes = useOutletContext().allClothes;
 
-    const getClothes = () => {
-        fetch(`/clothesByBrand${brand}`)
-        .then((res) => res.json())
-        .then((response) => {
-          setClothes(response)
-          setClothesFilter(response)
-        })
-      }
     
-      useEffect(() => {
-        if(brand !== "null") getClothes();
-      }, [brand] );
+    useEffect(() => {
+      const getClothes = () => {
+          fetch(`/clothesByBrand${brand}`)
+          .then((res) => res.json())
+          .then((response) => {
+            setClothes(response)
+            setClothesFilter(response)
+          })
+        }
+      if(brand !== "null") getClothes();
+      },[brand]);
 
       useEffect(()=>{
         let clothesAfterSearch = [];
-        if(searchValue == undefined) {
+        if(searchValue === undefined) {
           setClothesFilter(allClothes)
           setClothes(allClothes)
         } else {
@@ -57,7 +57,7 @@ export default function Cloth(props)  {
       const addToFavorite = async (event , cloth) => {
         event.target.style.color = "red"
         for(let favorite of myFavorite) {
-            if(cloth.cloth_id == favorite.cloth_id) {
+            if(cloth.cloth_id === favorite.cloth_id) {
               event.target.style.color = "black"
                 setMyFavorite(previousState =>{ 
                     const itemsFilter = previousState.filter(currentItem => { return favorite.cloth_id !== currentItem.cloth_id })
@@ -106,7 +106,7 @@ export default function Cloth(props)  {
       const clothesUi = clothesAfterFilter.map(cloth => {
         let colorHeart
         for(let favorite of myFavorite) {
-          if(cloth.cloth_id == favorite.cloth_id) {
+          if(cloth.cloth_id === favorite.cloth_id) {
             colorHeart = "red"
           }
         }

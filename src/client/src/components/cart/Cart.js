@@ -1,8 +1,8 @@
 import {React , useState , useEffect } from 'react';
-import '../../styles/Cart.scss'
-import {  useOutletContext} from 'react-router-dom';
+import {  useOutletContext } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import '../../styles/Cart.scss'
 
 export default function Cart()  { 
    
@@ -120,7 +120,7 @@ export default function Cart()  {
             return (
                  <div className="row border-top border-bottom" key={item.cloth.cloth_id * index}>
                     <div className="row main align-items-center">
-                        <div className="col-2"><img className="img-fluid" src={item.cloth.img}/></div>
+                        <div className="col-2"><img className="img-fluid" src={item.cloth.img} alt="clothImg"/></div>
                         <div className="col">
                             <div className="row text-muted">{item.cloth.sector}</div>
                             <div className="row">{item.cloth.title}</div>

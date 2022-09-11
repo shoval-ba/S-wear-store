@@ -35,36 +35,36 @@ export default function CreateAccount(props)  {
 
     const handleSubmit = async () => {
         setInsert(true)
-        if(!textValidate(user.first_name).status || user.first_name == ""){
+        if(!textValidate(user.first_name).status || user.first_name === ""){
             setInsert(false)
             first_name.current.style.display = "block"
         } else first_name.current.style.display = "none"
-        if(!textValidate(user.last_name).status || user.last_name == ""){
+        if(!textValidate(user.last_name).status || user.last_name === ""){
             setInsert(false)
             last_name.current.style.display = "block"
         } else last_name.current.style.display = "none"
-        if(!emailValidate(user.email).status || user.email == ""){
+        if(!emailValidate(user.email).status || user.email === ""){
             setInsert(false)
             email.current.style.display = "block"
         } else email.current.style.display = "none"
-        if(!numValidate(user.phone_number).status || user.phone_number == 0){
+        if(!numValidate(user.phone_number).status || user.phone_number === 0){
             setInsert(false)
             phone_number.current.style.display = "block"
         } else phone_number.current.style.display = "none"
-        if(!textValidate(user.city).status || user.city == ""){
+        if(!textValidate(user.city).status || user.city === ""){
             setInsert(false)
             city.current.style.display = "block"
         } else city.current.style.display = "none"
-        if(!textNumberValidate(user.adress).status || user.adress == ""){
+        if(!textNumberValidate(user.adress).status || user.adress === ""){
             setInsert(false)
             adress.current.style.display = "block"
         } else adress.current.style.display = "none"
-        if(!textNumberValidate(user.password).status || user.password == ""){
+        if(!textNumberValidate(user.password).status || user.password === ""){
             setInsert(false)
             password.current.style.display = "block"
         } else password.current.style.display = "none"
               
-        if (passwordAgain !== user.password || passwordAgain == ""){
+        if (passwordAgain !== user.password || passwordAgain === ""){
             setInsert(false);
             inputPassword.current.style.display = "block"
             return
@@ -74,7 +74,7 @@ export default function CreateAccount(props)  {
             user.password = hashedPassword
         }
         console.log(insert)
-        if(insert == true){
+        if(insert){
             console.log(user)
             const options ={
                 method: 'POST',

@@ -1,4 +1,4 @@
-import {React , useState , useEffect } from 'react';
+import {React , useState } from 'react';
 import SignIn from './SignIn';
 import CreateAccount from './createAccount';
 import "../../styles/Popup.scss"
@@ -9,8 +9,8 @@ export default function Popup(props)  {
 
     return (
         <div className="popupContainer">       
-                {createAccount ? <CreateAccount signIn={props.signIn} setUser={props.setUser} setCreate={setCreate}/> : 
-                <SignIn setCreate={setCreate} signIn={props.signIn} setUser={props.setUser} setMyBag={props.setMyBag}/>}
+            {createAccount ? <CreateAccount signIn={props.signIn} setUser={props.setUser} setCreate={setCreate}/> : 
+            <SignIn setCreate={setCreate} signIn={props.signIn} setUser={props.setUser} setMyBag={props.setMyBag}/>}
         </div>
     )
 }

@@ -26,7 +26,7 @@ export default function SignIn(props)  {
             inputEmail.current.style.display = "block";
             insert = false;
         } else inputEmail.current.style.display = "none";
-        if(!textNumberValidate(password).status || password == undefined) {
+        if(!textNumberValidate(password).status || password === undefined) {
             inputPassword.current.style.display = "block";
             insert = false;
         } else {
