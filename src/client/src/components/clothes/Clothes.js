@@ -4,7 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import OneCloth from './OneCloth';
 import Filters from './Filters';
 import Sort from './Sort';
-import '../styles/Clothes.scss';
+import '../../styles/Clothes.scss';
 
 export default function Cloth(props)  { 
   const brand = props.brand;

@@ -4,7 +4,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import '../styles/OneCloth.scss';
+import '../../styles/OneCloth.scss';
 
 export default function OneCloth(props)  { 
     const cloth = props.cloth;

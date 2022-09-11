@@ -1,5 +1,5 @@
 import {React , useEffect, useState} from 'react';
-import "../styles/Sort.scss"
+import "../../styles/Sort.scss"
 
 export default function Sort(props)  { 
 

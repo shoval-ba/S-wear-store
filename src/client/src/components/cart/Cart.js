@@ -1,5 +1,5 @@
-import {React , useState , useEffect , createRef} from 'react';
-import '../styles/Cart.scss'
+import {React , useState , useEffect } from 'react';
+import '../../styles/Cart.scss'
 import {  useOutletContext} from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';

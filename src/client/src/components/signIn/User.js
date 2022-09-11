@@ -1,6 +1,5 @@
-import {React , useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
-import "../styles/LittleCart.scss"
+import { React } from 'react';
+import "../../styles/LittleCart.scss"
 
 export default function User(props)  { 
 

@@ -26,7 +26,7 @@ export default function Carousel()  {
                 </a>
             </div>
             <div style={{textAlign:"center"}}>
-                <img style={{ width:"60%"}} src={require("../images/logo2.png")} alt="image"/>   
+                <img style={{ width:"60%"}} src={require("../../images/logo2.png")} alt="image"/>   
                 <h1 style={{fontSize:"90px" , color:"DarkBlue"}}>Bring Your Style</h1>
                 <h3>Be the first to get your hands on the most wanted sneakers, tracksuits, backpacks, and more.</h3>
             </div>

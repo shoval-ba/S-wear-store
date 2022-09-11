@@ -12,12 +12,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import Popup from './Popup';
 import { Link , Outlet} from 'react-router-dom';
-import LittleCart from './LittleCart'
-import Favorites from './Favorites';
-import User from './User';
-import ClothesSearch from './ClothesSearch';
+import Popup from '../signIn/Popup';
+import LittleCart from '../cart/LittleCart'
+import Favorites from '../cart/Favorites';
+import User from '../signIn/User';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',

@@ -4,7 +4,7 @@ import {
     textNumberValidate,
     emailValidate,
   } from "react-validations-components";
-import '../styles/SignIn.scss'
+import '../../styles/SignIn.scss'
 
 export default function SignIn(props)  { 
 

@@ -6,7 +6,7 @@ import {
     textNumberValidate,
     emailValidate,
   } from "react-validations-components";
-import '../styles/CreateAccount.scss'
+import '../../styles/CreateAccount.scss'
 import bcrypt from 'bcryptjs'
 
 export default function CreateAccount(props)  { 

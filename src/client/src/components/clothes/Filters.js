@@ -1,5 +1,5 @@
 import {React } from 'react';
-import "../styles/Filters.scss"
+import "../../styles/Filters.scss"
 
 export default function Filters(props)  { 
 

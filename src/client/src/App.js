@@ -1,14 +1,13 @@
 import React from 'react';
-import Header from './components/Header';
-import Cloth from './components/Cloth'
+import Header from './components/header/Header';
+import Cloth from './components/clothes/Clothes'
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
-import Carousel from './components/Carousel';
-import Cart from './components/Cart';
-import ClothesSearch from './components/ClothesSearch';
+import Carousel from './components/header/Carousel';
+import Cart from './components/cart/Cart';
 
 function App() {
   return (
