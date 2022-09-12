@@ -30,7 +30,13 @@ app.get('/clothesByBrand:brand', (req: any, response: any) => {
 // Gives clothes from the db.
 app.get('/getMyBag:userId', (req: any, response: any) => {
   let userId = req.params.userId;
-  getMyBag(userId).then((cloth: any) => response.json(cloth));
+  getMyBag('carts',userId).then((cloth: any) => response.json(cloth));
+});
+
+// Gives clothes from the db.
+app.get('/getMyOrder:userId', (req: any, response: any) => {
+  let userId = req.params.userId;
+  getMyBag('orders',userId).then((cloth: any) => response.json(cloth));
 });
 
 // Gives clothes from the db.

@@ -29,8 +29,8 @@ export async function getClothesByBrand(brand:string){
   return clothes;
 }
 
-export async function getMyBag(userId:string){
-  const sql = `SELECT * FROM carts INNER JOIN clothes ON carts.user_id=$1 AND carts.cloth_id = clothes.cloth_id`;
+export async function getMyBag(table:string,userId:string){
+  const sql = `SELECT * FROM ${table} INNER JOIN clothes ON ${table}.user_id=$1 AND ${table}.cloth_id = clothes.cloth_id`;
   const result = await client.query(sql,[userId]);
   if(result.rows.length > 0){
     const array = await Promise.all(result.rows.map(async (cart: any) => {

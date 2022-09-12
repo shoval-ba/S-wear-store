@@ -8,8 +8,9 @@ export default function Cart()  {
    
     const myBag = useOutletContext().myBag;
     const setMyBag = useOutletContext().setMyBag;
-    const currentUser = useOutletContext().currentUser
-    const setSignIn = useOutletContext().setSignIn
+    const currentUser = useOutletContext().currentUser;
+    const setSignIn = useOutletContext().setSignIn;
+    const setHaveOrders = useOutletContext().setHaveOrders;
 
     const [totalPrice , setTotalPrice]= useState(0);
     const [price , setPrice]= useState(5);
@@ -76,6 +77,7 @@ export default function Cart()  {
                     await result.json().then((res) => {
                         console.log(res)
                     })
+                    setHaveOrders(true)
                   }
                   catch {
                     alert("no")

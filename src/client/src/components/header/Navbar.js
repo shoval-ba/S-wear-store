@@ -66,6 +66,8 @@ export default function Navbar() {
   const [signIn , setSignIn]= useState(false);
   const[currentUser , setUser] = useState();
   const [search , setSearch] = useState();
+  const [haveOrders , setHaveOrders] = useState(false)
+  const [orders , setOrders] = useState([])
 
   useEffect(()=>{
     let user = JSON.parse(localStorage.getItem('currentUser'));
@@ -81,13 +83,16 @@ export default function Navbar() {
     getAllClothes();
   },[])
 
+  useEffect(()=>{
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    setUser(user);
+  },[])
+
   const usePrevious = (value)=>{
     const ref = useRef();
-  // Store current value in ref
   useEffect(() => {
     ref.current = value;
-  }, [value]); // Only re-run if value changes
-  // Return previous value (happens before update in useEffect above)
+  }, [value]); 
   return ref.current;
   }
 
@@ -158,6 +163,24 @@ export default function Navbar() {
       }
     }
   },[myBag])
+
+  useEffect(()=>{
+    const getOrders = async () =>{
+      console.log(currentUser)
+      if(currentUser){
+        await fetch(`getMyOrder${currentUser.user_id}`)
+          .then((res) => res.json())
+              .then((response) => {
+                console.log(response)
+                setOrders(response)
+              })
+      }
+    }
+    const timeoutId = setTimeout(()=>getOrders(),1000)
+      return () => {
+        clearTimeout(timeoutId)
+      }
+  },[haveOrders , currentUser])
 
   useEffect(()=>{
     if(hoverCart){
@@ -296,7 +319,7 @@ export default function Navbar() {
     </Box>
       <Outlet context={{setMyBag:setMyBag, myBag:myBag , setMyFavorite:setMyFavorite , 
         myFavorite:myFavorite , currentUser:currentUser , setSignIn:setSignIn ,
-        searchValue:search ,  allClothes:allClothes  }}></Outlet>
+        searchValue:search ,  allClothes:allClothes ,setHaveOrders:setHaveOrders }}></Outlet>
     </div>
   );
 }
