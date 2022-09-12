@@ -81,6 +81,7 @@ export default function Cart()  {
                     alert("no")
                   }
             }
+            setMyBag([])
         }
     }
 

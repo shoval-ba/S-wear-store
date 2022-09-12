@@ -15,33 +15,33 @@ client.connect();
 async function initDb() {
 
   // Drop table
-  let sql = 'DROP TABLE IF EXISTS  users , orders;'
-  // await client.query(sql)
-  // await client.query(
-  //     `CREATE TABLE IF NOT EXISTS clothes(
-  //         cloth_id SERIAL PRIMARY KEY,
-  //         brand TEXT NOT NULL,
-  //         sector TEXT NOT NULL,
-  //         title TEXT NOT NULL,
-  //         price FLOAT NOT NULL,
-  //         img TEXT NOT NULL,
-  //         variants JSON[] NOT NULL,
-  //         sizes JSON NOT NULL
-  //     );`
-  //     );
-
+  let sql = 'DROP TABLE IF EXISTS  clothes , carts ,orders , favorites;'
+  await client.query(sql)
   await client.query(
-      `CREATE TABLE IF NOT EXISTS users(
-          user_id SERIAL PRIMARY KEY,
-          first_name TEXT NOT NULL,
-          last_name TEXT NOT NULL,
-          phone_number INTEGER NOT NULL,
-          city TEXT NOT NULL,
-          adress TEXT NOT NULL,
-          email TEXT NOT NULL,
-          password TEXT NOT NULL
+      `CREATE TABLE IF NOT EXISTS clothes(
+          cloth_id SERIAL PRIMARY KEY,
+          brand TEXT NOT NULL,
+          sector TEXT NOT NULL,
+          title TEXT NOT NULL,
+          price FLOAT NOT NULL,
+          img TEXT NOT NULL,
+          variants JSON[] NOT NULL,
+          sizes JSON NOT NULL
       );`
       );
+
+  // await client.query(
+  //     `CREATE TABLE IF NOT EXISTS users(
+  //         user_id SERIAL PRIMARY KEY,
+  //         first_name TEXT NOT NULL,
+  //         last_name TEXT NOT NULL,
+  //         phone_number INTEGER NOT NULL,
+  //         city TEXT NOT NULL,
+  //         adress TEXT NOT NULL,
+  //         email TEXT NOT NULL,
+  //         password TEXT NOT NULL
+  //     );`
+  //     );
 
       await client.query(
         `CREATE TABLE IF NOT EXISTS carts(
@@ -443,4 +443,4 @@ async function insertClothes(){
   await getShoes();
 }
 
-// insertClothes();
+insertClothes();

@@ -100,7 +100,19 @@ export async function addToFavorites(userId:number ,clothId:number){
 export async function addToOrders(size:any , quantity:any , userId:number ,clothId:number){
   const sql = 'INSERT INTO orders(size ,quantity ,user_id, cloth_id) VALUES($1, $2, $3, $4)';
   await client.query(sql, [size , quantity , userId , clothId]);
-  return "Success"
+  const sql1 = 'DELETE FROM carts WHERE user_id=$1';
+  await client.query(sql1, [userId]);
+  const sql2 = `SELECT sizes FROM clothes WHERE cloth_id = $1;`
+  const result = await client.query(sql2, [clothId]);
+  let sizes :any = result.rows[0].sizes
+  console.log(clothId , sizes)
+  const oldQuantity = sizes[size]
+  sizes[size] = ( oldQuantity - quantity)
+  console.log(clothId , sizes)
+  const sql3 = `UPDATE clothes SET sizes = $1 WHERE cloth_id = $2`;
+  await client.query(sql3 , [sizes , clothId])
+  return "Your order is on the way , it will come until 10 days";
+  // "Your order is good to go"
 }
 
 // Add officer to users table.
