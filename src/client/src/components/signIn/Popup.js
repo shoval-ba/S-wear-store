@@ -1,7 +1,7 @@
 import {React , useState } from 'react';
 import SignIn from './SignIn';
 import CreateAccount from './createAccount';
-import "../../styles/Popup.scss"
+import "../../styles/Popup.moudle.scss"
 
 export default function Popup(props)  { 
 

@@ -1,4 +1,4 @@
-import { React , useEffect, useState } from 'react';
+import { React , useEffect, useState , useRef  } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -81,12 +81,40 @@ export default function Navbar() {
     getAllClothes();
   },[])
 
+  const usePrevious = (value)=>{
+    const ref = useRef();
+  // Store current value in ref
+  useEffect(() => {
+    ref.current = value;
+  }, [value]); // Only re-run if value changes
+  // Return previous value (happens before update in useEffect above)
+  return ref.current;
+  }
+
+  const prevUser = usePrevious(currentUser)
   useEffect(()=>{
     const getMyBag = async ()=>{
-      console.log(currentUser)
+      if(prevUser === null || prevUser === undefined){
+        for(let item of myBag){
+          const options ={
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({size:item.size , quantity:item.quantity , clothId:item.cloth.cloth_id , userId:currentUser.user_id})
+          }
+          try{
+            let result = await fetch('/addToCarts', options);
+            await result.json()
+          }
+          catch {
+            console.log("no")
+          }
+        }
+      }
       setMyBag([])
       setMyFavorite([])
-      if(currentUser !== undefined || currentUser !== null){
+      if(currentUser){
         await fetch(`getMyBag${currentUser.user_id}`)
         .then((res) => res.json())
             .then((response) => {

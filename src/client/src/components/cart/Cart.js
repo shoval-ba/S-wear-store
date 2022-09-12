@@ -53,17 +53,16 @@ export default function Cart()  {
     }
 
     const handlePay = async () => {
-        if(currentUser === null) {
-            setSignIn(true)
-            return;
-        }
-        else if (myBag.length ===0 ) {
+        if (myBag.length ===0 ) {
             alert('Your cart is empty')
             return;
         }
-        else{
-            console.log(currentUser)
+        else if(currentUser === null) {
+            setSignIn(true);
             console.log(myBag)
+            return;
+        }
+        else{
             for(let item of myBag){
                 const options ={
                     method: 'POST',
@@ -113,7 +112,6 @@ export default function Cart()  {
             </div>   
         )
     }
-
 
     else {
         itemsUi = myBag.map((item,index) => {
