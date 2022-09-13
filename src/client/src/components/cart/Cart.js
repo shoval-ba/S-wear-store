@@ -47,13 +47,14 @@ export default function Cart()  {
     }
 
     const inputCoupon = (value) =>{
-        if(value === "ilovecode" || value === "Swear"){
+        if(value === "Ilovecode" || value === "Swear5"){
             setPrice(0)
         } else setPrice(5)
             
     }
 
     const handlePay = async () => {
+        const alertText = "";
         if (myBag.length ===0 ) {
             alert('Your cart is empty')
             return;
@@ -75,14 +76,15 @@ export default function Cart()  {
                   try{
                     let result = await fetch('/addToOrders', options);
                     await result.json().then((res) => {
-                        console.log(res)
+                        alertText = res;
                     })
                     setHaveOrders(true)
                   }
                   catch {
-                    alert("no")
+                    alertText = "Sorry we have a plroblem right now , Please try latter"
                   }
             }
+            alert(alertText)
             setMyBag([])
         }
     }

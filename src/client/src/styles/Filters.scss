@@ -21,6 +21,9 @@
         &:hover{
             background-color: #f5f5f5;
         }
+        &::after{
+            background-color: #a3a1a1;
+        }
     }
     h6{
         margin:0

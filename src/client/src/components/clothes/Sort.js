@@ -36,25 +36,18 @@ export default function Sort(props)  {
 
     return(
         <div id='sort'>
-            {/* <label htmlFor="sorts" id='sortTitle'>Sort by:</label>
-            <select id="options" onClick={(e)=>handleClick(e.target.value)}>
-                <option className="link" value="popular">popular</option>
-                <option className="link" value="lowToHigh">Price low to high</option>
-                <option className="link" value="highToLow">Price high to low</option>
-            </select> */}
-            {/* <label htmlFor="sorts" id='sortTitle'>Sort by:</label> */}
             <Box sx={{ minWidth: 120 , position:"relative"}}>
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Sort by:</InputLabel>
                     <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    label="Sort by:"
+                    value="popular"
                     onChange={(e)=>handleChange(e.target.value)}
                     >
-                    <MenuItem value="popular">Popular</MenuItem>
-                    <MenuItem value="lowToHigh">Price low to high</MenuItem>
-                    <MenuItem value="highToLow">Price high to low</MenuItem>
+                    <MenuItem value={"popular"}>Popular</MenuItem>
+                    <MenuItem value={"lowToHigh"}>Price low to high</MenuItem>
+                    <MenuItem value={"highToLow"}>Price high to low</MenuItem>
                     </Select>
                 </FormControl>
             </Box>

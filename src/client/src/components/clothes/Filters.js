@@ -7,7 +7,16 @@ export default function Filters(props)  {
     const clothes = props.clothes;
     let clothesAfterFilter = [];
 
-    const filterBySector=(sector)=>{
+    const filterBySector=(event,sector)=>{
+        const allDivs = document.querySelectorAll('.filter');
+        for(let div of allDivs){
+            div.style.backgroundColor="white";
+        }
+        if(event.target.tagName === "H6"){
+            event.target.parentNode.style.backgroundColor = "rgb(209 209 209)"
+        } else if (event.target.tagName === "DIV"){
+            event.target.style.backgroundColor = "rgb(209 209 209)"
+        }
         for(let cloth of clothes){
             if(cloth.sector === sector) {
                 clothesAfterFilter.push(cloth);
@@ -19,19 +28,19 @@ export default function Filters(props)  {
     if(brand === "WOMEN"){
         return (
             <div className='containerFilter'>
-                <div className='filter' onClick={()=>filterBySector("T-Shirts")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"T-Shirts")}>
                     <h6>T-shirt</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("pants")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"pants")}>
                     <h6>Pants</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("shoes")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"shoes")}>
                     <h6>Shoes</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("jackets")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"jackets")}>
                     <h6>Jackets</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("dresses")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"dresses")}>
                     <h6>Dresses and Suits</h6>
                 </div>
             </div>
@@ -40,16 +49,16 @@ export default function Filters(props)  {
     else if(brand === "MEN"){
         return (
             <div className='containerFilter' style={{height:"243px"}}>
-                <div className='filter' onClick={()=>filterBySector("T-Shirts")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"T-Shirts")}>
                     <h6>T-shirt</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("pants")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"pants")}>
                     <h6>Pants</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("shoes")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"shoes")}>
                     <h6>Shoes</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("jackets")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"jackets")}>
                     <h6>Jackets</h6>
                 </div>
             </div>
@@ -58,16 +67,16 @@ export default function Filters(props)  {
     else if(brand === "PLUS"){
         return (
             <div className='containerFilter' style={{height:"243px"}}>
-                <div className='filter' onClick={()=>filterBySector("T-Shirts")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"T-Shirts")}>
                     <h6>T-shirt</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("pants")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"pants")}>
                     <h6>Pants</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("dresses")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"dresses")}>
                     <h6>Dresses</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("jackets")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"jackets")}>
                     <h6>Jackets</h6>
                 </div>
             </div>
@@ -77,16 +86,16 @@ export default function Filters(props)  {
     else if(brand === "KIDS"){
         return (
             <div className='containerFilter' style={{height:"243px"}}>
-                <div className='filter' onClick={()=>filterBySector("T-Shirts")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"T-Shirts")}>
                     <h6>T-shirt</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("pants")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"pants")}>
                     <h6>Pants</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("dresses")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"dresses")}>
                     <h6>Dresses</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("jackets")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"jackets")}>
                     <h6>Jackets</h6>
                 </div>
             </div>
@@ -96,19 +105,19 @@ export default function Filters(props)  {
     else if(brand === "null"){
         return (
             <div className='containerFilter'>
-                <div className='filter' onClick={()=>filterBySector("T-Shirts")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"T-Shirts")}>
                     <h6>T-shirt</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("pants")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"pants")}>
                     <h6>Pants</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("jackets")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"jackets")}>
                     <h6>Jackets</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("dresses")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"dresses")}>
                     <h6>Dresses and Suits</h6>
                 </div>
-                <div className='filter' onClick={()=>filterBySector("shoes")}>
+                <div className='filter' onClick={(event)=>filterBySector(event,"shoes")}>
                     <h6>Shoes</h6>
                 </div>
             </div>
