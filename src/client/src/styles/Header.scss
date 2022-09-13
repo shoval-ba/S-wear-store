@@ -1,0 +1,18 @@
+.circleImages{
+    margin:20px ;
+    margin-top: 20px;
+     display:flex ;
+     justify-content:center ;
+     text-align:center ;
+     justify-content:space-around ;
+     width:60% ;
+     margin:0 auto;
+     .linkImage{
+        width:200px ;
+        margin:10px ;
+        border-radius:50%;
+     }
+     .linkText{
+        color:black;
+    }
+}

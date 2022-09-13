@@ -212,7 +212,6 @@ export default function Navbar() {
 
   const handleSearch = (value) => {
     setSearch(value)
-    // setOpenClothes(true)
   }
 
   return (
@@ -235,7 +234,7 @@ export default function Navbar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' , flexGrow: 0.4} }}
           >
-            <Link to="/" style={{color:"white"}}>SHOVAL SPORT</Link>
+            <Link to="/" style={{color:"white"}}>S-wear</Link>
           </Typography>
             <Box sx={{ flexGrow: 1 , textAlign:"center" , marginTop: "5px"}}>
                 <Typography

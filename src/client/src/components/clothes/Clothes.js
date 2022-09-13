@@ -1,4 +1,4 @@
-import {React , useState , useEffect } from 'react';
+import {React , useState , useEffect, createRef } from 'react';
 import {  useOutletContext } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import OneCloth from './OneCloth';
@@ -19,8 +19,7 @@ export default function Cloth(props)  {
     const currentUser = useOutletContext().currentUser;
     const searchValue = useOutletContext().searchValue;
     const allClothes = useOutletContext().allClothes;
-
-    
+   
     useEffect(() => {
       const getClothes = () => {
           fetch(`/clothesByBrand${brand}`)
@@ -135,9 +134,9 @@ export default function Cloth(props)  {
             <Filters brand={brand} clothes={clothes} setClothes={setClothesFilter}/>
           <div id='container'>
             {clothesUi}
-            {openOneCloth ? <OneCloth cloth={oneCloth} close={setOpenOneCloth}/> : <></>}
           </div>
         </div>
+            {openOneCloth ? <OneCloth cloth={oneCloth} close={setOpenOneCloth}/> : <></>}
         </div>
     )
 }
