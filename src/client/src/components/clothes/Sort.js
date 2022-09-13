@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React , useState } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,9 +10,10 @@ export default function Sort(props)  {
 
     const clothes = props.clothes;
     let sorted= [];
+    const[valueText , setValue] = useState("");
 
     const handleChange = (value) => {
-        console.log(value)
+        setValue(value)
         if (value === "lowToHigh"){      
             sorted = clothes.slice().sort((a, b) => {
                 return a.price - b.price;
@@ -42,7 +43,8 @@ export default function Sort(props)  {
                     <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value="popular"
+                    value={valueText}
+                    label="Sort by:"
                     onChange={(e)=>handleChange(e.target.value)}
                     >
                     <MenuItem value={"popular"}>Popular</MenuItem>
