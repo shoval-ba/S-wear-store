@@ -55,14 +55,13 @@
         height: 400px;
         text-align: center;
         .OneImage{
-          width: 90%;
+          width: 80%;
           height: inherit;
         }
       }
       .infoSide{
         width: 100%;
         display: grid;
-        grid-template-rows: 140px , 150px , 80px , 100px;
         height: 90%;
         .firstDiv{
           padding-bottom: 30px;
@@ -81,6 +80,9 @@
             font-size:35px;
             font-weight: 700;
           }
+        }
+        #sizesTitle{
+          margin-top: 0;
         }
         .sizes{
           display: grid;

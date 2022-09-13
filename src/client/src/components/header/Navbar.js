@@ -219,15 +219,6 @@ export default function Navbar() {
     <Box sx={{ flexGrow: 1}} style={{margin:"10px"}}>
       <AppBar position="static" sx={{ backgroundColor:"rgb(102, 175, 235)"}}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography
             variant="h4"
             noWrap
@@ -242,25 +233,25 @@ export default function Navbar() {
                 noWrap
                 sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}
                 >
-                <Link to="men" style={{color:"white"}}>men</Link>
+                <Link to="men" style={{color:"white"}}>Men</Link>
                 </Typography>
                 <Typography
                 variant="h6"
                 noWrap
                 sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
-                <Link to="women" style={{color:"white"}}>women</Link>
+                <Link to="women" style={{color:"white"}}>Women</Link>
                 </Typography>
                 <Typography
                 variant="h6"
                 noWrap
                 sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
-                <Link to="plus" style={{color:"white"}}>plus size</Link>
+                <Link to="plus" style={{color:"white"}}>Plus size</Link>
                 </Typography>
                 <Typography
                 variant="h6"
                 noWrap
                 sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
-                <Link to="kids" style={{color:"white"}}>kids</Link>
+                <Link to="kids" style={{color:"white"}}>Kids</Link>
                 </Typography>
            </Box>
           <Search>

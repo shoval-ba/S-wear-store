@@ -6,7 +6,7 @@ export default function Carousel()  {
 
     return (
         <div style={{position:"absolute" , margin:"10px"}}>
-            <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
+            <div id="carouselExampleControls" className="carousel slide" data-ride="carousel" >
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                     <img className="d-block w-100" src="https://images.footlocker.com/content/dam/final/footlockereurope/Online_activations/vendor-stories/2022/adidas/2022_aug_fl_onl_adidas_nmd_homepage_banner/2022_Aug_FL_ONL_Adidas_NMD_homepage_banner_1600x300.jpg" alt="First slide"/>
@@ -48,15 +48,15 @@ export default function Carousel()  {
                 </div>
                 <div>
                     <Link to="plus">
-                    <img style={{ height:"200px" }} className="linkImage" src="https://th.bing.com/th/id/OIP.yzErexZLJ0DRUJjwu-fcygHaLH?w=204&h=306&c=7&r=0&o=5&pid=1.7" alt="image"/>   
+                    <img style={{ height:"200px" , border:"0.5px solid rgb(207 201 201)"}} className="linkImage" src={require("../../images/plus2.jpg")} alt="image"/>   
                     <h2 className="linkText">PLUS SIZE</h2>
                     </Link>
                 </div>
             </div>
             <div style={{textAlign:"center"}}>
                 <h1 style={{fontSize:"90px" , color:"DarkBlue"}}>Bring Your Style</h1>
-                <h3>Be the first to get your hands on the most wanted fashion clothes.</h3>
-                <img style={{ width:"100%" , margin:"10px" , height:"80%"}} src={require("../../images/fashion.png")} alt="image"/>   
+                <h3>Be the first to get your hands on the most wanted fashion clothes</h3>
+                <img style={{ width:"90%" , margin:"50px 30px" , height:"80%"}} src={require("../../images/fashion.png")} alt="image"/>   
             </div>
         </div>
     )

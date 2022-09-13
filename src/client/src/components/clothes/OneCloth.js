@@ -165,11 +165,11 @@ export default function OneCloth(props)  {
                         <h3 className="price" > {cloth.price} $ </h3>
                     </div>     
                     <div>
-                        <h3>sizes:</h3>
+                        <h3 id="sizesTitle">sizes:</h3>
                         <div className='sizes'>
                             {sizesUI}
                         </div>
-                        <p ref={select} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please select your size</p>
+                        <p ref={select} style={{display:"none" , color:"rgb(238, 85, 85)" , mrginBotton:"0"}}>Please select your size</p>
                     </div> 
                     
                     <div className='quantity'>
