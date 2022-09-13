@@ -23,14 +23,22 @@ export default function User(props)  {
             )
         }
     
-        else { 
+        else if(props.orders !== []){ 
             userUi = (
                     <div>
                         <p>{currentUser.email}</p>
+                        <p>Your orders</p>
                         <p style={{cursor:"pointer"}} onClick={()=>handleSignOut()}>Sign Out</p>
                     </div>
              )
             
+        } else {
+            userUi = (
+                <div>
+                    <p>{currentUser.email}</p>
+                    <p style={{cursor:"pointer"}} onClick={()=>handleSignOut()}>Sign Out</p>
+                </div>
+         )
         }
 
     return(

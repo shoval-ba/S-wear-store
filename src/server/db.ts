@@ -105,10 +105,8 @@ export async function addToOrders(size:any , quantity:any , userId:number ,cloth
   const sql2 = `SELECT sizes FROM clothes WHERE cloth_id = $1;`
   const result = await client.query(sql2, [clothId]);
   let sizes :any = result.rows[0].sizes
-  console.log(clothId , sizes)
   const oldQuantity = sizes[size]
-  sizes[size] = ( oldQuantity - quantity)
-  console.log(clothId , sizes)
+  sizes[size] = (oldQuantity - quantity)
   const sql3 = `UPDATE clothes SET sizes = $1 WHERE cloth_id = $2`;
   await client.query(sql3 , [sizes , clothId])
   return "Your order is on the way , it will come until 10 days";

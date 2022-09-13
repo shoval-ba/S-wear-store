@@ -166,7 +166,6 @@ export default function Navbar() {
 
   useEffect(()=>{
     const getOrders = async () =>{
-      console.log(currentUser)
       if(currentUser){
         await fetch(`getMyOrder${currentUser.user_id}`)
           .then((res) => res.json())
@@ -314,7 +313,7 @@ export default function Navbar() {
       </AppBar>
       {signIn ? <Popup signIn={setSignIn} setUser={setUser} setMyBag={setMyBag}/> : <></>}
       {hoverCart ? <LittleCart myBag={myBag} setHover={setHoverCart}/> : <></>}
-      {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} signIn={setSignIn} setUser={setUser}/> : <></>}
+      {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} signIn={setSignIn} setUser={setUser} orders={orders}/> : <></>}
       {hoverFavorite ? <Favorites myFavorite={myFavorite} setHoverFavorite={setHoverFavorite} setFavorite={setMyFavorite}/> : <></>}
     </Box>
       <Outlet context={{setMyBag:setMyBag, myBag:myBag , setMyFavorite:setMyFavorite , 
