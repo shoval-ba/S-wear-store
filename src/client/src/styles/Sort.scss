@@ -1,9 +1,6 @@
 #sort{
-    width:200px;
-    margin-left:20%;
+    width:160px;
     margin-top:10px;
-    display: flex;
-    justify-content: space-between;
     #sortTitle{
         font-size: 20px;
         padding-top: 11px;
@@ -21,3 +18,38 @@
     }
 }
 
+@media screen and (min-width:1600px){
+    #sort{
+        margin-left: 338px!important;
+      }
+}
+
+@media screen and (max-width: 1600px){
+  #sort{
+    margin-left: 327px!important;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+    #sort{
+        margin-left: 326px!important;
+      }
+}
+
+@media screen and (max-width: 1300px) {
+    #sort{
+        margin-left: 285px!important;
+      }
+}
+
+@media screen and (max-width: 1150px){
+    #sort{
+        margin-left: 256px!important;
+      }
+}
+
+@media screen and (max-width: 900px){
+    #sort{
+        margin-left: 240px!important;
+      }
+}

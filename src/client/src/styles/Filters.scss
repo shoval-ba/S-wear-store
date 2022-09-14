@@ -18,11 +18,13 @@
         padding: 20px;
         height: 60px;
         width: 100%;
+        cursor: pointer;
         &:hover{
             background-color: #f5f5f5;
-        }
-        &::after{
-            background-color: #a3a1a1;
+            h6{
+
+                font-size: 18px;
+            }
         }
     }
     h6{
