@@ -25,18 +25,18 @@
     display: block;
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     background: rgba(182, 179, 179, 0.281);
     z-index: 2;
     top: 0;
     left: 0;
     .oneCloth{
       width: 900px;
-      height: 450px;
       background-color: white;
       border-radius: 5px;
       position: fixed;
-      top: 35%;
+      top: 50%;
+      transform: translate(0, -50%);
       left: 0; 
       right: 0; 
       margin-left: auto; 
@@ -52,7 +52,7 @@
       }
       .imageSide{
         width: 90%;
-        height: 400px;
+        height: 90%;
         text-align: center;
         .OneImage{
           width: 80%;
@@ -89,6 +89,11 @@
           grid-template-columns: repeat(5 , 1fr);
           gap:10px;
           margin-bottom: 10px;
+        }
+        .errorMessage{
+          display:none ;
+           color:rgb(238, 85, 85) ;
+           margin-bottom:0;
         }
         .quantity{
           margin-top:0;
@@ -178,3 +183,28 @@
     }
 }
 
+@media screen and (max-width: 1300px){
+  .oneCloth{
+    width: 750px!important;
+    height: 400px!important;
+    top:32%;
+    .infoSide{
+      height: 97%!important;
+      .firstDiv{
+        padding-bottom: 20px!important;
+      }
+      .clothTitle{
+        font-size: 15.5px!important;
+      }
+      .price{
+        font-size: 27px!important;
+      }
+      .button-17{
+        height: 34px!important;
+      }
+      .errorMessage{
+        margin-bottom: 0!important;
+      }
+    }
+  }
+}
