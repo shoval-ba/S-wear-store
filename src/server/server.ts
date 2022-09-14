@@ -5,13 +5,6 @@ const path = require('path');
 const port =process.env.PORT||4000;
 const app = express();
 
-if (process.env.NODE_ENV==='production'){
-  app.use(express.static('build'))
-  app.get('/',(_req:any,res:any)=>{
-    res.sendFile(path.resolve(__dirname,'build', 'index.html'))
-  })
-}
-
 import { addToUsers , checkIfUserExist , getClothesByBrand , getMyBag , 
   getMyFavorites , getClothes , addToOrders , addToCarts , addToFavorites ,
   deleteCart , deleteFavorite} from './db'
@@ -85,9 +78,17 @@ app.post('/user', (req: any, response: any) => {
 // Gives user from the db.
 app.post('/addToOrders', (req: any, response: any) => {
   const body = req.body;
-  addToOrders(body.size , body.quantity , body.userId , body.clothId).then((user: any) => response.json(user));
+  addToOrders(body.size , body.quantity , body.userId , body.clothId).then((res: any) => response.json(res));
 });
 
+
+if (process.env.NODE_ENV==='production'){
+  app.use(express.static('build'))
+  app.get('/',(_req:any,res:any)=>{
+    res.sendFile(path.join(__dirname,'../build', 'index.html'))
+  })
+}
+
 app.listen(port || 4000, () => {
-  console.log('listen to port 4000');
+  console.log('listen on http://localhost:'+port);
 });

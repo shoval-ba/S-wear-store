@@ -23,7 +23,7 @@ export default function User(props)  {
             )
         }
     
-        else if(props.orders !== []){ 
+        else if(props.orders.length !== 0){ 
             userUi = (
                     <div>
                         <p>{currentUser.email}</p>

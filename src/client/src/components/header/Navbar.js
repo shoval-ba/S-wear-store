@@ -77,7 +77,6 @@ export default function Navbar() {
       await fetch(`allClothes`)
         .then((res) => res.json())
             .then((response) => {
-              console.log(response)
               setAllClothes(response)
             })
     }
@@ -124,7 +123,6 @@ export default function Navbar() {
         await fetch(`getMyBag${currentUser.user_id}`)
         .then((res) => res.json())
             .then((response) => {
-              console.log(response)
               setMyBag(response)
             })
     
@@ -171,7 +169,6 @@ export default function Navbar() {
         await fetch(`getMyOrder${currentUser.user_id}`)
           .then((res) => res.json())
               .then((response) => {
-                console.log(response)
                 setOrders(response)
               })
       }
@@ -205,10 +202,6 @@ export default function Navbar() {
 
   const handleUserClick = () => {
     setSignIn(true)
-  }
-
-  const handleFavoriteClick = () => {
-    console.log(myFavorite)
   }
 
   const handleSearch = (value) => {
@@ -285,7 +278,6 @@ export default function Navbar() {
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
-              onClick={() => handleFavoriteClick()}
             >
               <Badge badgeContent={myFavorite.length} color="error"
               onMouseEnter={() => setHoverFavorite(true)}>

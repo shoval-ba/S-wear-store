@@ -108,9 +108,8 @@ export async function addToOrders(size:any , quantity:any , userId:number ,cloth
   const oldQuantity = sizes[size]
   sizes[size] = (oldQuantity - quantity)
   const sql3 = `UPDATE clothes SET sizes = $1 WHERE cloth_id = $2`;
-  await client.query(sql3 , [sizes , clothId])
+  await client.query(sql3 , [sizes , clothId]);
   return "Your order is on the way , it will come until 10 days";
-  // "Your order is good to go"
 }
 
 // Add officer to users table.

@@ -1,2 +1,1 @@
-My project :
-https://clothes-app-shoval.herokuapp.com/
+https://s-wear-store.herokuapp.com/

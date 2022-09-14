@@ -14,7 +14,7 @@ export default function Cart()  {
 
     const [totalPrice , setTotalPrice]= useState(0);
     const [price , setPrice]= useState(5);
-
+    const [alertText, setAlert] = useState("")
     useEffect(() => {
         setTotalPrice(0)
         let total = 0
@@ -23,6 +23,12 @@ export default function Cart()  {
         }
         setTotalPrice(Math.floor(total))
     }, [myBag] );
+    
+    useEffect(()=>{
+        if(alertText !== "") {
+            alert(alertText)
+        }
+    },[alertText])
     
     const handleDelete = async (item) => {
         setMyBag(previousState =>{ 
@@ -38,7 +44,6 @@ export default function Cart()  {
         try{
             let result = await fetch(`/deleteCart${item.cloth.cloth_id}`, options);
             await result.json().then((res) => {
-                console.log(res)
             })
         }
         catch {
@@ -54,7 +59,6 @@ export default function Cart()  {
     }
 
     const handlePay = async () => {
-        const alertText = "";
         if (myBag.length ===0 ) {
             alert('Your cart is empty')
             return;
@@ -76,16 +80,16 @@ export default function Cart()  {
                   try{
                     let result = await fetch('/addToOrders', options);
                     await result.json().then((res) => {
-                        alertText = res;
+                        console.log(res)
+                        setAlert(res)
                     })
                     setHaveOrders(true)
+                    setMyBag([])
                   }
                   catch {
-                    alertText = "Sorry we have a plroblem right now , Please try latter"
+                    console.log("Sorry we have a problem right now , Please try latter")
                   }
             }
-            alert(alertText)
-            setMyBag([])
         }
     }
 
