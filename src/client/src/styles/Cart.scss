@@ -48,12 +48,13 @@ body{
     box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 1rem;
     border: transparent;
-    margin-top: 50px;
+    margin-top: 20px;
     position: absolute;
     left: 0;
-      right: 0;
-      margin-left: auto;
-      margin-right: auto;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
 }
 @media(max-width:767px){
     .card{
@@ -74,7 +75,7 @@ body{
     }
 }
 .summary{
-    background-color: #ddd;
+    background-color: #c7d4ed;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     padding: 4vh;

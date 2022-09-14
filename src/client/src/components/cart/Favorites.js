@@ -62,8 +62,7 @@ export default function Favorites(props)  {
             <ul className="shopping-cart-items">
             {itemsUi}
             </ul>
-
-            <Link to="cart" className="button">Checkout</Link>
+            {/* <Link to="cart" className="button">Checkout</Link> */}
             </div> 
         </div>
         

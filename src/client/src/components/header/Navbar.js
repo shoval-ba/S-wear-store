@@ -218,7 +218,7 @@ export default function Navbar() {
   return (
     <div>
     <Box sx={{ flexGrow: 1}} style={{margin:"10px 0px"}}>
-      <AppBar position="static" sx={{ backgroundColor:"rgb(102, 175, 235)"}}>
+      <AppBar position="static" sx={{ backgroundColor:"#79a7ff"}}>
         <Toolbar>
           <Typography
             variant="h4"

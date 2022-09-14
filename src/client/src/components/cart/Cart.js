@@ -151,7 +151,6 @@ export default function Cart()  {
         })
     }
     return (
-        <div>
            <div className="card">
             <div className="row">
                 <div className="col-md-8 cart">
@@ -182,9 +181,7 @@ export default function Cart()  {
                     </div>
                     <button className="btn" onClick={()=>handlePay()}>PAYMENT</button>
                 </div>
-            </div>
-            
-        </div>
+            </div>        
         </div>
     )
 }
