@@ -19,3 +19,31 @@
         text-decoration: none !important;
     }
 }
+
+#bigText{
+    font-size:90px ;
+     color:DarkBlue;
+}
+
+@media screen and (max-width: 1000px) and (min-width:915px) {
+    .linkImage{
+        width:170px!important;
+        height: 170px!important;
+    }
+    .linkText{
+        font-size:25px;
+    }
+}
+
+@media screen and (max-width: 915px) {
+    .linkImage{
+        width:140px!important;
+        height: 140px!important;
+    }
+    .linkText{
+        font-size:20px;
+    }
+    #bigText{
+        font-size:70px ;
+    }
+}

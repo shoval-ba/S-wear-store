@@ -17,6 +17,7 @@ import Popup from '../signIn/Popup';
 import LittleCart from '../cart/LittleCart'
 import Favorites from '../cart/Favorites';
 import User from '../signIn/User';
+import '../../styles/Navbar.moudle.scss'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -227,37 +228,41 @@ export default function Navbar() {
           >
             <Link to="/" style={{color:"white"}}>S-wear</Link>
           </Typography>
-            <Box sx={{ flexGrow: 1 , textAlign:"center" , marginTop: "5px"}}>
+            <Box className="divLinks">
                 <Typography
                 variant="h6"
                 noWrap
-                sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}
+                sx={{ display: { xs: 'none', sm: 'inline-block' }}}
+                className="textLink"
                 >
                 <Link to="men" style={{color:"white"}}>Men</Link>
                 </Typography>
                 <Typography
                 variant="h6"
                 noWrap
-                sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
+                sx={{ display: { xs: 'none', sm: 'inline-block' }}}
+                className="textLink">
                 <Link to="women" style={{color:"white"}}>Women</Link>
                 </Typography>
                 <Typography
                 variant="h6"
                 noWrap
-                sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
+                sx={{ display: { xs: 'none', sm: 'inline-block' }}}
+                className="textLink">
                 <Link to="plus" style={{color:"white"}}>Plus size</Link>
                 </Typography>
                 <Typography
                 variant="h6"
                 noWrap
-                sx={{ display: { xs: 'none', sm: 'inline-block' } , paddingRight:10}}>
+                sx={{ display: { xs: 'none', sm: 'inline-block' }}}
+                className="textLink">
                 <Link to="kids" style={{color:"white"}}>Kids</Link>
                 </Typography>
            </Box>
-          <Search>
+          <Search className="searchBar">
               <Link to="search" style={{color:"white"}}>
-            <SearchIconWrapper>
-              <SearchIcon />
+            <SearchIconWrapper id="searchIcon">
+              <SearchIcon/>
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
