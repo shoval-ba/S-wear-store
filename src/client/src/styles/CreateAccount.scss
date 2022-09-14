@@ -4,7 +4,8 @@
     height: 566px;
     width: 850px;
     position: fixed;
-    top: 30%;
+    top: 50%;
+    transform: translate(0, -50%);
     left: 0;
     right: 0;
     margin-left: auto;
@@ -32,9 +33,6 @@
         .message{
             position: absolute;
             bottom: -37px;
-        }
-        .iconCreate{
-            height: 100%;
         }
         .inputCreate{
             height: 100%;
@@ -75,4 +73,15 @@ select.form-control {
 }
 .form-control:focus {
     box-shadow: none;
+}
+
+
+@media screen and (max-width: 1200px) ,  screen and (max-height: 850px) {
+    .container{
+        width: 750px!important;
+        height: 450px!important;
+        .inputContainer{
+            height: 32px!important;
+        }
+    }
 }

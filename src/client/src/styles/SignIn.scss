@@ -93,11 +93,6 @@
       }
   }
   
-  
-  
-  
-  
-  
   #login input {
     outline: none;
     border: none
@@ -390,9 +385,9 @@
   }
 
 
-  @media screen and (max-heigth: 750px) {
-    #login{
-      width: 500px !important;;
+  @media screen and (max-width: 1200px) ,  screen and (max-height: 750px){
+    #login1{
+      width: 400px !important;;
       .login_topimg{
         min-height: 145px!important;
       }
