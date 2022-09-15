@@ -305,7 +305,7 @@ export default function Navbar() {
     </Box>
       <Outlet context={{setMyBag:setMyBag, myBag:myBag , setMyFavorite:setMyFavorite , 
         myFavorite:myFavorite , currentUser:currentUser , setSignIn:setSignIn ,
-        searchValue:search ,  allClothes:allClothes ,setHaveOrders:setHaveOrders }}></Outlet>
+        searchValue:search ,  allClothes:allClothes ,setHaveOrders:setHaveOrders , orders:orders }}></Outlet>
     </div>
   );
 }

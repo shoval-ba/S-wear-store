@@ -1,4 +1,5 @@
 import { React } from 'react';
+import { Link} from 'react-router-dom';
 import "../../styles/LittleCart.scss"
 
 export default function User(props)  { 
@@ -27,7 +28,7 @@ export default function User(props)  {
             userUi = (
                     <div>
                         <p>{currentUser.email}</p>
-                        <p>Your orders</p>
+                        <Link to="orders" style={{marginTop:"0"}}>Your orders</Link>
                         <p style={{cursor:"pointer"}} onClick={()=>handleSignOut()}>Sign Out</p>
                     </div>
              )
