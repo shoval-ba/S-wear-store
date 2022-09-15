@@ -253,7 +253,6 @@ export default function Navbar() {
                 </Typography>
            </Box>
           <Search className="searchBar">
-              <Link to="search" style={{color:"white"}}>
             <SearchIconWrapper id="searchIcon">
               <SearchIcon/>
             </SearchIconWrapper>
@@ -262,7 +261,6 @@ export default function Navbar() {
               inputProps={{ 'aria-label': 'search' }}
               onChange={(e)=>{handleSearch(e.target.value)}}
               />
-              </Link>
           </Search>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Link to="cart" style={{color:"white"}}>

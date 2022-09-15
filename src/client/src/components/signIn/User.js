@@ -27,7 +27,7 @@ export default function User(props)  {
         else if(props.orders.length !== 0){ 
             userUi = (
                     <div>
-                        <p>{currentUser.email}</p>
+                        <p style={{marginBottom:"0"}}>{currentUser.email}</p>
                         <Link to="orders" style={{marginTop:"0"}}>Your orders</Link>
                         <p style={{cursor:"pointer"}} onClick={()=>handleSignOut()}>Sign Out</p>
                     </div>

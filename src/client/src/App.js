@@ -28,8 +28,6 @@ function App() {
         </Route>
         <Route path="kids" element={<Cloth brand={"KIDS"}/>}>       
         </Route>
-        <Route path="search" element={<Cloth brand={"null"}/>}>       
-        </Route>
         <Route path="orders" element={<Orders />}>       
         </Route>
       </Route>

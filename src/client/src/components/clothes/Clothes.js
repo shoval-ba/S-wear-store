@@ -29,22 +29,21 @@ export default function Cloth(props)  {
             setClothesFilter(response)
           })
         }
-      if(brand !== "null") getClothes();
-      },[]);
+        getClothes();
+      },[brand]);
 
       useEffect(()=>{
         let clothesAfterSearch = [];
-        if(searchValue === undefined) {
-          setClothesFilter(allClothes)
-          setClothes(allClothes)
+        if(searchValue === undefined || searchValue === "") {
+          setClothesFilter(clothes)
+          setClothes(clothes)
         } else {
-          for (let cloth of allClothes){
+          for (let cloth of clothes){
             if(cloth.title.toLowerCase().includes(searchValue)){
               clothesAfterSearch.push(cloth)
             }
           }
           setClothesFilter(clothesAfterSearch)
-          setClothes(clothesAfterSearch)
         }
       } , [searchValue])
 
@@ -93,9 +92,7 @@ export default function Cloth(props)  {
               }
               try{
                 let result = await fetch('/addToFavorites', options);
-                await result.json().then((res) => {
-                 
-                })
+                await result.json()
               }
               catch {
                 console.log("no")
