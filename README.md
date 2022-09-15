@@ -1,6 +1,6 @@
 # S-wear-store
 
-A store of clothes for women , men , kids and plus size.
+A store of clothes for women :dress: men :necktie: kids :shirt: and plus size :womans_clothes:. 
 
 To buy in my web click [Here](https://s-wear-store.herokuapp.com/). :point_left:
 
@@ -9,7 +9,7 @@ To buy in my web click [Here](https://s-wear-store.herokuapp.com/). :point_left:
 Like almost every women I really like shoppping online , it's more easy , you just need to scroll in the web and pick your clothes.
 I decided that I wan't to do it my self.
 In my store I store all the clothes in the database and to every cloth there is diffrent sizes and diffrent quantity from any size.
-I also save the users and there cart and there favorites and even there orders if they order some clothes. 
+I also save the users and there cart and there favorites and even there orders if they order some clothes. :briefcase:
 
 ## Technology
 #### Client side :
