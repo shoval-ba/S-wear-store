@@ -21,7 +21,8 @@ export default function CreateAccount(props)  {
         password:""
     }
     const [user , setUser] = useState(newUser);
-    const [passwordAgain , setPassword] = useState("");
+    const [passwordAgain , setPasswordAgain] = useState("");
+    const [passwordInput , setPassword] = useState("");
     const [insert , setInsert] = useState(true);
 
     const first_name = createRef();
@@ -64,10 +65,9 @@ export default function CreateAccount(props)  {
             password.current.style.display = "block"
         } else password.current.style.display = "none"
               
-        if (passwordAgain !== user.password || passwordAgain === ""){
+        if (passwordAgain !== passwordInput || passwordAgain === ""){
             setInsert(false);
             inputPassword.current.style.display = "block"
-            return
         } else {
             inputPassword.current.style.display = "none"
             const hashedPassword = bcrypt.hashSync(user.password, bcrypt.genSaltSync());
@@ -201,10 +201,12 @@ export default function CreateAccount(props)  {
                                     </span>
                                 </div>
                                 <input id="password" type="password" name="password" placeholder="Password" 
-                                className="inputCreate form-control bg-white border-left-0 border-md" onChange={(e)=>{setUser(previousState => {
+                                className="inputCreate form-control bg-white border-left-0 border-md" onChange={(e)=>{
+                                            setPassword(e.target.value)
+                                            setUser(previousState => {
                                                 return { ...previousState, password: e.target.value }
                                             })}}/>
-                                    <p ref={password} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter just number and letters</p>
+                                    <p ref={password} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Please enter number and letters</p>
                             </div>
                             <div className="input-group col-lg-6 mb-4 inputContainer">
                                 <div className="input-group-prepend">
@@ -213,7 +215,7 @@ export default function CreateAccount(props)  {
                                     </span>
                                 </div>
                                 <input id="passwordConfirmation" type="password" name="passwordConfirmation" placeholder="Confirm Password" 
-                                className="inputCreate form-control bg-white border-left-0 border-md" onChange={(e)=>{setPassword(e.target.value)}}/>
+                                className="inputCreate form-control bg-white border-left-0 border-md" onChange={(e)=>{setPasswordAgain(e.target.value)}}/>
                                 <p ref={inputPassword} style={{display:"none" , color:"rgb(238, 85, 85)"}}>Passwords are not the same</p>
                             </div>
 

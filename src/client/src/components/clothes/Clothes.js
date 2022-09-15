@@ -30,7 +30,7 @@ export default function Cloth(props)  {
           })
         }
       if(brand !== "null") getClothes();
-      },[brand]);
+      },[]);
 
       useEffect(()=>{
         let clothesAfterSearch = [];
@@ -72,7 +72,7 @@ export default function Cloth(props)  {
                     try{
                         let result = await fetch(`/deleteFavorite${favorite.cloth_id}`, options);
                         await result.json().then((res) => {
-                            console.log(res)
+                           
                         })
                     }
                     catch {
@@ -94,7 +94,7 @@ export default function Cloth(props)  {
               try{
                 let result = await fetch('/addToFavorites', options);
                 await result.json().then((res) => {
-                  console.log(res)
+                 
                 })
               }
               catch {

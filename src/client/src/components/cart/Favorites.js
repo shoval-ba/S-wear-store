@@ -32,7 +32,7 @@ export default function Favorites(props)  {
         if(myFavorites.length ===0 ){
             itemsUi = (
                 <div id="emptyImgText">                  
-                    <h6>You don't have nothing here</h6>                           
+                    <h6>Your whising list is empty</h6>                           
                 </div>   
             )
         }
