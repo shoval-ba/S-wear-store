@@ -13,11 +13,12 @@ I also save the users and there cart and there favorites and even there orders i
 
 ## Technology
 #### Client side :
- The client size written in React app.
- I chose React because it's render to the screen in every change of the state , like when you add clothes to your cart or when you login or order things.
+ The client side is written in React.
+ I chose React because it's rendered to the screen on every change of the state, like when you add clothes to your cart or when you log in or order things.
+
  
  #### Server side :
- The server size written in TypeScirpt.
+The server side is written in Typescript and compiled into JS by a gulp file.
  
  #### Database :
  The database store in PostgreSql.
@@ -26,6 +27,6 @@ I also save the users and there cart and there favorites and even there orders i
  ## How to run the project
  1. gin clone
  2. npm ci
- 3. In one terminal run :npm run server
- 4. In other terminal run : npm run start
+ 3. In one terminal run :'npm run server'
+ 4. In other terminal run : 'npm run start'
 
