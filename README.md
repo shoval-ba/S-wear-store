@@ -4,9 +4,9 @@ A store of clothes for women :dress: men :necktie: kids :shirt: and plus size :w
 
 To buy in my web click [Here](https://s-wear-store.herokuapp.com/). :point_left:
 
-## Why I chose to do this project?
+## The reason for my decision to do this project?
 
-Like almost every women I really like shoppping online , it's more easy , you just need to scroll in the web and pick your clothes.
+Nowadays every women mostly shop online , it's more easy , you just need to scroll in the web and pick your clothes.
 I decided that I wan't to do it my self.
 In my store I store all the clothes in the database and to every cloth there is diffrent sizes and diffrent quantity from any size.
 I also save the users and there cart and there favorites and even there orders if they order some clothes. :briefcase:
@@ -19,7 +19,7 @@ I also save the users and there cart and there favorites and even there orders i
  #### Server side :
  The server size written in TypeScirpt.
  
- #### Datebase :
+ #### Database :
  The database store in PostgreSql.
  I chose this database becacuse I wanted to store my data in tables because I use foreign key in my database and I don't just save objects.
  
