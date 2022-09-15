@@ -1,15 +1,14 @@
 # S-wear-store
 
-A clothes store for women :dress: men :necktie: kids :shirt: and plus size :womans_clothes:. 
+A clothing store for women :dress: men :necktie: kids :shirt: and plus size :womans_clothes:. 
 
-To buy on my web click [Here](https://s-wear-store.herokuapp.com/). :point_left:
+Click [Here](https://s-wear-store.herokuapp.com/) to choose your stylish look today. :point_left:
 
-## The reason for my decision to do this project?
+## Why I choose this specific project?
 
-Nowadays every women mostly shop online. It's easier , you just need to scroll on the web page and pick your clothes.
-I decided that I want to do it myself.
-In my store I store all the clothes in the database and for every clothes there are different sizes and quantity.
-I also save the users, their cart, their favorites and even their orders if they order some clothes. :briefcase:
+Online shopping became extremely popular in the last decade and especially in the last 2 years since Covid-19 emerge and changed our shopping habits.
+Nowadays, everyone can easily order anything online so I decided to make a fashionable clothing website that is convenient for the customer to see all the offered products with different sizes and quantities to choose from and easily make an order.
+As for the technical part, as part of building the website, I stored all the offered products in a Database as well as the user’s info, including their cart, whishing list and previous orders. :briefcase:
 
 ## Technology
 #### Client side :
@@ -17,13 +16,13 @@ I also save the users, their cart, their favorites and even their orders if they
  I chose "React" because it's rendered to the screen on every change of the state, like when you add clothes to your cart or when you login or order things.
  
  #### Server side :
-The server side is written in TypeScript and compiled into JS by a gulp file.
+The server side is written in TypeScript and compiled into JS through a gulp file.
  
  #### Database :
  The database is stored in PostgreSql.
  I chose this database becaucse I wanted to store my data in tables. I also use foreign key in my database and I don't just save objects.
  
- ## How to run the project
+ ## How to run the project 
  1. git clone
  2. npm ci
  3. In one terminal run :'npm run server'
