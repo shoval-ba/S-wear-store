@@ -1,4 +1,4 @@
-#S-wear-store
+# S-wear-store
 
 A store of clothes for women , men , kids and plus size.
 
