@@ -1,28 +1,27 @@
 # S-wear-store
 
-A store of clothes for women :dress: men :necktie: kids :shirt: and plus size :womans_clothes:. 
+A clothes store for women :dress: men :necktie: kids :shirt: and plus size :womans_clothes:. 
 
-To buy in my web click [Here](https://s-wear-store.herokuapp.com/). :point_left:
+To buy on my web click [Here](https://s-wear-store.herokuapp.com/). :point_left:
 
 ## The reason for my decision to do this project?
 
-Nowadays every women mostly shop online , it's more easy , you just need to scroll in the web and pick your clothes.
-I decided that I wan't to do it my self.
-In my store I store all the clothes in the database and to every cloth there is diffrent sizes and diffrent quantity from any size.
-I also save the users and there cart and there favorites and even there orders if they order some clothes. :briefcase:
+Nowadays every women mostly shop online. It's easier , you just need to scroll on the web page and pick your clothes.
+I decided that I want to do it myself.
+In my store I store all the clothes in the database and for every clothes there are different sizes and quantity.
+I also save the users, their cart, their favorites and even their orders if they order some clothes. :briefcase:
 
 ## Technology
 #### Client side :
  The client side is written in React.
- I chose React because it's rendered to the screen on every change of the state, like when you add clothes to your cart or when you log in or order things.
-
+ I chose "React" because it's rendered to the screen on every change of the state, like when you add clothes to your cart or when you login or order things.
  
  #### Server side :
-The server side is written in Typescript and compiled into JS by a gulp file.
+The server side is written in TypeScript and compiled into JS by a gulp file.
  
  #### Database :
- The database store in PostgreSql.
- I chose this database becacuse I wanted to store my data in tables because I use foreign key in my database and I don't just save objects.
+ The database is stored in PostgreSql.
+ I chose this database becaucse I wanted to store my data in tables. I also use foreign key in my database and I don't just save objects.
  
  ## How to run the project
  1. git clone
