@@ -25,7 +25,7 @@ The server side is written in Typescript and compiled into JS by a gulp file.
  I chose this database becacuse I wanted to store my data in tables because I use foreign key in my database and I don't just save objects.
  
  ## How to run the project
- 1. gin clone
+ 1. git clone
  2. npm ci
  3. In one terminal run :'npm run server'
  4. In other terminal run : 'npm run start'
