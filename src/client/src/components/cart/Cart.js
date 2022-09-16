@@ -155,7 +155,7 @@ export default function Cart()  {
         })
     }
     return (
-           <div className="card">
+           <div className="card1">
             <div className="row">
                 <div className="col-md-8 cart">
                     <div className="title">

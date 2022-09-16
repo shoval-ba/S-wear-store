@@ -19,6 +19,8 @@ export default function Cloth(props)  {
     const currentUser = useOutletContext().currentUser;
     const searchValue = useOutletContext().searchValue;
     const allClothes = useOutletContext().allClothes;
+
+    const message = createRef()
    
     useEffect(() => {
       const getClothes = () => {
@@ -99,7 +101,10 @@ export default function Cloth(props)  {
               }
         }
     }
-      const clothesUi = clothesAfterFilter.map(cloth => {
+    let clothesUi;
+    if(clothesAfterFilter.length > 0) {
+      // message.current.style.display = "none"
+       clothesUi = clothesAfterFilter.map(cloth => {
         let colorHeart
         for(let favorite of myFavorite) {
           if(cloth.cloth_id === favorite.cloth_id) {
@@ -123,6 +128,9 @@ export default function Cloth(props)  {
             </div>
         )
       })
+    } else if (clothesAfterFilter.length === 0) {
+      // message.current.style.display = "block"
+    }
       
       return (
       <div style={{margin:"20px"}}>
@@ -133,6 +141,7 @@ export default function Cloth(props)  {
             {clothesUi}
           </div>
         </div>
+            <h1 ref={message} style={{display:"none"}}>Sorry, we don't have the items you're looking for</h1>
             {openOneCloth ? <OneCloth cloth={oneCloth} close={setOpenOneCloth}/> : <></>}
         </div>
     )
