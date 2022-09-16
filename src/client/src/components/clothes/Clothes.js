@@ -46,6 +46,9 @@ export default function Cloth(props)  {
             }
           }
           setClothesFilter(clothesAfterSearch)
+          if(clothesAfterSearch.length === 0 ) {
+            message.current.style.display = "block"
+          } else message.current.style.display = "none"
         }
       } , [searchValue])
 
@@ -103,7 +106,6 @@ export default function Cloth(props)  {
     }
     let clothesUi;
     if(clothesAfterFilter.length > 0) {
-      // message.current.style.display = "none"
        clothesUi = clothesAfterFilter.map(cloth => {
         let colorHeart
         for(let favorite of myFavorite) {
@@ -128,10 +130,7 @@ export default function Cloth(props)  {
             </div>
         )
       })
-    } else if (clothesAfterFilter.length === 0) {
-      // message.current.style.display = "block"
-    }
-      
+    }   
       return (
       <div style={{margin:"20px"}}>
           <Sort clothes={clothesAfterFilter} setClothes={setClothesFilter}></Sort>
@@ -139,9 +138,9 @@ export default function Cloth(props)  {
             <Filters brand={brand} clothes={clothes} setClothes={setClothesFilter}/>
           <div id='container'>
             {clothesUi}
+            <h1 ref={message} style={{display:"none" , color:"DarkBlue"}}>Sorry, we don't have the items you're looking for.</h1>
           </div>
         </div>
-            <h1 ref={message} style={{display:"none"}}>Sorry, we don't have the items you're looking for</h1>
             {openOneCloth ? <OneCloth cloth={oneCloth} close={setOpenOneCloth}/> : <></>}
         </div>
     )

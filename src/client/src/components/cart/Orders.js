@@ -45,7 +45,6 @@ import { useEffect } from 'react';
     })
     return (
         <div >
-
             <CCard className='ordersDiv'>
             <h3 style={{marginBottom:"0px"}}>Orders ({orders.length})</h3>
             <h4 style={{borderBottom:"1px solid black" , paddingBottom:"5px"}}>Total price: {totalPrice}$</h4>
