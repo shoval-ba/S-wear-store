@@ -9,8 +9,12 @@
     border: 1px solid black;
     border-radius: 5%;
     width: 700px;
-    #orders{
-        text-align: center;
+    #titleDivs{
+        margin-bottom:20px;
+        display:flex;
+        border-bottom:1px solid black;
+        // padding-bottom:5px;
+        justify-content: space-around;  
     }
         .mb-3 {
             width: 570px;

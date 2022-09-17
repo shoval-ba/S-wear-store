@@ -52,11 +52,10 @@
       }
       .imageSide{
         width: 90%;
-        height: 90%;
         text-align: center;
         .OneImage{
-          width: 80%;
-          height: inherit;
+          width: 75%;
+          height: fit-content;
         }
       }
       .infoSide{
