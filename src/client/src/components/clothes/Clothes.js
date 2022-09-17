@@ -106,13 +106,21 @@ export default function Cloth(props)  {
               }
         }
     }
+    
     let clothesUi;
+    useEffect(()=>{
+      let clothes = clothesAfterFilter
+      setClothesFilter(clothes)
+    },[myFavorite])
+
     if(clothesAfterFilter.length > 0) {
        clothesUi = clothesAfterFilter.map(cloth => {
         let colorHeart
         for(let favorite of myFavorite) {
           if(cloth.cloth_id === favorite.cloth_id) {
             colorHeart = "red"
+          } else {
+            colorHeart = "black"
           }
         }
         return (

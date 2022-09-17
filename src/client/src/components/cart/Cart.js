@@ -21,7 +21,7 @@ export default function Cart()  {
         for (let item of myBag){
             total += (item.cloth.price)*(item.quantity)
         }
-        setTotalPrice(total)
+        setTotalPrice(Math.floor(total))
     }, [myBag] );
     
     useEffect(()=>{
@@ -94,13 +94,19 @@ export default function Cart()  {
     }
 
     const changeQuantity = (number , item ) => {
+
         if(item.quantity + number <= 0 ){
             handleDelete(item)
         }
         else if (number === 1 || number === -1){
             setMyBag(previousState =>{
-                const itemsFilter = previousState.filter(currentItem => { return item !== currentItem })
-                return [...itemsFilter , {...item, quantity:item.quantity+number}]
+                let new1 = previousState.map(obj=>{
+                    if(obj == item){
+                        console.log(obj)
+                        return {...item, quantity:item.quantity+number}
+                    } else return obj 
+                })
+                return [...new1]
                 })
             
         }
