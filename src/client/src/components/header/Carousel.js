@@ -29,12 +29,6 @@ export default function Carousel()  {
             </div>
             <div className="circleImages">
                 <div>
-                    <Link to="kids">
-                    <img className="linkImage" src="https://d2ichgn6omvugs.cloudfront.net/images/19762189/za_1e4d6319e48231954.jpg" alt="image"/>  
-                    <h2 className="linkText">KIDS</h2>
-                    </Link>
-                </div>
-                <div>
                     <Link to="men">
                     <img className="linkImage" src="https://d2ichgn6omvugs.cloudfront.net/images/19762189/za_0fc76319e4a1914d7.jpg" alt="image"/> 
                     <h2 className="linkText">MEN</h2>
@@ -50,6 +44,12 @@ export default function Carousel()  {
                     <Link to="plus">
                     <img style={{ height:"200px" , border:"0.5px solid rgb(207 201 201)"}} className="linkImage" src={require("../../images/plus2.jpg")} alt="image"/>   
                     <h2 className="linkText">PLUS SIZE</h2>
+                    </Link>
+                </div>
+                <div>
+                    <Link to="kids">
+                    <img className="linkImage" src="https://d2ichgn6omvugs.cloudfront.net/images/19762189/za_1e4d6319e48231954.jpg" alt="image"/>  
+                    <h2 className="linkText">KIDS</h2>
                     </Link>
                 </div>
             </div>

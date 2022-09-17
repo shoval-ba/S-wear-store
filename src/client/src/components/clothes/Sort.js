@@ -1,4 +1,4 @@
-import { React , useState } from 'react';
+import { React , useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -34,6 +34,11 @@ export default function Sort(props)  {
             props.setClothes(sorted)
         }
     }
+
+    useEffect(()=>{
+        handleChange(valueText)
+        console.log(valueText)
+    },[props.sector])
 
     return(
         <div id='sort'>

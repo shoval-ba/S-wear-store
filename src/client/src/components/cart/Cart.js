@@ -21,7 +21,7 @@ export default function Cart()  {
         for (let item of myBag){
             total += (item.cloth.price)*(item.quantity)
         }
-        setTotalPrice(Math.floor(total))
+        setTotalPrice(total)
     }, [myBag] );
     
     useEffect(()=>{

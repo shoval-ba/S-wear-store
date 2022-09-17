@@ -8,6 +8,7 @@ export default function Filters(props)  {
     let clothesAfterFilter = [];
 
     const filterBySector=(event,sector)=>{
+        props.setSector(sector)
         const allDivs = document.querySelectorAll('.filter');
         for(let div of allDivs){
             div.style.backgroundColor="white";

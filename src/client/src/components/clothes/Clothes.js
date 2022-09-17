@@ -5,6 +5,7 @@ import OneCloth from './OneCloth';
 import Filters from './Filters';
 import Sort from './Sort';
 import '../../styles/Clothes.moudle.scss';
+import { setCommentRange } from 'typescript';
 
 export default function Cloth(props)  { 
   const brand = props.brand;
@@ -13,6 +14,7 @@ export default function Cloth(props)  {
     const [clothesAfterFilter , setClothesFilter] = useState([]);
     const [openOneCloth , setOpenOneCloth] = useState(false);
     const [oneCloth , setOneCloth] = useState({})
+    const [sector , setSector] = useState("")
 
     const setMyFavorite = useOutletContext().setMyFavorite;
     const myFavorite = useOutletContext().myFavorite;
@@ -133,9 +135,9 @@ export default function Cloth(props)  {
     }   
       return (
       <div style={{margin:"20px"}}>
-          <Sort clothes={clothesAfterFilter} setClothes={setClothesFilter}></Sort>
+          <Sort clothes={clothesAfterFilter} setClothes={setClothesFilter} sector={sector}></Sort>
       <div className='filterAnd'>
-            <Filters brand={brand} clothes={clothes} setClothes={setClothesFilter}/>
+            <Filters brand={brand} clothes={clothes} setClothes={setClothesFilter} setSector={setSector}/>
           <div id='container'>
             {clothesUi}
             <h1 ref={message} style={{display:"none" , color:"DarkBlue"}}>Sorry, we don't have the items you're looking for.</h1>
