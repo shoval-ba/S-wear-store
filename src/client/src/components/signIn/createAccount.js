@@ -23,7 +23,7 @@ export default function CreateAccount(props)  {
     const [user , setUser] = useState(newUser);
     const [passwordAgain , setPasswordAgain] = useState("");
     const [passwordInput , setPassword] = useState("");
-    const [insert , setInsert] = useState(true);
+    // const [insert , setInsert] = useState(true);
 
     const first_name = createRef();
     const last_name = createRef();
@@ -35,45 +35,46 @@ export default function CreateAccount(props)  {
     const inputPassword = createRef();
 
     const handleSubmit = async () => {
-        setInsert(true)
+        let insert = true
         if(!textValidate(user.first_name).status || user.first_name === ""){
-            setInsert(false)
+            insert = false
             first_name.current.style.display = "block"
         } else first_name.current.style.display = "none"
         if(!textValidate(user.last_name).status || user.last_name === ""){
-            setInsert(false)
+            insert = false
             last_name.current.style.display = "block"
         } else last_name.current.style.display = "none"
         if(!emailValidate(user.email).status || user.email === ""){
-            setInsert(false)
+            insert = false
             email.current.style.display = "block"
         } else email.current.style.display = "none"
         if(!numValidate(user.phone_number).status || user.phone_number === 0){
-            setInsert(false)
+            insert = false
             phone_number.current.style.display = "block"
         } else phone_number.current.style.display = "none"
         if(!textValidate(user.city).status || user.city === ""){
-            setInsert(false)
+            insert = false
             city.current.style.display = "block"
         } else city.current.style.display = "none"
         if(!textNumberValidate(user.adress).status || user.adress === ""){
-            setInsert(false)
+            insert = false
             adress.current.style.display = "block"
         } else adress.current.style.display = "none"
         if(!textNumberValidate(user.password).status || user.password === ""){
-            setInsert(false)
+            insert=false
             password.current.style.display = "block"
         } else password.current.style.display = "none"
-              
-        if (passwordAgain !== passwordInput || passwordAgain === ""){
-            setInsert(false);
-            inputPassword.current.style.display = "block"
-        } else {
-            inputPassword.current.style.display = "none"
-            const hashedPassword = bcrypt.hashSync(user.password, bcrypt.genSaltSync());
-            user.password = hashedPassword
+             
+        if(insert){
+            if (passwordAgain !== user.password || passwordAgain === ""){
+                insert = false;
+                inputPassword.current.style.display = "block"
+            } else {
+                inputPassword.current.style.display = "none"
+                const hashedPassword = bcrypt.hashSync(user.password, bcrypt.genSaltSync());
+                user.password = hashedPassword
+            }
         }
-        console.log(insert)
         if(insert){
             console.log(user)
             const options ={
