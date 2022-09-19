@@ -84,7 +84,7 @@ app.post('/addToOrders', (req: any, response: any) => {
 
 if (process.env.NODE_ENV==='production'){
   app.use(express.static('build'))
-  app.get('/',(_req:any,res:any)=>{
+  app.get('*',(_req:any,res:any)=>{
     res.sendFile(path.join(__dirname,'../build', 'index.html'))
   })
 }
