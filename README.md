@@ -28,6 +28,9 @@ The server side is written in TypeScript and compiled into JS through a gulp fil
  3. In one terminal run :'npm run server'
  4. In other terminal run : 'npm run start'
 
+## My way 
 
-
+Right at the very beginning of this project I encounter a problem regarding the data gathering as well as organizing it as a table in the data- base. Moreover, during my search for an applicable API, I struggled to find suitable relevant information. After searching, I was able to find a suitable API and took the clothes from the API, I stored them on the data- base and added the quantity as well as the sizes for each product.
+The next phase was to think how I want to present the products on the website so it will be as easy as possible for the user to find what he wants and place an order. I draw a lot of inspiration from successful existing clothes websites and used "Bootstrap" method to design it and enhance the UX which was always a big priority to me throughout the project.
+After the website front was ready, I tried to find the best way to save the customers data including the orders, Wishlist and log-In detail. At first, I saved this data in the Front end, however this solution was not idle, so I started building relevant tables and save the user’s data in the database. This way I could present the customer’s data to him when he logs in to the website. The customer can get a full picture of his last purchases, the items he loved and more.
 
