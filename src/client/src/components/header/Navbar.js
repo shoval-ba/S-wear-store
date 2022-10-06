@@ -1,4 +1,5 @@
-import { React , useEffect, useState , useRef  } from 'react';
+import { React , useEffect, useState , useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,6 +19,7 @@ import LittleCart from '../cart/LittleCart'
 import Favorites from '../cart/Favorites';
 import User from '../signIn/User';
 import '../../styles/Navbar.moudle.scss'
+import { addToBag , removeFromBag , editItem , initBag} from '../../slices/myBagSlice'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,18 +59,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Navbar() {
 
-  const [myBag , setMyBag] = useState([])
+  const myBag = useSelector((state) => state.myBag.myBag);
+  const dispatch = useDispatch();
+
+  // const [myBag , setMyBag] = useState([])
   const [allClothes , setAllClothes] = useState([])
-  const [myFavorite , setMyFavorite] = useState([])
+  const [myFavorite , setMyFavorite] = useState([]) 
+  const [signIn , setSignIn]= useState(false);
+  const[currentUser , setUser] = useState();
+  const [orders , setOrders] = useState([])
+
   const [hoverCart , setHoverCart] = useState(false)
   const [hoverFavorite , setHoverFavorite] = useState(false)
   const [hoverUser , setHoverUser] = useState(false)
-
-  const [signIn , setSignIn]= useState(false);
-  const[currentUser , setUser] = useState();
   const [search , setSearch] = useState();
+  
   const [haveOrders , setHaveOrders] = useState(false)
-  const [orders , setOrders] = useState([])
 
   useEffect(()=>{
     let user = JSON.parse(localStorage.getItem('currentUser'));
@@ -98,6 +104,7 @@ export default function Navbar() {
 
   const prevUser = usePrevious(currentUser)
   useEffect(()=>{
+    console.log(myBag)
     const getMyBag = async ()=>{
       if(prevUser === null || prevUser === undefined){
         for(let item of myBag){
@@ -117,13 +124,15 @@ export default function Navbar() {
           }
         }
       }
-      setMyBag([])
+      // setMyBag([])
+      dispatch(initBag([]))
       setMyFavorite([])
       if(currentUser){
         await fetch(`getMyBag${currentUser.user_id}`)
         .then((res) => res.json())
             .then((response) => {
-              setMyBag(response)
+              // setMyBag(response)
+              dispatch(initBag(response))
             })
     
         await fetch(`getMyFavorites${currentUser.user_id}`)
@@ -296,12 +305,12 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {signIn ? <Popup signIn={setSignIn} setUser={setUser} setMyBag={setMyBag}/> : <></>}
+      {signIn ? <Popup signIn={setSignIn} setUser={setUser}/> : <></>}
       {hoverCart ? <LittleCart myBag={myBag} setHover={setHoverCart}/> : <></>}
       {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} signIn={setSignIn} setUser={setUser} orders={orders}/> : <></>}
       {hoverFavorite ? <Favorites myFavorite={myFavorite} setHoverFavorite={setHoverFavorite} setFavorite={setMyFavorite}/> : <></>}
     </Box>
-      <Outlet context={{setMyBag:setMyBag, myBag:myBag , setMyFavorite:setMyFavorite , 
+      <Outlet context={{ setMyFavorite:setMyFavorite , 
         myFavorite:myFavorite , currentUser:currentUser , setSignIn:setSignIn ,
         searchValue:search ,  allClothes:allClothes ,setHaveOrders:setHaveOrders , orders:orders }}></Outlet>
     </div>

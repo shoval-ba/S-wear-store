@@ -1,18 +1,22 @@
 import {React , useState , useEffect , createRef} from 'react';
-import {  useOutletContext} from 'react-router-dom';
+import {  useOutletContext } from 'react-router-dom'; 
+import { useSelector, useDispatch } from 'react-redux'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import '../../styles/OneCloth.scss';
+import { addToBag , removeFromBag , editItem , initBag} from '../../slices/myBagSlice'
 
 export default function OneCloth(props)  { 
+
+    const myBag = useSelector((state) => state.myBag.myBag);
+    const dispatch = useDispatch();
+
     const cloth = props.cloth;
     const [chosenSize , setChosenSize] = useState();
     const [quantity , setQuantity] = useState(0);
     const select = createRef();
-    const setMyBag = useOutletContext().setMyBag;
-    const myBag = useOutletContext().myBag;
     const setMyFavorite = useOutletContext().setMyFavorite;
     const myFavorite = useOutletContext().myFavorite;
     const currentUser = useOutletContext().currentUser;
@@ -113,7 +117,7 @@ export default function OneCloth(props)  {
         }
     }
 
-    const addToBag = async () =>{
+    const addCloth = () =>{
         for(let cloth2 of myBag) {
             if(cloth.cloth_id === cloth2.cloth.cloth_id && cloth2.size === chosenSize) {
                 let newCloth = {
@@ -121,10 +125,8 @@ export default function OneCloth(props)  {
                     size:chosenSize, 
                     quantity:cloth2.quantity+quantity
                 }
-                setMyBag(previousState =>{ 
-                    const itemsFilter = previousState.filter((currentItem)=>{return currentItem !== cloth2})
-                    return [...itemsFilter , newCloth]
-                    })
+                dispatch(removeFromBag(cloth2))
+                dispatch(addToBag(newCloth))
                 return;
             }
         }
@@ -147,7 +149,7 @@ export default function OneCloth(props)  {
                 }
             }
             select.current.style.display = "none";
-            setMyBag(previousState =>{ return [...previousState , newCloth]}); 
+            dispatch(addToBag(newCloth))
         }
     }
 
@@ -186,7 +188,7 @@ export default function OneCloth(props)  {
                         </ul>
                     </div>
                     <div className='add'>
-                        <button className="button-31" onClick={()=>addToBag()}>Add to bag </button>
+                        <button className="button-31" onClick={()=>addCloth()}>Add to bag </button>
                         <div className='circle'>
                             <FavoriteBorderIcon id="favoriteIcon" style={{color:colorHeart}} onClick={()=>addToFavorite()}/>
                         </div>

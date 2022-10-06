@@ -33,12 +33,6 @@ app.get('/getMyOrder:userId', (req: any, response: any) => {
 });
 
 // Gives clothes from the db.
-app.delete('/deleteCart:clothId', (req: any, response: any) => {
-  let clothId = req.params.clothId;
-  deleteCart(clothId).then((cloth: any) => response.json(cloth));
-});
-
-// Gives clothes from the db.
 app.delete('/deleteFavorite:clothId', (req: any, response: any) => {
   let clothId = req.params.clothId;
   deleteFavorite(clothId).then((cloth: any) => response.json(cloth));
@@ -62,6 +56,11 @@ app.post('/addUser', async function (req :any, response:any){
 app.post('/addToCarts', async function (req :any, response:any){
   const body = req.body;
   addToCarts(body.size , body.quantity , body.userId , body.clothId).then((user: any) => response.json(user));
+});
+
+app.post('/deleteCart', async function (req: any, response: any) {
+  const body = req.body;
+  deleteCart(body.clothId , body.size , body.userId).then((cloth: any) => response.json(cloth));
 });
 
 app.post('/addToFavorites', async function (req :any, response:any){

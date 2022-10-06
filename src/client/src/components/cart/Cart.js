@@ -1,13 +1,17 @@
 import {React , useState , useEffect } from 'react';
 import {  useOutletContext } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import '../../styles/Cart.scss'
+import '../../styles/Cart.scss';
+import { removeFromBag , editItem , initBag} from '../../slices/myBagSlice'
 
 export default function Cart()  { 
    
-    const myBag = useOutletContext().myBag;
-    const setMyBag = useOutletContext().setMyBag;
+    const myBag = useSelector((state) => state.myBag.myBag);
+    const dispatch = useDispatch();
+
+    // const setMyBag = useOutletContext().setMyBag;
     const currentUser = useOutletContext().currentUser;
     const setSignIn = useOutletContext().setSignIn;
     const setHaveOrders = useOutletContext().setHaveOrders;
@@ -15,6 +19,7 @@ export default function Cart()  {
     const [totalPrice , setTotalPrice]= useState(0);
     const [price , setPrice]= useState(5);
     const [alertText, setAlert] = useState("")
+
     useEffect(() => {
         setTotalPrice(0)
         let total = 0
@@ -24,6 +29,10 @@ export default function Cart()  {
         setTotalPrice(Math.floor(total))
     }, [myBag] );
     
+    useEffect(() => {
+        console.log(myBag)
+    }, [myBag] );
+
     useEffect(()=>{
         if(alertText !== "") {
             alert(alertText)
@@ -31,31 +40,28 @@ export default function Cart()  {
     },[alertText])
     
     const handleDelete = async (item) => {
-        setMyBag(previousState =>{ 
-            const itemsFilter = previousState.filter(currentItem => { return item !== currentItem})
-            return [...itemsFilter]
-            })
+        console.log(item)
         const options ={
-            method: 'DELETE',
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        try{
-            let result = await fetch(`/deleteCart${item.cloth.cloth_id}`, options);
-            await result.json().then((res) => {
-            })
-        }
-        catch {
-            alert("no")
-        }
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({size:item.size ,  clothId:item.cloth.cloth_id , userId:currentUser.user_id})
+          }
+          try{
+            let result = await fetch('/deleteCart', options);
+            await result.json()
+          }
+          catch {
+            console.log("no")
+          }
+        dispatch(removeFromBag(item))
     }
 
     const inputCoupon = (value) =>{
         if(value === "Ilovecode" || value === "Swear5"){
             setPrice(0)
-        } else setPrice(5)
-            
+        } else setPrice(5)       
     }
 
     const handlePay = async () => {
@@ -84,7 +90,8 @@ export default function Cart()  {
                         setAlert(res)
                     })
                     setHaveOrders(true)
-                    setMyBag([])
+                    // setMyBag([])
+                    dispatch(initBag([]))
                   }
                   catch {
                     console.log("Sorry we have a problem right now , Please try latter")
@@ -94,27 +101,21 @@ export default function Cart()  {
     }
 
     const changeQuantity = (number , item ) => {
-
         if(item.quantity + number <= 0 ){
             handleDelete(item)
         }
-        else if (number === 1 || number === -1){
-            setMyBag(previousState =>{
-                let new1 = previousState.map(obj=>{
-                    if(obj == item){
-                        console.log(obj)
-                        return {...item, quantity:item.quantity+number}
-                    } else return obj 
-                })
-                return [...new1]
-                })
-            
-        }
         else {
-            setMyBag(previousState =>{ 
-                const itemsFilter = previousState.filter(currentItem => { return item !== currentItem })
-                return [...itemsFilter , {...item, quantity:number}]
-                })
+            dispatch(editItem({item , number}))
+            // setMyBag(previousState =>{
+            //     let new1 = previousState.map(obj=>{
+            //         if(obj == item){
+            //             console.log(obj)
+            //             return {...item, quantity:item.quantity+number}
+            //         } else return obj 
+            //     })
+            //     return [...new1]
+            //     })
+            
         }
     }
 

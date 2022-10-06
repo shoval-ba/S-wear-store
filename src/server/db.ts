@@ -68,17 +68,17 @@ export async function getMyFavorites(userId:string){
 
 // Add officer to users table.
 export async function addToCarts(size:any , quantity:any , userId:number ,clothId:number){
-  const sql1 =`DELETE FROM carts WHERE cloth_id=$1 AND user_id =$2 `
-  await client.query(sql1 , [clothId , userId])
+  const sql1 =`DELETE FROM carts WHERE cloth_id=$1 AND size=$2 AND user_id =$3 `
+  await client.query(sql1 , [clothId , size, userId])
   const sql = 'INSERT INTO carts(size ,quantity ,user_id, cloth_id) VALUES($1, $2, $3, $4)';
   await client.query(sql, [size , quantity , userId , clothId]);
   return "Success"
 }
 
 // Add officer to users table.
-export async function deleteCart(clothId:number){
-  const sql1 =`DELETE FROM carts WHERE cloth_id=$1`
-  await client.query(sql1 , [clothId])
+export async function deleteCart(clothId:number , size:number|string , userId:number){
+  const sql1 =`DELETE FROM carts WHERE cloth_id=$1 AND size=$2 AND user_id=$3`
+  await client.query(sql1 , [clothId ,size , userId])
   return "Success"
 }
 
