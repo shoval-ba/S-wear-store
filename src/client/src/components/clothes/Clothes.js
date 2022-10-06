@@ -5,19 +5,20 @@ import OneCloth from './OneCloth';
 import Filters from './Filters';
 import Sort from './Sort';
 import '../../styles/Clothes.moudle.scss';
-import { setCommentRange } from 'typescript';
+import { useSelector, useDispatch } from 'react-redux'
+import { addToFavorites , removeFromFavorites } from '../../slices/myFavoritesSlice'
 
 export default function Cloth(props)  { 
   const brand = props.brand;
+
+  const myFavorites = useSelector((state) => state.myFavorites.myFavorites);
+  const dispatch = useDispatch();
 
     const [clothes , setClothes] = useState([]);
     const [clothesAfterFilter , setClothesFilter] = useState([]);
     const [openOneCloth , setOpenOneCloth] = useState(false);
     const [oneCloth , setOneCloth] = useState({})
     const [sector , setSector] = useState("")
-
-    const setMyFavorite = useOutletContext().setMyFavorite;
-    const myFavorite = useOutletContext().myFavorite;
     const currentUser = useOutletContext().currentUser;
     const searchValue = useOutletContext().searchValue;
     const allClothes = useOutletContext().allClothes;
@@ -61,13 +62,10 @@ export default function Cloth(props)  {
 
       const addToFavorite = async (event , cloth) => {
         event.target.style.color = "red"
-        for(let favorite of myFavorite) {
+        for(let favorite of myFavorites) {
             if(cloth.cloth_id === favorite.cloth_id) {
-              event.target.style.color = "black"
-                setMyFavorite(previousState =>{ 
-                    const itemsFilter = previousState.filter(currentItem => { return favorite.cloth_id !== currentItem.cloth_id })
-                    return [...itemsFilter]
-                })
+              event.target.style.color = "black";
+              dispatch(removeFromFavorites(cloth))
                 if(currentUser !== null){
                   const options ={
                     method: 'DELETE',
@@ -88,7 +86,8 @@ export default function Cloth(props)  {
                 return;
               }
             }
-            setMyFavorite(previousState =>{ return [...previousState , cloth]})
+            // setMyFavorite(previousState =>{ return [...previousState , cloth]})
+            dispatch(addToFavorites(cloth))
             if(currentUser !== null){
               const options ={
                 method: 'POST',
@@ -111,12 +110,12 @@ export default function Cloth(props)  {
     useEffect(()=>{
       let clothes = clothesAfterFilter
       setClothesFilter(clothes)
-    },[myFavorite])
+    },[myFavorites])
 
     if(clothesAfterFilter.length > 0) {
        clothesUi = clothesAfterFilter.map(cloth => {
         let colorHeart
-        for(let favorite of myFavorite) {
+        for(let favorite of myFavorites) {
           if(cloth.cloth_id === favorite.cloth_id) {
             colorHeart = "red"
           } else {

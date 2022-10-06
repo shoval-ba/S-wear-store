@@ -1,16 +1,15 @@
 import { React } from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { addToFavorites , removeFromFavorites , initFavorites } from '../../slices/myFavoritesSlice'
 import "../../styles/LittleCart.scss"
 
 export default function Favorites(props)  { 
 
-        const myFavorites = props.myFavorite;
+        const myFavorites = useSelector((state) => state.myFavorites.myFavorites);
+        const dispatch = useDispatch();
 
         const handleDelete = async (item) => {
-            props.setFavorite(previousState =>{ 
-                const itemsFilter = previousState.filter(currentItem => { return item !== currentItem})
-                return [...itemsFilter]
-                })
+            dispatch(removeFromFavorites(item))
             const options ={
                 method: 'DELETE',
                 headers: {
@@ -40,12 +39,12 @@ export default function Favorites(props)  {
         else {
             itemsUi = myFavorites.map((item) => {
                 return (
-                        <li className="clearfix" key={item.cloth_id}>
-                            <img src={item.img} alt="item1" />
-                            <span className="item-name">{item.title}</span>
-                            <span className="item-price">{item.price}$</span>
-                            <span className="close" onClick={()=>handleDelete(item)}>&#10005;</span>
-                        </li>
+                    <li className="clearfix" key={item.cloth_id}>
+                        <img src={item.img} alt="item1" />
+                        <span className="item-name">{item.title}</span>
+                        <span className="item-price">{item.price}$</span>
+                        <span className="close" onClick={()=>handleDelete(item)}>&#10005;</span>
+                    </li>
                 )
             })
         }

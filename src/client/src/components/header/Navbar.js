@@ -19,7 +19,8 @@ import LittleCart from '../cart/LittleCart'
 import Favorites from '../cart/Favorites';
 import User from '../signIn/User';
 import '../../styles/Navbar.moudle.scss'
-import { addToBag , removeFromBag , editItem , initBag} from '../../slices/myBagSlice'
+import { initBag } from '../../slices/myBagSlice'
+import { addToFavorites , removeFromFavorites , initFavorites } from '../../slices/myFavoritesSlice'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -60,11 +61,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Navbar() {
 
   const myBag = useSelector((state) => state.myBag.myBag);
+  const myFavorites = useSelector((state) => state.myFavorites.myFavorites);
   const dispatch = useDispatch();
 
-  // const [myBag , setMyBag] = useState([])
   const [allClothes , setAllClothes] = useState([])
-  const [myFavorite , setMyFavorite] = useState([]) 
   const [signIn , setSignIn]= useState(false);
   const[currentUser , setUser] = useState();
   const [orders , setOrders] = useState([])
@@ -124,21 +124,19 @@ export default function Navbar() {
           }
         }
       }
-      // setMyBag([])
       dispatch(initBag([]))
-      setMyFavorite([])
+      dispatch(initFavorites([]))
       if(currentUser){
         await fetch(`getMyBag${currentUser.user_id}`)
         .then((res) => res.json())
             .then((response) => {
-              // setMyBag(response)
               dispatch(initBag(response))
             })
     
         await fetch(`getMyFavorites${currentUser.user_id}`)
         .then((res) => res.json())
             .then((response) => {
-              setMyFavorite(response)
+              dispatch(initFavorites(response))
             })
       }
     }
@@ -286,7 +284,7 @@ export default function Navbar() {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={myFavorite.length} color="error"
+              <Badge badgeContent={myFavorites.length} color="error"
               onMouseEnter={() => setHoverFavorite(true)}>
                 <FavoriteIcon />
               </Badge>
@@ -308,10 +306,9 @@ export default function Navbar() {
       {signIn ? <Popup signIn={setSignIn} setUser={setUser}/> : <></>}
       {hoverCart ? <LittleCart myBag={myBag} setHover={setHoverCart}/> : <></>}
       {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} signIn={setSignIn} setUser={setUser} orders={orders}/> : <></>}
-      {hoverFavorite ? <Favorites myFavorite={myFavorite} setHoverFavorite={setHoverFavorite} setFavorite={setMyFavorite}/> : <></>}
+      {hoverFavorite ? <Favorites setHoverFavorite={setHoverFavorite} /> : <></>}
     </Box>
-      <Outlet context={{ setMyFavorite:setMyFavorite , 
-        myFavorite:myFavorite , currentUser:currentUser , setSignIn:setSignIn ,
+      <Outlet context={{ currentUser:currentUser , setSignIn:setSignIn ,
         searchValue:search ,  allClothes:allClothes ,setHaveOrders:setHaveOrders , orders:orders }}></Outlet>
     </div>
   );

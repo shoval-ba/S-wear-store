@@ -11,7 +11,6 @@ export default function Cart()  {
     const myBag = useSelector((state) => state.myBag.myBag);
     const dispatch = useDispatch();
 
-    // const setMyBag = useOutletContext().setMyBag;
     const currentUser = useOutletContext().currentUser;
     const setSignIn = useOutletContext().setSignIn;
     const setHaveOrders = useOutletContext().setHaveOrders;
@@ -90,7 +89,6 @@ export default function Cart()  {
                         setAlert(res)
                     })
                     setHaveOrders(true)
-                    // setMyBag([])
                     dispatch(initBag([]))
                   }
                   catch {
@@ -105,17 +103,7 @@ export default function Cart()  {
             handleDelete(item)
         }
         else {
-            dispatch(editItem({item , number}))
-            // setMyBag(previousState =>{
-            //     let new1 = previousState.map(obj=>{
-            //         if(obj == item){
-            //             console.log(obj)
-            //             return {...item, quantity:item.quantity+number}
-            //         } else return obj 
-            //     })
-            //     return [...new1]
-            //     })
-            
+            dispatch(editItem({item , number}))     
         }
     }
 

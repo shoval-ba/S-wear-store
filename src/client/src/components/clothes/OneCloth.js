@@ -6,19 +6,19 @@ import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import '../../styles/OneCloth.scss';
-import { addToBag , removeFromBag , editItem , initBag} from '../../slices/myBagSlice'
+import { addToBag , removeFromBag } from '../../slices/myBagSlice'
+import { addToFavorites , removeFromFavorites } from '../../slices/myFavoritesSlice'
 
 export default function OneCloth(props)  { 
 
     const myBag = useSelector((state) => state.myBag.myBag);
+    const myFavorites = useSelector((state) => state.myFavorites.myFavorites);
     const dispatch = useDispatch();
 
     const cloth = props.cloth;
     const [chosenSize , setChosenSize] = useState();
     const [quantity , setQuantity] = useState(0);
     const select = createRef();
-    const setMyFavorite = useOutletContext().setMyFavorite;
-    const myFavorite = useOutletContext().myFavorite;
     const currentUser = useOutletContext().currentUser;
     const [colorHeart , setColor] = useState("black");
     let sizes = [];
@@ -28,7 +28,7 @@ export default function OneCloth(props)  {
     }
 
     useEffect(()=>{
-        for(let favorite of myFavorite) {
+        for(let favorite of myFavorites) {
             if(cloth.cloth_id === favorite.cloth_id) {
                 setColor("red")
             }
@@ -69,13 +69,10 @@ export default function OneCloth(props)  {
 
     const addToFavorite = async () => {
         setColor("red")
-        for(let favorite of myFavorite) {
+        for(let favorite of myFavorites) {
             if(cloth.cloth_id === favorite.cloth_id) {
                 setColor("black")
-                setMyFavorite(previousState =>{ 
-                    const itemsFilter = previousState.filter(currentItem => { return favorite.cloth_id !== currentItem.cloth_id })
-                    return [...itemsFilter]
-                })
+                dispatch(removeFromFavorites(cloth))
                 if(currentUser !== null){
                     const options ={
                         method: 'DELETE',
@@ -96,7 +93,7 @@ export default function OneCloth(props)  {
                 return;
             }
         }
-        setMyFavorite(previousState =>{ return [...previousState , cloth]})
+        dispatch(addToFavorites(cloth))
         if(currentUser !== null){
             const options ={
                 method: 'POST',
