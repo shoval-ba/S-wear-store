@@ -21,6 +21,7 @@ import User from '../signIn/User';
 import '../../styles/Navbar.moudle.scss'
 import { initBag } from '../../slices/myBagSlice'
 import { initFavorites } from '../../slices/myFavoritesSlice'
+import { initOrders } from '../../slices/ordersSlice'
 import { initUser } from '../../slices/userSlice'
 import { changeSignIn } from '../../slices/signInSlice'
 
@@ -67,8 +68,6 @@ export default function Navbar() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const signIn = useSelector((state) => state.signIn.signIn);
   const dispatch = useDispatch();
-
-  const [orders , setOrders] = useState([])
 
   const [hoverCart , setHoverCart] = useState(false)
   const [hoverFavorite , setHoverFavorite] = useState(false)
@@ -164,7 +163,7 @@ export default function Navbar() {
         await fetch(`getMyOrder${currentUser.user_id}`)
           .then((res) => res.json())
               .then((response) => {
-                setOrders(response)
+                dispatch(initOrders(response))
               })
       }
     }
@@ -293,10 +292,10 @@ export default function Navbar() {
       </AppBar>
       {signIn ? <Popup /> : <></>}
       {hoverCart ? <LittleCart myBag={myBag} setHover={setHoverCart}/> : <></>}
-      {hoverUser ? <User setHover={setHoverUser} orders={orders}/> : <></>}
+      {hoverUser ? <User setHover={setHoverUser}/> : <></>}
       {hoverFavorite ? <Favorites setHoverFavorite={setHoverFavorite} /> : <></>}
     </Box>
-      <Outlet context={{ searchValue:search ,setHaveOrders:setHaveOrders , orders:orders }}></Outlet>
+      <Outlet context={{ searchValue:search ,setHaveOrders:setHaveOrders }}></Outlet>
     </div>
   );
 }

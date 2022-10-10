@@ -3,10 +3,12 @@ import { Link} from 'react-router-dom';
 import { useSelector , useDispatch} from 'react-redux'
 import "../../styles/LittleCart.scss"
 import { initUser } from '../../slices/userSlice'
+import { changeSignIn } from '../../slices/signInSlice'
 
 export default function User(props)  { 
 
     const currentUser = useSelector((state) => state.user.currentUser);
+    const orders = useSelector((state) => state.orders.orders);
     const dispatch = useDispatch();
         
         const handleSignOut = () => {
@@ -22,12 +24,12 @@ export default function User(props)  {
         if(currentUser === null || currentUser === undefined){
             userUi = (
                 <div>
-                    <p style={{cursor:"pointer"}} onClick={()=>props.signIn(true)}>Sign In</p>
+                    <p style={{cursor:"pointer"}} onClick={()=>dispatch(changeSignIn(true))}>Sign In</p>
                 </div>
             )
         }
     
-        else if(props.orders.length !== 0){ 
+        else if(orders.length !== 0){ 
             userUi = (
                     <div>
                         <p style={{marginBottom:"0"}}>{currentUser.email}</p>

@@ -1,5 +1,5 @@
 import { React , useState } from 'react'
-import {  useOutletContext } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 import {
     CCard,
     CCardImage,
@@ -13,7 +13,7 @@ import '../../styles/Orders.moudle.scss'
 import { useEffect } from 'react';
 
   export default function Orders() {
-    const orders = useOutletContext().orders;
+    const orders = useSelector((state) => state.orders.orders);
     const [totalPrice , setPrice] = useState(0)
 
     useEffect(()=>{
