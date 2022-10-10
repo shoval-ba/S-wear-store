@@ -1,12 +1,16 @@
 import {React , useState , createRef  } from 'react';
+import { useDispatch } from 'react-redux'
 import CloseIcon from '@mui/icons-material/Close';
 import {
     textNumberValidate,
     emailValidate,
   } from "react-validations-components";
 import '../../styles/SignIn.scss'
+import { initUser } from '../../slices/userSlice'
 
 export default function SignIn(props)  { 
+
+    const dispatch = useDispatch();
 
     const [email , setEmail] = useState();
     const [password , setPassword] = useState();
@@ -46,7 +50,7 @@ export default function SignIn(props)  {
                 await result.json().then((res) => {
                     if(typeof res == "string") alert(res)
                     else if (typeof res == "object"){
-                        props.setUser(res);
+                        dispatch(initUser(res))
                         let user = JSON.parse(localStorage.getItem('currentUser'));
                         if(user !== null) {
                             localStorage.removeItem('currentUser')

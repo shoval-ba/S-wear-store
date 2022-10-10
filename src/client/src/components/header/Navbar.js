@@ -20,7 +20,8 @@ import Favorites from '../cart/Favorites';
 import User from '../signIn/User';
 import '../../styles/Navbar.moudle.scss'
 import { initBag } from '../../slices/myBagSlice'
-import { addToFavorites , removeFromFavorites , initFavorites } from '../../slices/myFavoritesSlice'
+import { initFavorites } from '../../slices/myFavoritesSlice'
+import { initUser } from '../../slices/userSlice'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -62,11 +63,10 @@ export default function Navbar() {
 
   const myBag = useSelector((state) => state.myBag.myBag);
   const myFavorites = useSelector((state) => state.myFavorites.myFavorites);
+  const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
 
-  const [allClothes , setAllClothes] = useState([])
   const [signIn , setSignIn]= useState(false);
-  const[currentUser , setUser] = useState();
   const [orders , setOrders] = useState([])
 
   const [hoverCart , setHoverCart] = useState(false)
@@ -78,20 +78,8 @@ export default function Navbar() {
 
   useEffect(()=>{
     let user = JSON.parse(localStorage.getItem('currentUser'));
-    setUser(user);
-    const getAllClothes = async () =>{
-      await fetch(`allClothes`)
-        .then((res) => res.json())
-            .then((response) => {
-              setAllClothes(response)
-            })
-    }
-    getAllClothes();
-  },[])
-
-  useEffect(()=>{
-    let user = JSON.parse(localStorage.getItem('currentUser'));
-    setUser(user);
+    // setUser(user);
+    dispatch(initUser(user))
   },[])
 
   const usePrevious = (value)=>{
@@ -104,7 +92,6 @@ export default function Navbar() {
 
   const prevUser = usePrevious(currentUser)
   useEffect(()=>{
-    console.log(myBag)
     const getMyBag = async ()=>{
       if(prevUser === null || prevUser === undefined){
         for(let item of myBag){
@@ -303,13 +290,12 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {signIn ? <Popup signIn={setSignIn} setUser={setUser}/> : <></>}
+      {signIn ? <Popup signIn={setSignIn}/> : <></>}
       {hoverCart ? <LittleCart myBag={myBag} setHover={setHoverCart}/> : <></>}
-      {hoverUser ? <User currentUser={currentUser} setHover={setHoverUser} signIn={setSignIn} setUser={setUser} orders={orders}/> : <></>}
+      {hoverUser ? <User setHover={setHoverUser} signIn={setSignIn} orders={orders}/> : <></>}
       {hoverFavorite ? <Favorites setHoverFavorite={setHoverFavorite} /> : <></>}
     </Box>
-      <Outlet context={{ currentUser:currentUser , setSignIn:setSignIn ,
-        searchValue:search ,  allClothes:allClothes ,setHaveOrders:setHaveOrders , orders:orders }}></Outlet>
+      <Outlet context={{ setSignIn:setSignIn ,searchValue:search ,setHaveOrders:setHaveOrders , orders:orders }}></Outlet>
     </div>
   );
 }

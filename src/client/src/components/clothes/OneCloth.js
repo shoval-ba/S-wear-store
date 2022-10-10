@@ -13,13 +13,13 @@ export default function OneCloth(props)  {
 
     const myBag = useSelector((state) => state.myBag.myBag);
     const myFavorites = useSelector((state) => state.myFavorites.myFavorites);
+    const currentUser = useSelector((state) => state.user.currentUser);
     const dispatch = useDispatch();
 
     const cloth = props.cloth;
     const [chosenSize , setChosenSize] = useState();
     const [quantity , setQuantity] = useState(0);
     const select = createRef();
-    const currentUser = useOutletContext().currentUser;
     const [colorHeart , setColor] = useState("black");
     let sizes = [];
 

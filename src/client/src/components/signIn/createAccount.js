@@ -1,4 +1,5 @@
 import {React , useState , createRef } from 'react';
+import { useDispatch } from 'react-redux'
 import CloseIcon from '@mui/icons-material/Close';
 import {
     textValidate,
@@ -8,8 +9,11 @@ import {
   } from "react-validations-components";
 import '../../styles/CreateAccount.scss'
 import bcrypt from 'bcryptjs'
+import { initUser } from '../../slices/userSlice'
 
 export default function CreateAccount(props)  { 
+
+    const dispatch = useDispatch();
 
     const newUser ={
         first_name:"",
@@ -23,7 +27,6 @@ export default function CreateAccount(props)  {
     const [user , setUser] = useState(newUser);
     const [passwordAgain , setPasswordAgain] = useState("");
     const [passwordInput , setPassword] = useState("");
-    // const [insert , setInsert] = useState(true);
 
     const first_name = createRef();
     const last_name = createRef();
@@ -76,7 +79,6 @@ export default function CreateAccount(props)  {
             }
         }
         if(insert){
-            console.log(user)
             const options ={
                 method: 'POST',
                 headers: {
@@ -89,7 +91,7 @@ export default function CreateAccount(props)  {
                 await result.json().then((res) => {
                     if(typeof res == "string") alert(res)
                     else if (typeof res == "object"){
-                        props.setUser(res);
+                        dispatch(initUser(res))
                         let user = JSON.parse(localStorage.getItem('currentUser'));
                         if(user !== null) {
                             localStorage.removeItem(user)

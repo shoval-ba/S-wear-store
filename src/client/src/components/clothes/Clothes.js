@@ -12,6 +12,7 @@ export default function Cloth(props)  {
   const brand = props.brand;
 
   const myFavorites = useSelector((state) => state.myFavorites.myFavorites);
+  const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
 
     const [clothes , setClothes] = useState([]);
@@ -19,9 +20,7 @@ export default function Cloth(props)  {
     const [openOneCloth , setOpenOneCloth] = useState(false);
     const [oneCloth , setOneCloth] = useState({})
     const [sector , setSector] = useState("")
-    const currentUser = useOutletContext().currentUser;
     const searchValue = useOutletContext().searchValue;
-    const allClothes = useOutletContext().allClothes;
 
     const message = createRef()
    

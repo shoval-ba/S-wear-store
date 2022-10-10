@@ -1,10 +1,13 @@
 import { React } from 'react';
 import { Link} from 'react-router-dom';
+import { useSelector , useDispatch} from 'react-redux'
 import "../../styles/LittleCart.scss"
+import { initUser } from '../../slices/userSlice'
 
 export default function User(props)  { 
 
-        const currentUser = props.currentUser;
+    const currentUser = useSelector((state) => state.user.currentUser);
+    const dispatch = useDispatch();
         
         const handleSignOut = () => {
             let user = JSON.parse(localStorage.getItem('currentUser'));
@@ -12,11 +15,11 @@ export default function User(props)  {
                 if(user !== null) {
                     localStorage.removeItem('currentUser')
                 }
-            props.setUser(null);
+            dispatch(initUser(user))
         }
 
         let userUi ;
-        if(currentUser === null ){
+        if(currentUser === null || currentUser === undefined){
             userUi = (
                 <div>
                     <p style={{cursor:"pointer"}} onClick={()=>props.signIn(true)}>Sign In</p>

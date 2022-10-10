@@ -9,9 +9,9 @@ import { removeFromBag , editItem , initBag} from '../../slices/myBagSlice'
 export default function Cart()  { 
    
     const myBag = useSelector((state) => state.myBag.myBag);
+    const currentUser = useSelector((state) => state.user.currentUser);
     const dispatch = useDispatch();
 
-    const currentUser = useOutletContext().currentUser;
     const setSignIn = useOutletContext().setSignIn;
     const setHaveOrders = useOutletContext().setHaveOrders;
 
