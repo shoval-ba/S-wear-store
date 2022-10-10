@@ -13,16 +13,20 @@ As for the technical part, as part of building the website, I stored all the off
 ## Technology
 #### Client side :
  The client side is written in React.
- I chose "React" because it's rendered to the screen on every change of the state, like when you add clothes to your cart or when you login or order things.
+ I chose "React" because it's rendered to the screen on every change of the state, like when you add clothes to your cart or when you login or order things. 
+ Another reason is that it is easier way to write the 'HTML' with the 'JSX'. 
+ 
+ in addition, I used 'Redux' to state management of the web. Because in my web I have some diffrent states that changing in diffrent commponents, I chose to use 'Redux' for the state management.
  
  #### Server side :
-The server side is written in TypeScript and compiled into JS through a gulp file.
+The server side is written in TypeScript and compiled into JS through a gulp file. 
+I chose 'TypeScript' because it with types. It helps make our code easier to read and avoid errors.
  
  #### Database :
  The database is stored in PostgreSql.
  I chose this database becaucse I wanted to store my data in tables. I also use foreign key in my database and I don't just save objects.
  
- ## How to run the project?
+ ## How to run the project? :runner:
  1. git clone
  2. npm ci
  3. In one terminal run :'npm run server'
