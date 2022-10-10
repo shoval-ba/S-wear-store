@@ -5,14 +5,14 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import '../../styles/Cart.scss';
 import { removeFromBag , editItem , initBag} from '../../slices/myBagSlice'
+import { changeSignIn } from '../../slices/signInSlice'
 
 export default function Cart()  { 
-   
+    
     const myBag = useSelector((state) => state.myBag.myBag);
     const currentUser = useSelector((state) => state.user.currentUser);
     const dispatch = useDispatch();
 
-    const setSignIn = useOutletContext().setSignIn;
     const setHaveOrders = useOutletContext().setHaveOrders;
 
     const [totalPrice , setTotalPrice]= useState(0);
@@ -68,8 +68,8 @@ export default function Cart()  {
             alert('Your cart is empty')
             return;
         }
-        else if(currentUser === null) {
-            setSignIn(true);
+        else if(currentUser === null || currentUser === undefined) {
+            dispatch(changeSignIn(true))
             console.log(myBag)
             return;
         }

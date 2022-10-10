@@ -10,6 +10,7 @@ import {
 import '../../styles/CreateAccount.scss'
 import bcrypt from 'bcryptjs'
 import { initUser } from '../../slices/userSlice'
+import { changeSignIn } from '../../slices/signInSlice'
 
 export default function CreateAccount(props)  { 
 
@@ -108,7 +109,7 @@ export default function CreateAccount(props)  {
     }
 
     const close = () => {
-        props.signIn(false)
+        dispatch(changeSignIn(false))
     }
 
     return (

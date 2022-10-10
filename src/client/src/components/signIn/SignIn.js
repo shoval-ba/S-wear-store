@@ -7,6 +7,7 @@ import {
   } from "react-validations-components";
 import '../../styles/SignIn.scss'
 import { initUser } from '../../slices/userSlice'
+import { changeSignIn } from '../../slices/signInSlice'
 
 export default function SignIn(props)  { 
 
@@ -21,7 +22,7 @@ export default function SignIn(props)  {
     const checkbox = createRef();
 
     const close = () => {
-        props.signIn(false)
+        dispatch(changeSignIn(false))
     }
 
     const signIn =  async () => {
