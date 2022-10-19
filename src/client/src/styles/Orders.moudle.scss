@@ -9,46 +9,49 @@
     border: 1px solid black;
     border-radius: 5%;
     width: 700px;
-    #titleDivs{
-        margin-bottom:20px;
-        display:flex;
-        border-bottom:1px solid black;
+
+    #titleDivs {
+        margin-bottom: 20px;
+        display: flex;
+        border-bottom: 1px solid black;
         // padding-bottom:5px;
-        justify-content: space-around;  
+        justify-content: space-around;
     }
-        .mb-3 {
-            width: 570px;
-            height: 200px;
-            margin: 0 auto;
-            border-radius: 10px;
-            .card-img {
-                width: 79%;
-                margin-top: 3.2%;
+
+    .mb-3 {
+        width: 570px;
+        height: 200px;
+        margin: 0 auto;
+        border-radius: 10px;
+
+        .card-img {
+            width: 79%;
+            margin-top: 3.2%;
+        }
+
+        .col-md-8 {
+            display: flex;
+            align-items: center;
+            padding-left: 0;
+        }
+
+        .card-body {
+            text-align: left;
+            padding: 0;
+
+            .card-title {
+                margin-top: 0;
+                font-size: 20px;
+                margin-bottom: 30px;
             }
 
-            .col-md-8 {
-                display: flex;
-                align-items: center;
-                padding-left: 0;
-            }
-
-            .card-body {
-                text-align: left;
-                padding: 0;
-
-                .card-title {
-                    margin-top: 0;
-                    font-size: 20px;
-                    margin-bottom: 30px;
-                }
-
-                .card-text {
-                    font-size: 15px
-                }
-            }
-
-            #orderPrice {
-                font-size: 30px;
+            .card-text {
+                font-size: 15px
             }
         }
+
+        #orderPrice {
+            font-size: 30px;
+        }
     }
+}

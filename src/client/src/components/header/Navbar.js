@@ -1,5 +1,5 @@
-import { React , useEffect, useState , useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { React, useEffect, useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,17 +12,17 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Link , Outlet} from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Popup from '../signIn/Popup';
-import LittleCart from '../cart/LittleCart'
+import LittleCart from '../cart/LittleCart';
 import Favorites from '../cart/Favorites';
 import User from '../signIn/User';
-import '../../styles/Navbar.moudle.scss'
-import { initBag } from '../../slices/myBagSlice'
-import { initFavorites } from '../../slices/myFavoritesSlice'
-import { initOrders } from '../../slices/ordersSlice'
-import { initUser } from '../../slices/userSlice'
-import { changeSignIn } from '../../slices/signInSlice'
+import '../../styles/Navbar.moudle.scss';
+import { initBag } from '../../slices/myBagSlice';
+import { initFavorites } from '../../slices/myFavoritesSlice';
+import { initOrders } from '../../slices/ordersSlice';
+import { initUser } from '../../slices/userSlice';
+import { changeSignIn } from '../../slices/signInSlice';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -68,236 +68,236 @@ export default function Navbar() {
   const signIn = useSelector((state) => state.signIn.signIn);
   const dispatch = useDispatch();
 
-  const [hoverCart , setHoverCart] = useState(false)
-  const [hoverFavorite , setHoverFavorite] = useState(false)
-  const [hoverUser , setHoverUser] = useState(false)
-  const [search , setSearch] = useState();
-  
-  const [haveOrders , setHaveOrders] = useState(false)
+  const [hoverCart, setHoverCart] = useState(false);
+  const [hoverFavorite, setHoverFavorite] = useState(false);
+  const [hoverUser, setHoverUser] = useState(false);
+  const [search, setSearch] = useState();
+
+  const [haveOrders, setHaveOrders] = useState(false);
 
   // Gives the user from the local storge.
-  useEffect(()=>{
-    let user = JSON.parse(localStorage.getItem('currentUser'));
-    dispatch(initUser(user))
-  },[])
-
-  const usePrevious = (value)=>{
-    const ref = useRef();
   useEffect(() => {
-    ref.current = value;
-  }, [value]); 
-  return ref.current;
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    dispatch(initUser(user));
+  }, [])
+
+  const usePrevious = (value) => {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    }, [value]);
+    return ref.current;
   }
 
   const prevUser = usePrevious(currentUser);
   // Gets the bag and the favorites of the user.
-  useEffect(()=>{
-    const getMyBag = async ()=>{
-      if(prevUser === null || prevUser === undefined){
-        for(let item of myBag){
-          const options ={
+  useEffect(() => {
+    const getMyBag = async () => {
+      if (prevUser === null || prevUser === undefined) {
+        for (let item of myBag) {
+          const options = {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({size:item.size , quantity:item.quantity , clothId:item.cloth.cloth_id , userId:currentUser.user_id})
+            body: JSON.stringify({ size: item.size, quantity: item.quantity, clothId: item.cloth.cloth_id, userId: currentUser.user_id })
           }
-          try{
+          try {
             let result = await fetch('/addToCarts', options);
-            await result.json()
+            await result.json();
           }
           catch {
-            console.log("no")
+            console.log("no");
           }
         }
       }
-      dispatch(initBag([]))
-      dispatch(initFavorites([]))
-      if(currentUser){
+      dispatch(initBag([]));
+      dispatch(initFavorites([]));
+      if (currentUser) {
         await fetch(`getMyBag${currentUser.user_id}`)
-        .then((res) => res.json())
-            .then((response) => {
-              dispatch(initBag(response))
-            })
-    
+          .then((res) => res.json())
+          .then((response) => {
+            dispatch(initBag(response));
+          })
+
         await fetch(`getMyFavorites${currentUser.user_id}`)
-        .then((res) => res.json())
-            .then((response) => {
-              dispatch(initFavorites(response))
-            })
+          .then((res) => res.json())
+          .then((response) => {
+            dispatch(initFavorites(response));
+          })
       }
     }
-    getMyBag()
-  },[currentUser])
+    getMyBag();
+  }, [currentUser])
 
   // Add to cart.
-  useEffect(()=>{
-    const addToCart = async ()=>{
-      for(let item of myBag){
-        const options ={
+  useEffect(() => {
+    const addToCart = async () => {
+      for (let item of myBag) {
+        const options = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({size:item.size , quantity:item.quantity , clothId:item.cloth.cloth_id , userId:currentUser.user_id})
+          body: JSON.stringify({ size: item.size, quantity: item.quantity, clothId: item.cloth.cloth_id, userId: currentUser.user_id })
         }
-        try{
+        try {
           let result = await fetch('/addToCarts', options);
-          await result.json()
+          await result.json();
         }
         catch {
-          console.log("no")
+          console.log("no");
         }
       }
     }
-    if(currentUser !== undefined){
-      const timeoutId = setTimeout(()=>addToCart(),1000)
+    if (currentUser !== undefined) {
+      const timeoutId = setTimeout(() => addToCart(), 1000);
       return () => {
-        clearTimeout(timeoutId)
+        clearTimeout(timeoutId);
       }
     }
-  },[myBag])
+  }, [myBag])
 
   // Gets the orders of the user.
-  useEffect(()=>{
-    const getOrders = async () =>{
-      if(currentUser){
+  useEffect(() => {
+    const getOrders = async () => {
+      if (currentUser) {
         await fetch(`getMyOrder${currentUser.user_id}`)
           .then((res) => res.json())
-              .then((response) => {
-                dispatch(initOrders(response))
-              })
+          .then((response) => {
+            dispatch(initOrders(response));
+          })
       }
     }
-    const timeoutId = setTimeout(()=>getOrders(),1000)
-      return () => {
-        clearTimeout(timeoutId)
-      }
-  },[haveOrders , currentUser])
+    const timeoutId = setTimeout(() => getOrders(), 1000);
+    return () => {
+      clearTimeout(timeoutId);
+    }
+  }, [haveOrders, currentUser])
 
-  useEffect(()=>{
-    if(hoverCart){
-     setHoverFavorite(false)
-     setHoverUser(false)
-    }   
-  } , [hoverCart])
+  useEffect(() => {
+    if (hoverCart) {
+      setHoverFavorite(false);
+      setHoverUser(false);
+    }
+  }, [hoverCart])
 
-  useEffect(()=>{
-    if(hoverFavorite) {
-      setHoverCart(false)
-      setHoverUser(false)
-      }
-  } , [hoverFavorite])
+  useEffect(() => {
+    if (hoverFavorite) {
+      setHoverCart(false);
+      setHoverUser(false);
+    }
+  }, [hoverFavorite])
 
-  useEffect(()=>{
-    if(hoverUser) {
-      setHoverCart(false)
-      setHoverFavorite(false)
-      }
-  } , [hoverUser])
+  useEffect(() => {
+    if (hoverUser) {
+      setHoverCart(false);
+      setHoverFavorite(false);
+    }
+  }, [hoverUser])
 
   const handleUserClick = () => {
-    dispatch(changeSignIn(true))
+    dispatch(changeSignIn(true));
   }
 
   const handleSearch = (value) => {
-    setSearch(value)
+    setSearch(value);
   }
 
   return (
     <div>
-    <Box sx={{ flexGrow: 1}} style={{margin:"10px 0px"}}>
-      <AppBar position="static" sx={{ backgroundColor:"#79a7ff"}}>
-        <Toolbar>
-          <Typography
-            variant="h4"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' , flexGrow: 0.4} }}
-          >
-            <Link to="/" style={{color:"white"}}>S-wear</Link>
-          </Typography>
+      <Box sx={{ flexGrow: 1 }} style={{ margin: "10px 0px" }}>
+        <AppBar position="static" sx={{ backgroundColor: "#79a7ff" }}>
+          <Toolbar>
+            <Typography
+              variant="h4"
+              noWrap
+              component="div"
+              sx={{ display: { xs: 'none', sm: 'block', flexGrow: 0.4 } }}
+            >
+              <Link to="/" style={{ color: "white" }}>S-wear</Link>
+            </Typography>
             <Box className="divLinks">
-                <Typography
+              <Typography
                 variant="h6"
                 noWrap
-                sx={{ display: { xs: 'none', sm: 'inline-block' }}}
+                sx={{ display: { xs: 'none', sm: 'inline-block' } }}
                 className="textLink"
-                >
-                <Link to="men" style={{color:"white"}}>Men</Link>
-                </Typography>
-                <Typography
+              >
+                <Link to="men" style={{ color: "white" }}>Men</Link>
+              </Typography>
+              <Typography
                 variant="h6"
                 noWrap
-                sx={{ display: { xs: 'none', sm: 'inline-block' }}}
+                sx={{ display: { xs: 'none', sm: 'inline-block' } }}
                 className="textLink">
-                <Link to="women" style={{color:"white"}}>Women</Link>
-                </Typography>
-                <Typography
+                <Link to="women" style={{ color: "white" }}>Women</Link>
+              </Typography>
+              <Typography
                 variant="h6"
                 noWrap
-                sx={{ display: { xs: 'none', sm: 'inline-block' }}}
+                sx={{ display: { xs: 'none', sm: 'inline-block' } }}
                 className="textLink">
-                <Link to="plus" style={{color:"white"}}>Plus size</Link>
-                </Typography>
-                <Typography
+                <Link to="plus" style={{ color: "white" }}>Plus size</Link>
+              </Typography>
+              <Typography
                 variant="h6"
                 noWrap
-                sx={{ display: { xs: 'none', sm: 'inline-block' }}}
+                sx={{ display: { xs: 'none', sm: 'inline-block' } }}
                 className="textLink">
-                <Link to="kids" style={{color:"white"}}>Kids</Link>
-                </Typography>
-           </Box>
-          <Search className="searchBar">
-            <SearchIconWrapper id="searchIcon">
-              <SearchIcon/>
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={(e)=>{handleSearch(e.target.value)}}
+                <Link to="kids" style={{ color: "white" }}>Kids</Link>
+              </Typography>
+            </Box>
+            <Search className="searchBar">
+              <SearchIconWrapper id="searchIcon">
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={(e) => { handleSearch(e.target.value) }}
               />
-          </Search>
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Link to="cart" style={{color:"white"}}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit"
-            onMouseEnter={() => setHoverCart(true)}
-            >
-              <Badge badgeContent={myBag.length} color="error">
-                <ShoppingCartIcon/>
-              </Badge>
-            </IconButton>
-            </Link>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={myFavorites.length} color="error"
-              onMouseEnter={() => setHoverFavorite(true)}>
-                <FavoriteIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              onClick={() => handleUserClick()}
-              color="inherit"
-              onMouseEnter={() => setHoverUser(true)}
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      {signIn ? <Popup /> : <></>}
-      {hoverCart ? <LittleCart setHover={setHoverCart}/> : <></>}
-      {hoverUser ? <User setHover={setHoverUser}/> : <></>}
-      {hoverFavorite ? <Favorites setHoverFavorite={setHoverFavorite} /> : <></>}
-    </Box>
-      <Outlet context={{ searchValue:search ,setHaveOrders:setHaveOrders }}></Outlet>
+            </Search>
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <Link to="cart" style={{ color: "white" }}>
+                <IconButton size="large" aria-label="show 4 new mails" color="inherit"
+                  onMouseEnter={() => setHoverCart(true)}
+                >
+                  <Badge badgeContent={myBag.length} color="error">
+                    <ShoppingCartIcon />
+                  </Badge>
+                </IconButton>
+              </Link>
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={myFavorites.length} color="error"
+                  onMouseEnter={() => setHoverFavorite(true)}>
+                  <FavoriteIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-haspopup="true"
+                onClick={() => handleUserClick()}
+                color="inherit"
+                onMouseEnter={() => setHoverUser(true)}
+              >
+                <AccountCircle />
+              </IconButton>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        {signIn ? <Popup /> : <></>}
+        {hoverCart ? <LittleCart setHover={setHoverCart} /> : <></>}
+        {hoverUser ? <User setHover={setHoverUser} /> : <></>}
+        {hoverFavorite ? <Favorites setHoverFavorite={setHoverFavorite} /> : <></>}
+      </Box>
+      <Outlet context={{ searchValue: search, setHaveOrders: setHaveOrders }}></Outlet>
     </div>
   );
 }

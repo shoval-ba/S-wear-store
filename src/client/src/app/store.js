@@ -1,9 +1,9 @@
 import myBagReducer from '../slices/myBagSlice';
-import myFavoritesReducer from '../slices/myFavoritesSlice'
-import userReduser from '../slices/userSlice'
-import signInReducer from '../slices/signInSlice'
-import ordersReduser from '../slices/ordersSlice'
-import { configureStore } from '@reduxjs/toolkit'
+import myFavoritesReducer from '../slices/myFavoritesSlice';
+import userReduser from '../slices/userSlice';
+import signInReducer from '../slices/signInSlice';
+import ordersReduser from '../slices/ordersSlice';
+import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: {
@@ -13,4 +13,4 @@ export const store = configureStore({
     signIn: signInReducer,
     orders: ordersReduser
   },
-})
+});

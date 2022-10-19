@@ -1,56 +1,63 @@
-.divLinks{
-    flex-grow:1;
-    text-align:center;
+.divLinks {
+    flex-grow: 1;
+    text-align: center;
     margin-top: 5px;
-    .textLink{
-        padding-right:100px;
+
+    .textLink {
+        padding-right: 100px;
     }
 }
 
-@media screen and (max-width: 1230px) and (min-width:1120px){
-    .divLinks{
-        .textLink{
-            padding-right:80px;
+@media screen and (max-width: 1230px) and (min-width:1120px) {
+    .divLinks {
+        .textLink {
+            padding-right: 80px;
         }
     }
-  }
+}
 
-@media screen and (max-width: 1120px) and (min-width:1000px){
-    .divLinks{
-        .textLink{
-            padding-right:50px;
+@media screen and (max-width: 1120px) and (min-width:1000px) {
+    .divLinks {
+        .textLink {
+            padding-right: 50px;
         }
     }
-    .searchBar{
+
+    .searchBar {
         width: 200px !important;
         height: 35px;
     }
 }
 
 @media screen and (max-width: 1000px) and (min-width:915px) {
-    .divLinks{
-        width:39%;
-        .textLink{
-            padding-right:40px;
+    .divLinks {
+        width: 39%;
+
+        .textLink {
+            padding-right: 40px;
         }
     }
-    .searchBar{
-        width:180px!important;
+
+    .searchBar {
+        width: 180px !important;
         height: 35px;
     }
 }
 
 @media screen and (max-width: 915px) {
-    .divLinks{
-        width:37%;
-        .textLink{
-            padding-right:30px;
+    .divLinks {
+        width: 37%;
+
+        .textLink {
+            padding-right: 30px;
         }
     }
-    .searchBar{
-        width: 150px!important;
+
+    .searchBar {
+        width: 150px !important;
         height: 35px;
-        #searchIcon{
+
+        #searchIcon {
             padding: 0px 7px;
         }
     }

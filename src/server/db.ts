@@ -1,4 +1,6 @@
-import { Client } from 'pg';
+import {
+  Client
+} from 'pg';
 import dotenv from 'dotenv';
 const bcrypt = require('bcryptjs');
 dotenv.config();
@@ -14,7 +16,7 @@ const client = new Client({
 client.connect();
 
 // Get all the clothes.
-export async function getClothes () {
+export async function getClothes() {
   const sql = 'SELECT * FROM clothes ';
   const result = await client.query(sql);
   const clothes = result.rows.map((cloth: any) => Object.assign(cloth));
@@ -22,7 +24,7 @@ export async function getClothes () {
 }
 
 // Get cloth by brand.
-export async function getClothesByBrand (brand: string) {
+export async function getClothesByBrand(brand: string) {
   const sql = 'SELECT * FROM clothes WHERE brand=$1';
   const result = await client.query(sql, [brand]);
   const clothes = result.rows.map((cloth: any) => Object.assign(cloth));
@@ -30,7 +32,7 @@ export async function getClothesByBrand (brand: string) {
 }
 
 // Get the bag of the user.
-export async function getMyBag (table: string, userId: string) {
+export async function getMyBag(table: string, userId: string) {
   const sql = `SELECT * FROM ${table} INNER JOIN clothes ON ${table}.user_id=$1 AND ${table}.cloth_id = clothes.cloth_id`;
   const result = await client.query(sql, [userId]);
   if (result.rows.length > 0) {
@@ -52,7 +54,7 @@ export async function getMyBag (table: string, userId: string) {
 }
 
 // Get the favorites clothes of the user.
-export async function getMyFavorites (userId: string) {
+export async function getMyFavorites(userId: string) {
   const sql = 'SELECT * FROM favorites INNER JOIN clothes ON favorites.user_id=$1 AND favorites.cloth_id = clothes.cloth_id';
   const result = await client.query(sql, [userId]);
   if (result.rows.length > 0) {
@@ -69,7 +71,7 @@ export async function getMyFavorites (userId: string) {
 }
 
 // Add cloth to carts table.
-export async function addToCarts (size: any, quantity: any, userId: number, clothId: number) {
+export async function addToCarts(size: any, quantity: any, userId: number, clothId: number) {
   const sql1 = 'DELETE FROM carts WHERE cloth_id=$1 AND size=$2 AND user_id =$3 ';
   await client.query(sql1, [clothId, size, userId]);
   const sql = 'INSERT INTO carts(size ,quantity ,user_id, cloth_id) VALUES($1, $2, $3, $4)';
@@ -78,28 +80,28 @@ export async function addToCarts (size: any, quantity: any, userId: number, clot
 }
 
 // Delete cloth from carts table.
-export async function deleteCart (clothId: number, size: number | string, userId: number) {
+export async function deleteCart(clothId: number, size: number | string, userId: number) {
   const sql1 = 'DELETE FROM carts WHERE cloth_id=$1 AND size=$2 AND user_id=$3';
   await client.query(sql1, [clothId, size, userId]);
   return 'Success';
 }
 
 // Delete cloth from favorites table.
-export async function deleteFavorite (clothId: number) {
+export async function deleteFavorite(clothId: number) {
   const sql1 = 'DELETE FROM favorites WHERE cloth_id=$1';
   await client.query(sql1, [clothId]);
   return 'Success';
 }
 
 // Add cloth to favorites table.
-export async function addToFavorites (userId: number, clothId: number) {
+export async function addToFavorites(userId: number, clothId: number) {
   const sql = 'INSERT INTO favorites(user_id, cloth_id) VALUES($1, $2)';
   await client.query(sql, [userId, clothId]);
   return 'Success';
 }
 
 // Add clothes to orders table.
-export async function addToOrders (size: any, quantity: any, userId: number, clothId: number) {
+export async function addToOrders(size: any, quantity: any, userId: number, clothId: number) {
   const sql = 'INSERT INTO orders(size ,quantity ,user_id, cloth_id) VALUES($1, $2, $3, $4)';
   await client.query(sql, [size, quantity, userId, clothId]);
   const sql1 = 'DELETE FROM carts WHERE user_id=$1';
@@ -115,7 +117,7 @@ export async function addToOrders (size: any, quantity: any, userId: number, clo
 }
 
 // Add user to users table.
-export async function addToUsers (user: any) {
+export async function addToUsers(user: any) {
   const userArray = Object.values(user);
   const sql1 = 'SELECT COUNT(email) FROM users WHERE email = $1';
   const result = await client.query(sql1, [user.email]);
@@ -129,7 +131,7 @@ export async function addToUsers (user: any) {
 }
 
 // Check if the user exist and return the user if exist.
-export async function checkIfUserExist (email: string, password: string) {
+export async function checkIfUserExist(email: string, password: string) {
   const sql = 'SELECT * FROM users WHERE email=$1';
   const result = await client.query(sql, [email]);
   const user = result.rows.map((user: any) => Object.assign(user));

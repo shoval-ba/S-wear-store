@@ -1,49 +1,55 @@
-#carouselExampleControls{
+#carouselExampleControls {
     margin-bottom: 50px;
     margin-top: 10px;
 }
-.circleImages{
-     display:flex ;
-     justify-content:center ;
-     text-align:center ;
-     justify-content:space-around ;
-     width:60% ;
-     margin:0 auto;
-     .linkImage{
-        width:200px ;
-        margin:10px ;
-        border-radius:50%;
-     }
-     .linkText{
-        color:black;
+
+.circleImages {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    justify-content: space-around;
+    width: 60%;
+    margin: 0 auto;
+
+    .linkImage {
+        width: 200px;
+        margin: 10px;
+        border-radius: 50%;
+    }
+
+    .linkText {
+        color: black;
         text-decoration: none !important;
     }
 }
 
-#bigText{
-    font-size:90px ;
-     color:DarkBlue;
+#bigText {
+    font-size: 90px;
+    color: DarkBlue;
 }
 
 @media screen and (max-width: 1000px) and (min-width:915px) {
-    .linkImage{
-        width:170px!important;
-        height: 170px!important;
+    .linkImage {
+        width: 170px !important;
+        height: 170px !important;
     }
-    .linkText{
-        font-size:25px;
+
+    .linkText {
+        font-size: 25px;
     }
 }
 
 @media screen and (max-width: 915px) {
-    .linkImage{
-        width:140px!important;
-        height: 140px!important;
+    .linkImage {
+        width: 140px !important;
+        height: 140px !important;
     }
-    .linkText{
-        font-size:20px;
+
+    .linkText {
+        font-size: 20px;
     }
-    #bigText{
-        font-size:70px ;
+
+    #bigText {
+        font-size: 70px;
     }
 }

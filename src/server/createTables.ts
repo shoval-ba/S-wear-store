@@ -1,4 +1,6 @@
-import { Client } from 'pg';
+import {
+  Client
+} from 'pg';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -13,7 +15,7 @@ export const client = new Client({
 client.connect();
 
 // Creates all the tables.
-async function initDb () {
+async function initDb() {
   // Drop table
   const sql = 'DROP TABLE IF EXISTS  clothes , carts ,orders , favorites;';
   await client.query(sql);
@@ -31,7 +33,7 @@ async function initDb () {
   );
 
   await client.query(
-      `CREATE TABLE IF NOT EXISTS users(
+    `CREATE TABLE IF NOT EXISTS users(
           user_id SERIAL PRIMARY KEY,
           first_name TEXT NOT NULL,
           last_name TEXT NOT NULL,
@@ -41,7 +43,7 @@ async function initDb () {
           email TEXT NOT NULL,
           password TEXT NOT NULL
       );`
-      );
+  );
 
   await client.query(
     `CREATE TABLE IF NOT EXISTS carts(
@@ -86,7 +88,7 @@ async function initDb () {
 
 // initDb();
 
-interface cloth2{
+interface cloth2 {
   brand: string
   sector: string
   title: string
@@ -104,20 +106,26 @@ let shoes: any[] = [];
 let jeanses: any[] = [];
 const allClothes: any[] = [];
 
-async function getPants () {
+async function getPants() {
   const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: { query: 'pants', rows: '80', start: '0' },
+    params: {
+      query: 'pants',
+      rows: '80',
+      start: '0'
+    },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(function (response: { data: any }) {
+  axios.request(options).then(function (response: {
+    data: any
+  }) {
     pants = response.data.response.docs;
     let sizes;
     for (const pant of pants) {
@@ -159,20 +167,26 @@ async function getPants () {
   });
 }
 
-async function getJackets () {
+async function getJackets() {
   const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: { query: 'jackets', rows: '60', start: '0' },
+    params: {
+      query: 'jackets',
+      rows: '60',
+      start: '0'
+    },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(function (response: { data: any }) {
+  axios.request(options).then(function (response: {
+    data: any
+  }) {
     jackets = response.data.response.docs;
     let sizes;
     for (const jacket of jackets) {
@@ -211,20 +225,26 @@ async function getJackets () {
   });
 }
 
-async function getShirts () {
+async function getShirts() {
   const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: { query: 'T-shirts', rows: '60', start: '0' },
+    params: {
+      query: 'T-shirts',
+      rows: '60',
+      start: '0'
+    },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(function (response: { data: any }) {
+  axios.request(options).then(function (response: {
+    data: any
+  }) {
     shirts = response.data.response.docs;
     let sizes;
     for (const shirt of shirts) {
@@ -263,20 +283,26 @@ async function getShirts () {
   });
 }
 
-async function getDresses () {
+async function getDresses() {
   const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: { query: 'dresses', rows: '60', start: '0' },
+    params: {
+      query: 'dresses',
+      rows: '60',
+      start: '0'
+    },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(function (response: { data: any }) {
+  axios.request(options).then(function (response: {
+    data: any
+  }) {
     dresses = response.data.response.docs;
     let sizes;
     for (const dress of dresses) {
@@ -315,20 +341,26 @@ async function getDresses () {
   });
 }
 
-async function getShoes () {
+async function getShoes() {
   const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: { query: 'shoes', rows: '60', start: '0' },
+    params: {
+      query: 'shoes',
+      rows: '60',
+      start: '0'
+    },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(async function (response: { data: any }) {
+  axios.request(options).then(async function (response: {
+    data: any
+  }) {
     shoes = response.data.response.docs;
     for (const shoe of shoes) {
       if (shoe.brand == '21MEN') shoe.brand = 'MEN';
@@ -367,20 +399,26 @@ async function getShoes () {
   });
 }
 
-async function getJeanses () {
+async function getJeanses() {
   const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: { query: 'jeans', rows: '60', start: '0' },
+    params: {
+      query: 'jeans',
+      rows: '60',
+      start: '0'
+    },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(async function (response: { data: any }) {
+  axios.request(options).then(async function (response: {
+    data: any
+  }) {
     jeanses = response.data.response.docs;
     let sizes;
     for (const jeans of jeanses) {
@@ -423,7 +461,7 @@ async function getJeanses () {
 }
 
 // Inserts the clothes to the db from the API.
-async function insertClothes () {
+async function insertClothes() {
   await initDb();
   await getPants();
   await getJackets();

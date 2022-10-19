@@ -8,8 +8,8 @@ export const signInSlice = createSlice({
     name: 'myBag',
     initialState,
     reducers: {
-        changeSignIn:(state , action)=>{
-            state.signIn = action.payload
+        changeSignIn: (state, action) => {
+            state.signIn = action.payload;
         },
     }
 });

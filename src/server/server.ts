@@ -1,9 +1,17 @@
 import process from 'process';
 
 import {
-  addToUsers, checkIfUserExist, getClothesByBrand, getMyBag,
-  getMyFavorites, getClothes, addToOrders, addToCarts, addToFavorites,
-  deleteCart, deleteFavorite
+  addToUsers,
+  checkIfUserExist,
+  getClothesByBrand,
+  getMyBag,
+  getMyFavorites,
+  getClothes,
+  addToOrders,
+  addToCarts,
+  addToFavorites,
+  deleteCart,
+  deleteFavorite
 } from './db';
 
 const express = require('express');
@@ -46,7 +54,9 @@ app.get('/getMyFavorites:userId', (req: any, response: any) => {
   getMyFavorites(userId).then((cloth: any) => response.json(cloth));
 });
 
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({
+  limit: '1mb'
+}));
 // Add user to users table.
 app.post('/addUser', async function (req: any, response: any) {
   const user = req.body;

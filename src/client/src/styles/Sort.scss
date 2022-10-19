@@ -1,55 +1,59 @@
-#sort{
-    width:160px;
-    margin-top:10px;
-    #sortTitle{
+#sort {
+    width: 160px;
+    margin-top: 10px;
+
+    #sortTitle {
         font-size: 20px;
         padding-top: 11px;
     }
-    #options{
-        width:180px;
+
+    #options {
+        width: 180px;
         margin-bottom: 5px;
-        .link{
+
+        .link {
             height: 100%;
             font-size: large;
         }
-        .link:hover{
+
+        .link:hover {
             background-color: azure;
         }
     }
 }
 
-@media screen and (min-width:1600px){
-    #sort{
-        margin-left: 338px!important;
-      }
+@media screen and (min-width:1600px) {
+    #sort {
+        margin-left: 338px !important;
+    }
 }
 
-@media screen and (max-width: 1600px){
-  #sort{
-    margin-left: 327px!important;
-  }
+@media screen and (max-width: 1600px) {
+    #sort {
+        margin-left: 327px !important;
+    }
 }
 
 @media screen and (max-width: 1400px) {
-    #sort{
-        margin-left: 326px!important;
-      }
+    #sort {
+        margin-left: 326px !important;
+    }
 }
 
 @media screen and (max-width: 1300px) {
-    #sort{
-        margin-left: 285px!important;
-      }
+    #sort {
+        margin-left: 285px !important;
+    }
 }
 
-@media screen and (max-width: 1150px){
-    #sort{
-        margin-left: 256px!important;
-      }
+@media screen and (max-width: 1150px) {
+    #sort {
+        margin-left: 256px !important;
+    }
 }
 
-@media screen and (max-width: 900px){
-    #sort{
-        margin-left: 240px!important;
-      }
+@media screen and (max-width: 900px) {
+    #sort {
+        margin-left: 240px !important;
+    }
 }

@@ -9,8 +9,8 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         // New user.
-        initUser:(state , action)=>{
-            state.currentUser = action.payload
+        initUser: (state, action) => {
+            state.currentUser = action.payload;
         },
     }
 });

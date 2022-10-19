@@ -9,24 +9,24 @@ export const ordersSlice = createSlice({
     initialState,
     reducers: {
         // new orders.
-        initOrders:(state , action)=>{
-            state.orders = action.payload
+        initOrders: (state, action) => {
+            state.orders = action.payload;
         },
         // Add cloth ro orders.
-        addToOrders:(state , action)=>{
+        addToOrders: (state, action) => {
             state.orders.push(action.payload);
         },
         // Delete cloth from orders.
-        removeFromOrders:(state , action)=>{
-            let newArray  = state.orders.filter(currentItem =>{
-                    return (currentItem.cloth_id !== action.payload.cloth_id )
-                }
-             ) 
-            state.orders = [...newArray]
+        removeFromOrders: (state, action) => {
+            let newArray = state.orders.filter(currentItem => {
+                return (currentItem.cloth_id !== action.payload.cloth_id);
+            }
+            )
+            state.orders = [...newArray];
         },
     }
 });
 
-export const { addToOrders , removeFromOrders , initOrders } = ordersSlice.actions;
+export const { addToOrders, removeFromOrders, initOrders } = ordersSlice.actions;
 
 export default ordersSlice.reducer;

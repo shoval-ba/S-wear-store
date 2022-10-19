@@ -9,24 +9,24 @@ export const myFavoritesSlice = createSlice({
     initialState,
     reducers: {
         // New favorites.
-        initFavorites:(state , action)=>{
-            state.myFavorites = action.payload
+        initFavorites: (state, action) => {
+            state.myFavorites = action.payload;
         },
         // Add cloth to favorites.
-        addToFavorites:(state , action)=>{
+        addToFavorites: (state, action) => {
             state.myFavorites.push(action.payload);
         },
         // Delete cloth from favorites.
-        removeFromFavorites:(state , action)=>{
-            let newArray  = state.myFavorites.filter(currentItem =>{
-                    return (currentItem.cloth_id !== action.payload.cloth_id )
-                }
-             ) 
-            state.myFavorites = [...newArray]
+        removeFromFavorites: (state, action) => {
+            let newArray = state.myFavorites.filter(currentItem => {
+                return (currentItem.cloth_id !== action.payload.cloth_id);
+            }
+            )
+            state.myFavorites = [...newArray];
         },
     }
 });
 
-export const { addToFavorites , removeFromFavorites , initFavorites } = myFavoritesSlice.actions;
+export const { addToFavorites, removeFromFavorites, initFavorites } = myFavoritesSlice.actions;
 
 export default myFavoritesSlice.reducer;
