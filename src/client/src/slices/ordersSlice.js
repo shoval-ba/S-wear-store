@@ -8,12 +8,15 @@ export const ordersSlice = createSlice({
     name: 'myBag',
     initialState,
     reducers: {
+        // new orders.
         initOrders:(state , action)=>{
             state.orders = action.payload
         },
+        // Add cloth ro orders.
         addToOrders:(state , action)=>{
             state.orders.push(action.payload);
         },
+        // Delete cloth from orders.
         removeFromOrders:(state , action)=>{
             let newArray  = state.orders.filter(currentItem =>{
                     return (currentItem.cloth_id !== action.payload.cloth_id )

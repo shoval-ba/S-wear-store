@@ -8,6 +8,7 @@ export const userSlice = createSlice({
     name: 'myBag',
     initialState,
     reducers: {
+        // New user.
         initUser:(state , action)=>{
             state.currentUser = action.payload
         },

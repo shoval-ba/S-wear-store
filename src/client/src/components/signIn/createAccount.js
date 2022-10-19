@@ -27,7 +27,6 @@ export default function CreateAccount(props)  {
     }
     const [user , setUser] = useState(newUser);
     const [passwordAgain , setPasswordAgain] = useState("");
-    const [passwordInput , setPassword] = useState("");
 
     const first_name = createRef();
     const last_name = createRef();
@@ -38,6 +37,7 @@ export default function CreateAccount(props)  {
     const password = createRef();
     const inputPassword = createRef();
 
+    // Create the user acoount and insert the information to the db.
     const handleSubmit = async () => {
         let insert = true
         if(!textValidate(user.first_name).status || user.first_name === ""){
@@ -206,7 +206,6 @@ export default function CreateAccount(props)  {
                                 </div>
                                 <input id="password" type="password" name="password" placeholder="Password" 
                                 className="inputCreate form-control bg-white border-left-0 border-md" onChange={(e)=>{
-                                            setPassword(e.target.value)
                                             setUser(previousState => {
                                                 return { ...previousState, password: e.target.value }
                                             })}}/>

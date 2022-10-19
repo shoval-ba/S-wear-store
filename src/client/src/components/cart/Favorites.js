@@ -8,6 +8,7 @@ export default function Favorites(props)  {
         const myFavorites = useSelector((state) => state.myFavorites.myFavorites);
         const dispatch = useDispatch();
 
+        // Delete item from favorites.
         const handleDelete = async (item) => {
             dispatch(removeFromFavorites(item))
             const options ={

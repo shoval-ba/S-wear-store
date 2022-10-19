@@ -8,7 +8,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -76,9 +75,9 @@ export default function Navbar() {
   
   const [haveOrders , setHaveOrders] = useState(false)
 
+  // Gives the user from the local storge.
   useEffect(()=>{
     let user = JSON.parse(localStorage.getItem('currentUser'));
-    // setUser(user);
     dispatch(initUser(user))
   },[])
 
@@ -90,7 +89,8 @@ export default function Navbar() {
   return ref.current;
   }
 
-  const prevUser = usePrevious(currentUser)
+  const prevUser = usePrevious(currentUser);
+  // Gets the bag and the favorites of the user.
   useEffect(()=>{
     const getMyBag = async ()=>{
       if(prevUser === null || prevUser === undefined){
@@ -130,6 +130,7 @@ export default function Navbar() {
     getMyBag()
   },[currentUser])
 
+  // Add to cart.
   useEffect(()=>{
     const addToCart = async ()=>{
       for(let item of myBag){
@@ -157,6 +158,7 @@ export default function Navbar() {
     }
   },[myBag])
 
+  // Gets the orders of the user.
   useEffect(()=>{
     const getOrders = async () =>{
       if(currentUser){
@@ -291,7 +293,7 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
       {signIn ? <Popup /> : <></>}
-      {hoverCart ? <LittleCart myBag={myBag} setHover={setHoverCart}/> : <></>}
+      {hoverCart ? <LittleCart setHover={setHoverCart}/> : <></>}
       {hoverUser ? <User setHover={setHoverUser}/> : <></>}
       {hoverFavorite ? <Favorites setHoverFavorite={setHoverFavorite} /> : <></>}
     </Box>

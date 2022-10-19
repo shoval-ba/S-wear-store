@@ -25,6 +25,7 @@ export default function SignIn(props)  {
         dispatch(changeSignIn(false))
     }
 
+    // Check the email and the password.
     const signIn =  async () => {
         let insert = true;
         if(!emailValidate(email).status || email === undefined) {

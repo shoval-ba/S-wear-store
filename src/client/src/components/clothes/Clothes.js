@@ -24,6 +24,7 @@ export default function Cloth(props)  {
 
     const message = createRef()
    
+    // Gets all clothes by brand.
     useEffect(() => {
       const getClothes = () => {
           fetch(`/clothesByBrand${brand}`)
@@ -36,6 +37,7 @@ export default function Cloth(props)  {
         getClothes();
       },[brand]);
 
+      // Gives the clothes after search.
       useEffect(()=>{
         let clothesAfterSearch = [];
         if(searchValue === undefined || searchValue === "") {
@@ -54,11 +56,13 @@ export default function Cloth(props)  {
         }
       } , [searchValue])
 
+      // Open one cloth.
       const handleClick = (cloth) => {
         setOneCloth(cloth)
         setOpenOneCloth(true)
       }
 
+      // Add cloth to the favorites.
       const addToFavorite = async (event , cloth) => {
         event.target.style.color = "red"
         for(let favorite of myFavorites) {
@@ -85,7 +89,6 @@ export default function Cloth(props)  {
                 return;
               }
             }
-            // setMyFavorite(previousState =>{ return [...previousState , cloth]})
             dispatch(addToFavorites(cloth))
             if(currentUser !== null){
               const options ={

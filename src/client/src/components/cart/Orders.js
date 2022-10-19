@@ -16,6 +16,7 @@ import { useEffect } from 'react';
     const orders = useSelector((state) => state.orders.orders);
     const [totalPrice , setPrice] = useState(0)
 
+    // Check the total price.
     useEffect(()=>{
         let price = 0;
         for(let item of orders){

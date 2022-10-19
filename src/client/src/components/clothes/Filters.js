@@ -5,8 +5,9 @@ export default function Filters(props)  {
 
     const brand = props.brand;
     const clothes = props.clothes;
-    let clothesAfterFilter = [];
+    let clothesAfterFilter = []
 
+    // Returns the clothes after filter.
     const filterBySector=(event,sector)=>{
         props.setSector(sector)
         const allDivs = document.querySelectorAll('.filter');

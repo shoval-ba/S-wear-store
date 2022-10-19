@@ -1,8 +1,8 @@
 import { Client } from 'pg';
 import dotenv from 'dotenv';
-dotenv.config()
+dotenv.config();
 
-const DATABASE_URL = process.env.DATABASE_URL
+const DATABASE_URL = process.env.DATABASE_URL;
 export const client = new Client({
   connectionString: DATABASE_URL,
   ssl: {
@@ -12,13 +12,13 @@ export const client = new Client({
 
 client.connect();
 
-async function initDb() {
-
+// Creates all the tables.
+async function initDb () {
   // Drop table
-  let sql = 'DROP TABLE IF EXISTS  clothes , carts ,orders , favorites;'
-  await client.query(sql)
+  const sql = 'DROP TABLE IF EXISTS  clothes , carts ,orders , favorites;';
+  await client.query(sql);
   await client.query(
-      `CREATE TABLE IF NOT EXISTS clothes(
+    `CREATE TABLE IF NOT EXISTS clothes(
           cloth_id SERIAL PRIMARY KEY,
           brand TEXT NOT NULL,
           sector TEXT NOT NULL,
@@ -28,23 +28,23 @@ async function initDb() {
           variants JSON[] NOT NULL,
           sizes JSON NOT NULL
       );`
+  );
+
+  await client.query(
+      `CREATE TABLE IF NOT EXISTS users(
+          user_id SERIAL PRIMARY KEY,
+          first_name TEXT NOT NULL,
+          last_name TEXT NOT NULL,
+          phone_number INTEGER NOT NULL,
+          city TEXT NOT NULL,
+          adress TEXT NOT NULL,
+          email TEXT NOT NULL,
+          password TEXT NOT NULL
+      );`
       );
 
-  // await client.query(
-  //     `CREATE TABLE IF NOT EXISTS users(
-  //         user_id SERIAL PRIMARY KEY,
-  //         first_name TEXT NOT NULL,
-  //         last_name TEXT NOT NULL,
-  //         phone_number INTEGER NOT NULL,
-  //         city TEXT NOT NULL,
-  //         adress TEXT NOT NULL,
-  //         email TEXT NOT NULL,
-  //         password TEXT NOT NULL
-  //     );`
-  //     );
-
-      await client.query(
-        `CREATE TABLE IF NOT EXISTS carts(
+  await client.query(
+    `CREATE TABLE IF NOT EXISTS carts(
             cart_id SERIAL PRIMARY KEY,
             size TEXT NOT NULL,
             quantity INTEGER NOT NULL,
@@ -55,10 +55,10 @@ async function initDb() {
             CONSTRAINT FK_clothId FOREIGN KEY(cloth_id)
             REFERENCES clothes(cloth_id)
         );`
-        );
+  );
 
-        await client.query(
-          `CREATE TABLE IF NOT EXISTS favorites(
+  await client.query(
+    `CREATE TABLE IF NOT EXISTS favorites(
               favorite_id SERIAL PRIMARY KEY,
               user_id INTEGER,
               cloth_id INTEGER,
@@ -67,9 +67,9 @@ async function initDb() {
               CONSTRAINT FK_clothId FOREIGN KEY(cloth_id)
               REFERENCES clothes(cloth_id)
           );`
-          );
+  );
   await client.query(
-      `CREATE TABLE IF NOT EXISTS orders(
+    `CREATE TABLE IF NOT EXISTS orders(
           order_id SERIAL PRIMARY KEY,
           size TEXT NOT NULL,
           quantity INTEGER NOT NULL,
@@ -80,361 +80,350 @@ async function initDb() {
           CONSTRAINT FK_clothId FOREIGN KEY(cloth_id)
           REFERENCES clothes(cloth_id)
       );`
-      );
-      console.log("create")
+  );
+  console.log('create');
 }
 
 // initDb();
 
 interface cloth2{
-  brand:string
-  sector:string
+  brand: string
+  sector: string
   title: string
   price: number
   img: string
   variants: []
-  sizes:{}
+  sizes: {}
 }
 
 let pants: any[] = [];
 let jackets: any[] = [];
-let shirts:any[]=[];
-let dresses:any[]=[];
-let shoes:any[]=[];
-let jeanses:any[]=[]
-let allClothes :any[]= [];
+let shirts: any[] = [];
+let dresses: any[] = [];
+let shoes: any[] = [];
+let jeanses: any[] = [];
+const allClothes: any[] = [];
 
-async function getPants(){
-  const axios = require("axios");
+async function getPants () {
+  const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: {query: 'pants', rows: '80', start: '0'},
+    params: { query: 'pants', rows: '80', start: '0' },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(function (response: { data: any; }) {
+  axios.request(options).then(function (response: { data: any }) {
     pants = response.data.response.docs;
     let sizes;
-    for(let pant of pants){
-      if(pant.brand == "21MEN") pant.brand = "MEN";
-      if(pant.brand == "Forever 21") pant.brand = "WOMEN"
-      if(pant.brand == "Forever 21 Girls") pant.brand = "KIDS"
-      if(pant.brand == "PLUS") {
-        sizes= {
-          40: Math.floor(Math.random()*50),
-          42: Math.floor(Math.random()*50),
-          44: Math.floor(Math.random()*50),
-          46: Math.floor(Math.random()*50),
-          48: Math.floor(Math.random()*50),
-        }
-      }
-      else {
+    for (const pant of pants) {
+      if (pant.brand == '21MEN') pant.brand = 'MEN';
+      if (pant.brand == 'Forever 21') pant.brand = 'WOMEN';
+      if (pant.brand == 'Forever 21 Girls') pant.brand = 'KIDS';
+      if (pant.brand == 'PLUS') {
         sizes = {
-          32: Math.floor(Math.random()*50),
-          34: Math.floor(Math.random()*50),
-          36: Math.floor(Math.random()*50),
-          38: Math.floor(Math.random()*50),
-          40: Math.floor(Math.random()*50),
-          42: Math.floor(Math.random()*50),
-          44: Math.floor(Math.random()*50),
-        }
+          40: Math.floor(Math.random() * 50),
+          42: Math.floor(Math.random() * 50),
+          44: Math.floor(Math.random() * 50),
+          46: Math.floor(Math.random() * 50),
+          48: Math.floor(Math.random() * 50)
+        };
+      } else {
+        sizes = {
+          32: Math.floor(Math.random() * 50),
+          34: Math.floor(Math.random() * 50),
+          36: Math.floor(Math.random() * 50),
+          38: Math.floor(Math.random() * 50),
+          40: Math.floor(Math.random() * 50),
+          42: Math.floor(Math.random() * 50),
+          44: Math.floor(Math.random() * 50)
+        };
       }
       const pantInterface: cloth2 = {
         brand: pant.brand,
-        sector:"pants",
+        sector: 'pants',
         title: pant.title,
         price: pant.price,
         img: pant.thumb_image,
         variants: pant.variants,
-        sizes: sizes
-        }
-        allClothes.push(pantInterface)
-      }
-
+        sizes
+      };
+      allClothes.push(pantInterface);
+    }
   }).catch(function (error: any) {
     console.error(error);
   });
 }
 
-async function getJackets(){
-  const axios = require("axios");
+async function getJackets () {
+  const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: {query: 'jackets', rows: '60', start: '0'},
+    params: { query: 'jackets', rows: '60', start: '0' },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(function (response: { data: any; }) {
+  axios.request(options).then(function (response: { data: any }) {
     jackets = response.data.response.docs;
     let sizes;
-    for(let jacket of jackets){
-      if(jacket.brand == "21MEN") jacket.brand = "MEN";
-      if(jacket.brand == "Forever 21") jacket.brand = "WOMEN"
-      if(jacket.brand == "Forever 21 Girls") jacket.brand = "KIDS"
-      if(jacket.brand == "PLUS") {
-        sizes= {
-          m: Math.floor(Math.random()*50),
-          l: Math.floor(Math.random()*50),
-          xl: Math.floor(Math.random()*50),
-          xxl: Math.floor(Math.random()*50),
-        }
-      }
-      else {
+    for (const jacket of jackets) {
+      if (jacket.brand == '21MEN') jacket.brand = 'MEN';
+      if (jacket.brand == 'Forever 21') jacket.brand = 'WOMEN';
+      if (jacket.brand == 'Forever 21 Girls') jacket.brand = 'KIDS';
+      if (jacket.brand == 'PLUS') {
         sizes = {
-          xs: Math.floor(Math.random()*50),
-          s: Math.floor(Math.random()*50),
-          m: Math.floor(Math.random()*50),
-          l: Math.floor(Math.random()*50),
-          xl: Math.floor(Math.random()*50),
-        }
+          m: Math.floor(Math.random() * 50),
+          l: Math.floor(Math.random() * 50),
+          xl: Math.floor(Math.random() * 50),
+          xxl: Math.floor(Math.random() * 50)
+        };
+      } else {
+        sizes = {
+          xs: Math.floor(Math.random() * 50),
+          s: Math.floor(Math.random() * 50),
+          m: Math.floor(Math.random() * 50),
+          l: Math.floor(Math.random() * 50),
+          xl: Math.floor(Math.random() * 50)
+        };
       }
       const jacketInterface: cloth2 = {
         brand: jacket.brand,
-        sector:"jackets",
+        sector: 'jackets',
         title: jacket.title,
         price: jacket.price,
         img: jacket.thumb_image,
         variants: jacket.variants,
-        sizes: sizes
-        }
-        allClothes.push(jacketInterface)
-      }
-
+        sizes
+      };
+      allClothes.push(jacketInterface);
+    }
   }).catch(function (error: any) {
     console.error(error);
   });
 }
 
-async function getShirts(){
-  const axios = require("axios");
+async function getShirts () {
+  const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: {query: 'T-shirts', rows: '60', start: '0'},
+    params: { query: 'T-shirts', rows: '60', start: '0' },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(function (response: { data: any; }) {
+  axios.request(options).then(function (response: { data: any }) {
     shirts = response.data.response.docs;
     let sizes;
-    for(let shirt of shirts){
-      if(shirt.brand == "21MEN") shirt.brand = "MEN";
-      if(shirt.brand == "Forever 21") shirt.brand = "WOMEN"
-      if(shirt.brand == "Forever 21 Girls") shirt.brand = "KIDS"
-      if (shirt.brand == "PLUS") {
+    for (const shirt of shirts) {
+      if (shirt.brand == '21MEN') shirt.brand = 'MEN';
+      if (shirt.brand == 'Forever 21') shirt.brand = 'WOMEN';
+      if (shirt.brand == 'Forever 21 Girls') shirt.brand = 'KIDS';
+      if (shirt.brand == 'PLUS') {
         sizes = {
-          m: Math.floor(Math.random()*50),
-          l: Math.floor(Math.random()*50),
-          xl: Math.floor(Math.random()*50),
-          xxl: Math.floor(Math.random()*50),
-        }
-      }
-      else {
+          m: Math.floor(Math.random() * 50),
+          l: Math.floor(Math.random() * 50),
+          xl: Math.floor(Math.random() * 50),
+          xxl: Math.floor(Math.random() * 50)
+        };
+      } else {
         sizes = {
-          xs: Math.floor(Math.random()*50),
-          s: Math.floor(Math.random()*50),
-          m: Math.floor(Math.random()*50),
-          l: Math.floor(Math.random()*50),
-          xl: Math.floor(Math.random()*50),
-        }
+          xs: Math.floor(Math.random() * 50),
+          s: Math.floor(Math.random() * 50),
+          m: Math.floor(Math.random() * 50),
+          l: Math.floor(Math.random() * 50),
+          xl: Math.floor(Math.random() * 50)
+        };
       }
       const shirtInterface: cloth2 = {
         brand: shirt.brand,
-        sector:"T-Shirts",
+        sector: 'T-Shirts',
         title: shirt.title,
         price: shirt.price,
         img: shirt.thumb_image,
         variants: shirt.variants,
-        sizes: sizes
-        }
-        allClothes.push(shirtInterface)
-      }
-
+        sizes
+      };
+      allClothes.push(shirtInterface);
+    }
   }).catch(function (error: any) {
     console.error(error);
   });
 }
 
-async function getDresses(){
-  const axios = require("axios");
+async function getDresses () {
+  const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: {query: 'dresses', rows: '60', start: '0'},
+    params: { query: 'dresses', rows: '60', start: '0' },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(function (response: { data: any; }) {
+  axios.request(options).then(function (response: { data: any }) {
     dresses = response.data.response.docs;
     let sizes;
-    for(let dress of dresses){
-      if(dress.brand == "21MEN") dress.brand = "MEN";
-      if(dress.brand == "Forever 21") dress.brand = "WOMEN"
-      if(dress.brand == "Forever 21 Girls") dress.brand = "KIDS"
-      if (dress.brand == "PLUS") {
+    for (const dress of dresses) {
+      if (dress.brand == '21MEN') dress.brand = 'MEN';
+      if (dress.brand == 'Forever 21') dress.brand = 'WOMEN';
+      if (dress.brand == 'Forever 21 Girls') dress.brand = 'KIDS';
+      if (dress.brand == 'PLUS') {
         sizes = {
-          m: Math.floor(Math.random()*50),
-          l: Math.floor(Math.random()*50),
-          xl: Math.floor(Math.random()*50),
-          xxl: Math.floor(Math.random()*50),
-        }
-      }
-      else {
+          m: Math.floor(Math.random() * 50),
+          l: Math.floor(Math.random() * 50),
+          xl: Math.floor(Math.random() * 50),
+          xxl: Math.floor(Math.random() * 50)
+        };
+      } else {
         sizes = {
-          xs: Math.floor(Math.random()*50),
-          s: Math.floor(Math.random()*50),
-          m: Math.floor(Math.random()*50),
-          l: Math.floor(Math.random()*50),
-          xl: Math.floor(Math.random()*50),
-        }
+          xs: Math.floor(Math.random() * 50),
+          s: Math.floor(Math.random() * 50),
+          m: Math.floor(Math.random() * 50),
+          l: Math.floor(Math.random() * 50),
+          xl: Math.floor(Math.random() * 50)
+        };
       }
       const dressInterface: cloth2 = {
         brand: dress.brand,
-        sector:"dresses",
+        sector: 'dresses',
         title: dress.title,
         price: dress.price,
         img: dress.thumb_image,
         variants: dress.variants,
-        sizes: sizes
-        }
-        allClothes.push(dressInterface)
-      }
-
+        sizes
+      };
+      allClothes.push(dressInterface);
+    }
   }).catch(function (error: any) {
     console.error(error);
   });
 }
-  
-async function getShoes(){
-  const axios = require("axios");
+
+async function getShoes () {
+  const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: {query: 'shoes', rows: '60', start: '0'},
+    params: { query: 'shoes', rows: '60', start: '0' },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(async function (response: { data: any; }) {
+  axios.request(options).then(async function (response: { data: any }) {
     shoes = response.data.response.docs;
-    for(let shoe of shoes){
-      if(shoe.brand == "21MEN") shoe.brand = "MEN";
-      if(shoe.brand == "Forever 21") shoe.brand = "WOMEN"
-      if(shoe.brand == "Forever 21 Girls") shoe.brand = "KIDS"
+    for (const shoe of shoes) {
+      if (shoe.brand == '21MEN') shoe.brand = 'MEN';
+      if (shoe.brand == 'Forever 21') shoe.brand = 'WOMEN';
+      if (shoe.brand == 'Forever 21 Girls') shoe.brand = 'KIDS';
       const shoeInterface: cloth2 = {
         brand: shoe.brand,
-        sector:"shoes",
+        sector: 'shoes',
         title: shoe.title,
         price: shoe.price,
         img: shoe.thumb_image,
         variants: shoe.variants,
         sizes: {
-          36: Math.floor(Math.random()*50),
-          37: Math.floor(Math.random()*50),
-          38: Math.floor(Math.random()*50),
-          39: Math.floor(Math.random()*50),
-          40: Math.floor(Math.random()*50),
-          41: Math.floor(Math.random()*50),
-          42: Math.floor(Math.random()*50),
+          36: Math.floor(Math.random() * 50),
+          37: Math.floor(Math.random() * 50),
+          38: Math.floor(Math.random() * 50),
+          39: Math.floor(Math.random() * 50),
+          40: Math.floor(Math.random() * 50),
+          41: Math.floor(Math.random() * 50),
+          42: Math.floor(Math.random() * 50)
         }
-        }
-        allClothes.push(shoeInterface)
-      }
-      let i =0;
-      for(let cloth of allClothes){
-        console.log(i)
-        i++
-        const clothArray = Object.values(cloth);
-        const sql = 'INSERT INTO clothes(brand ,sector ,title , price , img , variants, sizes ) VALUES($1, $2, $3, $4, $5, $6, $7 )';
-        await client.query(sql, clothArray);
-      }
-      console.log('insert')
-
+      };
+      allClothes.push(shoeInterface);
+    }
+    let i = 0;
+    for (const cloth of allClothes) {
+      console.log(i);
+      i++;
+      const clothArray = Object.values(cloth);
+      const sql = 'INSERT INTO clothes(brand ,sector ,title , price , img , variants, sizes ) VALUES($1, $2, $3, $4, $5, $6, $7 )';
+      await client.query(sql, clothArray);
+    }
+    console.log('insert');
   }).catch(function (error: any) {
     console.error(error);
   });
 }
-  
-async function getJeanses(){
-  const axios = require("axios");
+
+async function getJeanses () {
+  const axios = require('axios');
 
   const options = {
     method: 'GET',
     url: 'https://apidojo-forever21-v1.p.rapidapi.com/products/search',
-    params: {query: 'jeans', rows: '60', start: '0'},
+    params: { query: 'jeans', rows: '60', start: '0' },
     headers: {
       'X-RapidAPI-Key': '31dc46645fmsha8c5da48b74c236p1ea83bjsne1cb7f2aaa3a',
       'X-RapidAPI-Host': 'apidojo-forever21-v1.p.rapidapi.com'
     }
   };
 
-  axios.request(options).then(async function (response: { data: any; }) {
+  axios.request(options).then(async function (response: { data: any }) {
     jeanses = response.data.response.docs;
     let sizes;
-    for(let jeans of jeanses){
-      if(jeans.brand == "21MEN") jeans.brand = "MEN";
-      if(jeans.brand == "FOREVER 21") jeans.brand = "WOMEN"
-      if(jeans.brand == "FOREVER 21 GIRLS") jeans.brand = "KIDS"
-      if(jeans.brand == "PLUS") {
-        sizes= {
-          40: Math.floor(Math.random()*50),
-          42: Math.floor(Math.random()*50),
-          44: Math.floor(Math.random()*50),
-          46: Math.floor(Math.random()*50),
-          48: Math.floor(Math.random()*50),
-        }
-      }
-      else {
+    for (const jeans of jeanses) {
+      if (jeans.brand == '21MEN') jeans.brand = 'MEN';
+      if (jeans.brand == 'FOREVER 21') jeans.brand = 'WOMEN';
+      if (jeans.brand == 'FOREVER 21 GIRLS') jeans.brand = 'KIDS';
+      if (jeans.brand == 'PLUS') {
         sizes = {
-          32: Math.floor(Math.random()*50),
-          34: Math.floor(Math.random()*50),
-          36: Math.floor(Math.random()*50),
-          38: Math.floor(Math.random()*50),
-          40: Math.floor(Math.random()*50),
-          42: Math.floor(Math.random()*50),
-          44: Math.floor(Math.random()*50),
-        }
+          40: Math.floor(Math.random() * 50),
+          42: Math.floor(Math.random() * 50),
+          44: Math.floor(Math.random() * 50),
+          46: Math.floor(Math.random() * 50),
+          48: Math.floor(Math.random() * 50)
+        };
+      } else {
+        sizes = {
+          32: Math.floor(Math.random() * 50),
+          34: Math.floor(Math.random() * 50),
+          36: Math.floor(Math.random() * 50),
+          38: Math.floor(Math.random() * 50),
+          40: Math.floor(Math.random() * 50),
+          42: Math.floor(Math.random() * 50),
+          44: Math.floor(Math.random() * 50)
+        };
       }
       const jeansInterface: cloth2 = {
         brand: jeans.brand,
-        sector:"jeans",
+        sector: 'jeans',
         title: jeans.title,
         price: jeans.price,
         img: jeans.thumb_image,
         variants: jeans.variants,
-        sizes: sizes
-        }
-        allClothes.push(jeansInterface)
-      }
-
+        sizes
+      };
+      allClothes.push(jeansInterface);
+    }
   }).catch(function (error: any) {
     console.error(error);
   });
 }
-  
 
-async function insertClothes(){
+// Inserts the clothes to the db from the API.
+async function insertClothes () {
   await initDb();
   await getPants();
   await getJackets();
@@ -443,4 +432,4 @@ async function insertClothes(){
   await getShoes();
 }
 
-insertClothes();
+// insertClothes();

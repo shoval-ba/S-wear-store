@@ -17,8 +17,8 @@ export default function Cart()  {
 
     const [totalPrice , setTotalPrice]= useState(0);
     const [price , setPrice]= useState(5);
-    const [alertText, setAlert] = useState("")
 
+    // Change the total price.
     useEffect(() => {
         setTotalPrice(0)
         let total = 0
@@ -27,17 +27,8 @@ export default function Cart()  {
         }
         setTotalPrice(Math.floor(total))
     }, [myBag] );
-    
-    useEffect(() => {
-        console.log(myBag)
-    }, [myBag] );
 
-    useEffect(()=>{
-        if(alertText !== "") {
-            alert(alertText)
-        }
-    },[alertText])
-    
+    // Delete item from the bag 
     const handleDelete = async (item) => {
         console.log(item)
         const options ={
@@ -57,12 +48,14 @@ export default function Cart()  {
         dispatch(removeFromBag(item))
     }
 
+    // Enter a coupon code
     const inputCoupon = (value) =>{
         if(value === "Ilovecode" || value === "Swear5"){
             setPrice(0)
         } else setPrice(5)       
     }
 
+    // Click the payment.
     const handlePay = async () => {
         if (myBag.length ===0 ) {
             alert('Your cart is empty')
@@ -86,7 +79,6 @@ export default function Cart()  {
                     let result = await fetch('/addToOrders', options);
                     await result.json().then((res) => {
                         console.log(res)
-                        setAlert(res)
                     })
                     setHaveOrders(true)
                     dispatch(initBag([]))
@@ -98,6 +90,7 @@ export default function Cart()  {
         }
     }
 
+    // Cahnge the quantity of the item.
     const changeQuantity = (number , item ) => {
         if(item.quantity + number <= 0 ){
             handleDelete(item)

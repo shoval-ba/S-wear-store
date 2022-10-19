@@ -12,6 +12,7 @@ export default function Sort(props)  {
     let sorted= [];
     const[valueText , setValue] = useState("");
 
+    // Sorted the clothes.
     const handleChange = (value) => {
         setValue(value)
         if (value === "lowToHigh"){      
@@ -37,7 +38,6 @@ export default function Sort(props)  {
 
     useEffect(()=>{
         handleChange(valueText)
-        console.log(valueText)
     },[props.sector])
 
     return(

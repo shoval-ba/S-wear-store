@@ -1,5 +1,4 @@
 import {React , useState , useEffect , createRef} from 'react';
-import {  useOutletContext } from 'react-router-dom'; 
 import { useSelector, useDispatch } from 'react-redux'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -67,6 +66,7 @@ export default function OneCloth(props)  {
         props.close(false)
     }
 
+    // Add cloth to favorties.
     const addToFavorite = async () => {
         setColor("red")
         for(let favorite of myFavorites) {
@@ -114,6 +114,7 @@ export default function OneCloth(props)  {
         }
     }
 
+    // Add cloth to the bag.
     const addCloth = () =>{
         for(let cloth2 of myBag) {
             if(cloth.cloth_id === cloth2.cloth.cloth_id && cloth2.size === chosenSize) {

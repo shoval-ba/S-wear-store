@@ -1,12 +1,14 @@
 import { React , useEffect, useState } from 'react';
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import "../../styles/LittleCart.scss"
 
-export default function Sort(props)  { 
+export default function LittleCart(props)  { 
 
-        const myBag = props.myBag;
-        const [totalPrice , setTotalPrice]= useState(0);
+    const myBag = useSelector((state) => state.myBag.myBag);
+    const [totalPrice , setTotalPrice]= useState(0);
 
+    // Change the total price.
         useEffect(() => {
                 setTotalPrice(0)
                 let total = 0
