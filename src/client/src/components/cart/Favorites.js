@@ -6,19 +6,21 @@ import "../../styles/LittleCart.scss";
 export default function Favorites(props) {
 
     const myFavorites = useSelector((state) => state.myFavorites.myFavorites);
+    const currentUser = useSelector((state) => state.user.currentUser);
     const dispatch = useDispatch();
 
     // Delete item from favorites.
     const handleDelete = async (item) => {
         dispatch(removeFromFavorites(item));
         const options = {
-            method: 'DELETE',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({ userId: currentUser.user_id, clothId: item.cloth.cloth_id })
         }
         try {
-            let result = await fetch(`/deleteFavorite${item.cloth_id}`, options);
+            let result = await fetch(`/deleteFavorite`, options);
             await result.json().then((res) => {
                 console.log(res);
             })

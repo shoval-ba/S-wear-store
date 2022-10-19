@@ -42,12 +42,6 @@ app.get('/getMyOrder:userId', (req: any, response: any) => {
   getMyBag('orders', userId).then((cloth: any) => response.json(cloth));
 });
 
-// Delete cloth from the favorite list of the user from the db.
-app.delete('/deleteFavorite:clothId', (req: any, response: any) => {
-  const clothId = req.params.clothId;
-  deleteFavorite(clothId).then((cloth: any) => response.json(cloth));
-});
-
 // Gives the favorite clothes of the user by user_id from the db.
 app.get('/getMyFavorites:userId', (req: any, response: any) => {
   const userId = req.params.userId;
@@ -62,6 +56,12 @@ app.post('/addUser', async function (req: any, response: any) {
   const user = req.body;
   const result = await addToUsers(user);
   response.json(result);
+});
+
+// Delete cloth from the favorite list of the user from the db.
+app.post('/deleteFavorite', (req: any, response: any) => {
+  const body = req.body;
+  deleteFavorite(body.clothId , body.userId).then((cloth: any) => response.json(cloth));
 });
 
 // Add cart to carts table.

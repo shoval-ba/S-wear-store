@@ -87,9 +87,9 @@ export async function deleteCart(clothId: number, size: number | string, userId:
 }
 
 // Delete cloth from favorites table.
-export async function deleteFavorite(clothId: number) {
-  const sql1 = 'DELETE FROM favorites WHERE cloth_id=$1';
-  await client.query(sql1, [clothId]);
+export async function deleteFavorite(clothId: number , userId: number) {
+  const sql1 = 'DELETE FROM favorites WHERE cloth_id=$1 AND user_id=$2';
+  await client.query(sql1, [clothId , userId]);
   return 'Success';
 }
 

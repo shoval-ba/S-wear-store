@@ -71,13 +71,14 @@ export default function Cloth(props) {
         dispatch(removeFromFavorites(cloth));
         if (currentUser !== null) {
           const options = {
-            method: 'DELETE',
+            method: 'POST',
             headers: {
               'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({ userId: currentUser.user_id, clothId:cloth.cloth_id })
           }
           try {
-            let result = await fetch(`/deleteFavorite${favorite.cloth_id}`, options);
+            let result = await fetch(`/deleteFavorite`, options);
             await result.json();
           }
           catch {
