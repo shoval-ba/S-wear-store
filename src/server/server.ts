@@ -102,6 +102,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(port || 4000, () => {
+app.listen(port , () => {
   console.log('listen on http://localhost:' + port);
 });

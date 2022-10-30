@@ -9,6 +9,7 @@ import {
 import Carousel from './components/header/Carousel';
 import Cart from './components/cart/Cart';
 import Orders from './components/cart/Orders';
+import Management from './components/management/Management';
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
           <Route path="kids" element={<Cloth brand={"KIDS"} />}>
           </Route>
           <Route path="orders" element={<Orders />}>
+          </Route>
+          <Route path="management" element={<Management />}>
           </Route>
         </Route>
       </Routes>

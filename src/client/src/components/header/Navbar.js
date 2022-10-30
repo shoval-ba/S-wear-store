@@ -75,6 +75,8 @@ export default function Navbar() {
 
   const [haveOrders, setHaveOrders] = useState(false);
 
+  const [isManager, setIsManager] = useState(false);
+
   // Gives the user from the local storge.
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem('currentUser'));
@@ -167,6 +169,9 @@ export default function Navbar() {
           .then((response) => {
             dispatch(initOrders(response));
           })
+          if(currentUser.email === "shovalshoval31@gmail.com"){
+            setIsManager(true)
+        } else  setIsManager(false)
       }
     }
     const timeoutId = setTimeout(() => getOrders(), 1000);
@@ -214,7 +219,7 @@ export default function Navbar() {
               noWrap
               component="div"
               sx={{ display: { xs: 'none', sm: 'block', flexGrow: 0.4 } }}
-            >
+              >
               <Link to="/" style={{ color: "white" }}>S-wear</Link>
             </Typography>
             <Box className="divLinks">
@@ -294,7 +299,7 @@ export default function Navbar() {
         </AppBar>
         {signIn ? <Popup /> : <></>}
         {hoverCart ? <LittleCart setHover={setHoverCart} /> : <></>}
-        {hoverUser ? <User setHover={setHoverUser} /> : <></>}
+        {hoverUser ? <User setHover={setHoverUser} isManager={isManager}/> : <></>}
         {hoverFavorite ? <Favorites setHoverFavorite={setHoverFavorite} /> : <></>}
       </Box>
       <Outlet context={{ searchValue: search, setHaveOrders: setHaveOrders }}></Outlet>

@@ -27,8 +27,26 @@ export default function User(props) {
             </div>
         )
     }
+    else if (props.isManager && orders.length !== 0) {
+        userUi = (
+            <div>
+                <p style={{ marginBottom: "0" }}>{currentUser.email}</p>
+                <Link to="orders" style={{ marginTop: "0" , display:"block"}}>Your orders</Link>
+                <Link to="management" style={{ marginTop: "0" }}>To the management</Link>
+                <p style={{ cursor: "pointer" }} onClick={() => handleSignOut()}>Sign Out</p>
+            </div>
+        )
 
-    else if (orders.length !== 0) {
+    }  else if (props.isManager ) {
+        userUi = (
+            <div>
+                <p style={{ marginBottom: "0" }}>{currentUser.email}</p>
+                <Link to="management" style={{ marginTop: "0" }}>To the management</Link>
+                <p style={{ cursor: "pointer" }} onClick={() => handleSignOut()}>Sign Out</p>
+            </div>
+        )
+
+    } else if (orders.length !== 0) {
         userUi = (
             <div>
                 <p style={{ marginBottom: "0" }}>{currentUser.email}</p>
@@ -37,7 +55,7 @@ export default function User(props) {
             </div>
         )
 
-    } else {
+    }  else {
         userUi = (
             <div>
                 <p>{currentUser.email}</p>
