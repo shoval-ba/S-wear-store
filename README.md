@@ -2,7 +2,7 @@
 
 A clothing store for women :dress: men :necktie: kids :shirt: and plus size :womans_clothes:. 
 
-Click [Here](https://s-wear-store.herokuapp.com/) to choose your stylish look today. :point_left:
+Click [Here](https://swear-store.herokuapp.com/) to choose your stylish look today. :point_left:
 
 ## Why I choose this specific project?
 
